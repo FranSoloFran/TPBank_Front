@@ -707,9 +707,10 @@ Navbar Area CSS
   left: 0;
   top: 0;
   width: 100%;
-  height: auto;
+  height: auto; 
   z-index: 999;
-  background-color: transparent;
+  /* background-color: transparent; */
+  background-color: black;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   padding-top: 20px;
@@ -986,7 +987,7 @@ Main Banner Area CSS
 =================================================*/
 .main-banner {
   height: 100vh;
-  background-image: url(../../images/main-banner1.jpg);
+  background-image: url(../../images/HomeBanner.jpeg);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -999,13 +1000,22 @@ Main Banner Area CSS
 
 .main-banner-content h1 {
   margin-bottom: 0;
-  color: #ffffff;
-  font-size: 52px;
+  /* color: #ffffff; */
+  color:"black";
+  font-size: 40px;
+  font-weight: bold;
+}
+.main-banner-content-hashtag {
+  margin-bottom: 0;
+  /* color: #ffffff; */
+  color:"white";
+  font-size: 40px;
   font-weight: bold;
 }
 
 .main-banner-content p {
-  color: #ffffff;
+  /* color: #ffffff; */
+  color:"black";
   font-family: "Raleway", sans-serif;
   font-size: 18px;
   max-width: 400px;

@@ -8,14 +8,14 @@ class AccountCreateArea extends Component {
                 <div className="container account-create-content">
                     <div className="row align-items-center">
                         <div className="col-lg-8">
-                            <h2>Apply for an account in minutes</h2>
-                            <p>Get your Luvion account today!</p>
+                            <h2>¿Nuevo? Te abrimos tu cuenta en minutos</h2>
+                            <p>Onboarding 100% digital</p>
                         </div>
                         
                         <div className="col-lg-4">
                             <div className="create-account">
                                 <Link href="#">
-                                    <a className="btn btn-primary">Get Your Account</a>
+                                    <a className="btn btn-primary">Hacete miembro</a>
                                 </Link>
                             </div>
                         </div>

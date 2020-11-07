@@ -24,15 +24,15 @@ class Index extends Component {
                 <FeaturedCard />
                 <Rates />
                 <ServicesCard />
-                <ComparisonsTable />
+                {/* <ComparisonsTable /> */}
                 <OurFeaturesContent />
-                <EasyPaymentBorrow />
+                {/* <EasyPaymentBorrow /> */}
                 <FunFacts />
-                <CustomersFeedback />
-                <PartnerContent />
+                {/* <CustomersFeedback /> */}
+                {/* <PartnerContent /> */}
                 <AppDownloadContent />
                 <AccountCreateArea />
-                <BlogCard />
+                {/* <BlogCard /> */}
                 <Footer />
             </React.Fragment>
         );

@@ -29,9 +29,9 @@ class Rates extends Component {
             <section className="currency-rates-area pt-70">
                 <div className="container">
                     <div className="section-title">
-                        <h2>Currency Rates</h2>
+                        <h2>Tarifas de las distintas monedas</h2>
                         <div className="bar"></div>
-                        <p>Latest Currency Rates Based on <strong>USA</strong></p>
+                        <p>Actualización de tarifas basadas en <strong>USA</strong></p>
                     </div>
                     <div className="table-responsive currency-rates-table">
                         <table className="table">
@@ -57,11 +57,11 @@ class Rates extends Component {
                     </div>
                     <div className="row currency-rates-info">
                         <div className="col-lg-6 col-md-6 col-6">
-                            <a href="https://exchangeratesapi.io/" target="_blank">Source</a>
+                            <a href="https://exchangeratesapi.io/" target="_blank">Fuente</a>
                         </div>
 
                         <div className="col-lg-6 col-md-6 col-6 text-right">
-                            <p>Date: {updateDate}</p>
+                            <p>Fecha: {updateDate}</p>
                         </div>
                     </div>
                 </div>
