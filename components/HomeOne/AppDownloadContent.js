@@ -10,8 +10,8 @@ class AppDownloadContent extends Component {
                         <div className="col-lg-6 col-md-12">
                             <div className="app-image">
                                 <div className="main-image">
-                                    <img src={require("../../images/mobile-app1.png")} className="wow fadeInLeft" data-wow-delay="0.6s" alt="image" />
-                                    <img src={require("../../images/mobile-app2.png")} className="wow fadeInUp" data-wow-delay="0.9s" alt="image" />
+                                    <img src={require("../../images/app-mobile-photo.png")} className="wow fadeInLeft" data-wow-delay="0.6s" alt="image" />
+                                    {/* <img src={require("../../images/mobile-app2.png")} className="wow fadeInUp" data-wow-delay="0.9s" alt="image" /> */}
                                 </div>
 
                                 <div className="main-mobile-image">
@@ -26,17 +26,17 @@ class AppDownloadContent extends Component {
 
                         <div className="col-lg-6 col-md-12">
                             <div className="app-download-content">
-                                <h2>You can find all the thing you need to payout</h2>
+                                <h2>Paga y opera desde nuestra nueva aplicación</h2>
                                 <div className="bar"></div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                                <p>Lanzamos a través de Haiper nuestra nueva aplicación Mobile Southern para que puedas pagar con QR, operar, comprar moneda extranjera y más!.</p>
 
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt.</p>
+                                <p>¿Te preguntas como obtenerla? Es muy fácil, descargala de manera gratuita desde tu telefono en los Stores o a través de nuestro acceso que encontrarás abajo.</p>
 
                                 <div className="btn-box">
                                     <Link href="#">
                                         <a className="app-store-btn">
                                             <i className="flaticon-apple"></i>
-                                            Download on
+                                            Descarga en
                                             <span>App Store</span>
                                         </a>
                                     </Link>
@@ -44,7 +44,7 @@ class AppDownloadContent extends Component {
                                     <Link href="#">
                                         <a className="play-store-btn">
                                             <i className="flaticon-play-store"></i>
-                                            Download on
+                                            Descarga en
                                             <span>Google play</span>
                                         </a>
                                     </Link>
