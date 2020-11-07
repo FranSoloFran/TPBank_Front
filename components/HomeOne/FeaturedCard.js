@@ -14,8 +14,8 @@ class FeaturedCard extends Component {
                                         <i className="flaticon-piggy-bank"></i>
                                     </div>
 
-                                    <h3>Transparent Pricing</h3>
-                                    <p>Lorem ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
+                                    <h3>Cuenta</h3>
+                                    <p>Obtene tu cuenta en distintas monedas, cobra tu sueldo, opera todo desde nuestro homebanking</p>
 
                                     <Link href="#">
                                         <a className="read-more-btn">Read More</a>
@@ -29,8 +29,8 @@ class FeaturedCard extends Component {
                                         <i className="flaticon-data-encryption"></i>
                                     </div>
 
-                                    <h3>Fully Encrypted</h3>
-                                    <p>Lorem ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
+                                    <h3>Seguridad</h3>
+                                    <p>Nuestro sitio cumple con todos los requisitos de seguridad establecidos por el BCRA</p>
 
                                     <Link href="#">
                                         <a className="read-more-btn">Read More</a>
@@ -44,8 +44,8 @@ class FeaturedCard extends Component {
                                         <i className="flaticon-wallet"></i>
                                     </div>
 
-                                    <h3>Instant Cashout</h3>
-                                    <p>Lorem ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
+                                    <h3>Retira dinero</h3>
+                                    <p>Retira dinero en cualquiera de los cajeros habilitados en el país sin pagar nada</p>
 
                                     <Link href="#">
                                         <a className="read-more-btn">Read More</a>
@@ -59,8 +59,8 @@ class FeaturedCard extends Component {
                                         <i className="flaticon-shield"></i>
                                     </div>
 
-                                    <h3>Safe and Secure</h3>
-                                    <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
+                                    <h3>Seguros</h3>
+                                    <p>Encontra en nuestro sitio de seguros diversidad de planes para proteger tus cosas</p>
 
                                     <Link href="#">
                                         <a className="read-more-btn">Read More</a>
