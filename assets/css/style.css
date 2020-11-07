@@ -707,7 +707,7 @@ Navbar Area CSS
   left: 0;
   top: 0;
   width: 100%;
-  height: auto;
+  height: auto; 
   z-index: 999;
   /* background-color: transparent; */
   background-color: black;
