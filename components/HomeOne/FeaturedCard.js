@@ -14,8 +14,8 @@ class FeaturedCard extends Component {
                                         <i className="flaticon-piggy-bank"></i>
                                     </div>
 
-                                    <h3>Transparent Pricing</h3>
-                                    <p>Lorem ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
+                                    <h3>Transacciones Transparentes</h3>
+                                    <p>Podes operar, revisar tus consumos, tus transacciones en un mismo lugar y de manera transparente y sin comisiones.</p>
 
                                     <Link href="#">
                                         <a className="read-more-btn">Read More</a>
@@ -29,8 +29,8 @@ class FeaturedCard extends Component {
                                         <i className="flaticon-data-encryption"></i>
                                     </div>
 
-                                    <h3>Fully Encrypted</h3>
-                                    <p>Lorem ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
+                                    <h3>Totalmente Encriptado</h3>
+                                    <p>Nos preocupa cuidar tus ahorros e información tanto como a vos, por ello tenemos nuestro sitio totalmente encriptado.</p>
 
                                     <Link href="#">
                                         <a className="read-more-btn">Read More</a>
@@ -44,8 +44,8 @@ class FeaturedCard extends Component {
                                         <i className="flaticon-wallet"></i>
                                     </div>
 
-                                    <h3>Instant Cashout</h3>
-                                    <p>Lorem ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
+                                    <h3>Opera de manera instantanea</h3>
+                                    <p>Retira tu dinero desde nuestras sucursales o ATMs habilitados. Transferi en el acto, paga en el momento.</p>
 
                                     <Link href="#">
                                         <a className="read-more-btn">Read More</a>
@@ -59,8 +59,8 @@ class FeaturedCard extends Component {
                                         <i className="flaticon-shield"></i>
                                     </div>
 
-                                    <h3>Safe and Secure</h3>
-                                    <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
+                                    <h3>Seguridad y tranquilidad</h3>
+                                    <p>Nuestro lema es opera tranquilo que nosotros nos ocupamos de que sea seguro. Tene en cuenta que nunca te pediremos tus datos de acceso.</p>
 
                                     <Link href="#">
                                         <a className="read-more-btn">Read More</a>
