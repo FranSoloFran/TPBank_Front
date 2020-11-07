@@ -10,45 +10,45 @@ class ServicesCard extends Component {
                         <div className="overview-box">
                             <div className="overview-content">
                                 <div className="content left-content">
-                                    <h2>Freelancers, entrepreneurs, and sole traders</h2>
+                                    <h2>Freelancers, emprendedores tenemos planes para ustedes</h2>
                                     <div className="bar"></div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    <p>¿Vas a comenzar tu negocio? Bueno, tenemos varios planes preparados para acompañarte</p>
 
                                     <ul className="services-list">
                                         <li>
                                             <span>
                                                 <i className="flaticon-check-mark"></i> 
-                                                Free plan available
+                                                Sin mantenimiento   
                                             </span>
                                         </li>
                                         <li>
                                             <span>
                                                 <i className="flaticon-check-mark"></i> 
-                                                Full data privacy compliance
+                                                Cuidamos tus datos personales
                                             </span>
                                         </li>
                                         <li>
                                             <span>
                                                 <i className="flaticon-check-mark"></i> 
-                                                100% transparent costs
+                                                100% costos transparentes
                                             </span>
                                         </li>
                                         <li>
                                             <span>
                                                 <i className="flaticon-check-mark"></i> 
-                                                Commitment-free
+                                                Sin comisión
                                             </span>
                                         </li>
                                         <li>
                                             <span>
                                                 <i className="flaticon-check-mark"></i> 
-                                                Real-time spending overview
+                                                Gastos Real-Time
                                             </span>
                                         </li>
                                         <li>
                                             <span>
                                                 <i className="flaticon-check-mark"></i> 
-                                                Debit Mastercard included
+                                                Tarjeta MasterCard Debito
                                             </span>
                                         </li>
                                     </ul>
@@ -68,7 +68,7 @@ class ServicesCard extends Component {
                 </div>
 
                 {/* Left Image Style */}
-                <div className="services-area ptb-70 bg-f7fafd">
+                {/* <div className="services-area ptb-70 bg-f7fafd">
                     <div className="container-fluid p-0">
                         <div className="overview-box">
                             <div className="overview-image">
@@ -128,10 +128,10 @@ class ServicesCard extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Right Image Style */}
-                <div className="services-area ptb-70">
+                {/* <div className="services-area ptb-70">
                     <div className="container-fluid p-0">
                         <div className="overview-box">
                             <div className="overview-content">
@@ -191,7 +191,7 @@ class ServicesCard extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </React.Fragment>
         );
     }

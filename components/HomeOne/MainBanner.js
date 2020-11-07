@@ -9,10 +9,11 @@ class MainBanner extends Component {
                     <div className="d-table-cell">
                         <div className="container">
                             <div className="main-banner-content">
-                                <h1>Easy free banking for entrepreneurs</h1>
-                                <p>Get the financial tools and insights to start, build, and grow your business.</p>
+                                <h1>Vos soña tu proyecto, nosotros te acompañamos</h1>
+                                {/* <p>Abri tu cuenta en Haiper por que: </p> */}
+                                <h1>#ElFuturoEstaAca</h1>
                                 <Link href="#">
-                                    <a className="btn btn-primary">Get Started</a>
+                                    <a className="btn btn-primary">¡Comencemos!</a>
                                 </Link>
                             </div>
                         </div>
