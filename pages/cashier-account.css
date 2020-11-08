@@ -1,0 +1,34 @@
+/*Estilos ventanas de operaciones*/
+
+.container-operation .money-transfer-form {
+    margin-top: 50px;
+}
+
+.money-transfer-form form .form-group-default{
+    background: linear-gradient(90deg, #2F4353 0%,#2F4353 50%, #D2CCC4 100%);
+    text-align: left;
+}
+
+.money-transfer-form form .form-group-default .form-control{
+    width: 50%;
+    display: inline-block;
+}
+
+.money-transfer-form form .form-group-default .form-extra-data{
+    color: white;
+}
+
+.navbar-admin{
+    background-color: #070d13;
+    color: #e4e4e4;
+}
+
+.navbar-admin .nav-link {
+    color:#e4e4e4 !important;
+    cursor:pointer;
+}
+
+.navbar-admin .nav-link.nav-link-selected {
+    font-weight: bold;
+    text-decoration: underline;
+}
