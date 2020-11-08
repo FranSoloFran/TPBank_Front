@@ -6,9 +6,9 @@ class OurFeaturesContent extends Component {
             <section className="features-area ptb-70 bg-f6f4f8">
                 <div className="container">
                     <div className="section-title">
-                        <h2>Our features</h2>
+                        <h2>Nuestras funcionalidades</h2>
                         <div className="bar"></div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p>Opera con la tranquilidad que te ser cliente de Haiper, te notificaremos ante cualquier cambio en tus cuentas o si necesitas abonar algo</p>
                     </div>
 
                     <div className="row">
@@ -18,8 +18,8 @@ class OurFeaturesContent extends Component {
                                     <i className="flaticon-settings"></i>
                                 </div>
 
-                                <h3>Incredible infrastructure</h3>
-                                <p>Lorem ipsum dolor amet, adipiscing, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+                                <h3>Web y Mobile</h3>
+                                <p>Te permitimos realizar las mismas operaciones tanto desde nuestra web como desde nuestra aplicación. Usa nuestro Token virtual para cualquier movimiento</p>
                             </div>
                         </div>
 
@@ -29,8 +29,8 @@ class OurFeaturesContent extends Component {
                                     <i className="flaticon-envelope-of-white-paper"></i>
                                 </div>
 
-                                <h3>Email notifications</h3>
-                                <p>Lorem ipsum dolor amet, adipiscing, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+                                <h3>Notificaciones vía mail</h3>
+                                <p>Ante cualquier movimiento de tus cuentas, te notificaremos vía mail para que estes informado</p>
                             </div>
                         </div>
 
@@ -40,8 +40,8 @@ class OurFeaturesContent extends Component {
                                     <i className="flaticon-menu"></i>
                                 </div>
 
-                                <h3>Simple dashboard</h3>
-                                <p>Lorem ipsum dolor amet, adipiscing, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+                                <h3>Dashboard Intuitivo</h3>
+                                <p>Si la tecnología no es lo tuyo, no te preocupes, nuestra HomeBankings es muy intuitivo</p>
                             </div>
                         </div>
 
@@ -51,8 +51,8 @@ class OurFeaturesContent extends Component {
                                     <i className="flaticon-info"></i>
                                 </div>
 
-                                <h3>Information retrieval</h3>
-                                <p>Lorem ipsum dolor amet, adipiscing, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+                                <h3>Promociones</h3>
+                                <p>Contamos con una plataforma de beneficios toda para vos, estate atento a las notificaciones push</p>
                             </div>
                         </div>
 
@@ -62,8 +62,8 @@ class OurFeaturesContent extends Component {
                                     <i className="flaticon-cursor"></i>
                                 </div>
 
-                                <h3>Drag and drop functionality</h3>
-                                <p>Lorem ipsum dolor amet, adipiscing, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+                                <h3>Drag and Drop</h3>
+                                <p>Podes cargar documentos de manera sencilla, simplemente toma el archivo y arrojalo en la pantalla</p>
                             </div>
                         </div>
 
@@ -73,8 +73,8 @@ class OurFeaturesContent extends Component {
                                     <i className="flaticon-alarm"></i>
                                 </div>
 
-                                <h3>Deadline reminders</h3>
-                                <p>Lorem ipsum dolor amet, adipiscing, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+                                <h3>Alarma de vencimiento</h3>
+                                <p>Configura tu cuenta para que nunca te olvides de pagar un servicio</p>
                             </div>
                         </div>
                     </div>
