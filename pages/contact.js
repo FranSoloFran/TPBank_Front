@@ -11,12 +11,12 @@ class Contact extends Component {
             <React.Fragment>
                 <Navbar />
                 <PageBannerContent 
-                    pageTitle="Contact" 
-                    pageCaption="If you have an idea, we would love to hear about it." 
+                    pageTitle="Estemos en contacto" 
+                    pageCaption="Nos encantaría recibir tu feedback" 
                 />
 
                 <ContactContent />
-                <AccountCreateArea />
+                {/* <AccountCreateArea /> */}
                 <Footer />
             </React.Fragment>
         );
