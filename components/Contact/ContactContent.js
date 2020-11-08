@@ -9,9 +9,9 @@ class ContactContent extends Component {
                 <div className="contact-area ptb-70">
                     <div className="container">
                         <div className="section-title">
-                            <h2>Drop us a message for any query</h2>
+                            <h2>Escribinos, estamos para ayudarte</h2>
                             <div className="bar"></div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Si queres volverte miembro, dejanos tus datos y te contactaremos para que te acerques a nuestra sucursal para realizar el alta</p>
                         </div>
 
                         <div className="row">
