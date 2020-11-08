@@ -63,13 +63,16 @@ class Navbar extends Component {
                                 <div className={classOne} id="navbarSupportedContent">
                                     <ul className="navbar-nav">
                                         <li className="nav-item">
-                                            <Link href="#">
+                                            <Link href="/">
                                                 <a className="nav-link">
                                                     Home <i className="fas fa-chevron-down"></i>
                                                 </a>
                                             </Link>
 
-                                            <ul className="dropdown-menu">
+
+                                            {/* //descomentar para poder tener dropdown */}
+
+                                            {/* <ul className="dropdown-menu">
                                                 <li className="nav-item">
                                                     <Link href="/" activeClassName="active">
                                                         <a className="nav-link">Home one</a>
@@ -90,24 +93,24 @@ class Navbar extends Component {
                                                         <a className="nav-link">Home four</a>
                                                     </Link>
                                                 </li>
-                                            </ul>
+                                            </ul> */}
                                         </li>
 
                                         <li className="nav-item">
                                             <Link href="/about-us" activeClassName="active">
-                                                <a className="nav-link">About us</a>
+                                                <a className="nav-link">Quienes Somos</a>
                                             </Link>
                                         </li>
  
                                         <li className="nav-item">
-                                            <Link href="#">
+                                            <Link href="/features-one">
                                                 <a className="nav-link">
-                                                    Features <i className="fas fa-chevron-down"></i>
+                                                    Funcionalidades <i className="fas fa-chevron-down"></i>
                                                 </a>
                                             </Link>
 
-                                            <ul className="dropdown-menu">
-                                                <li className="nav-item">
+                                            {/* <ul className="dropdown-menu">
+                                                <li className="nav-item">   
                                                     <Link href="/features-one" activeClassName="active">
                                                         <a className="nav-link">Features style one</a>
                                                     </Link>
@@ -118,13 +121,13 @@ class Navbar extends Component {
                                                         <a className="nav-link">Features style two</a>
                                                     </Link>
                                                 </li>
-                                            </ul>
+                                            </ul> */}
                                         </li>
 
-                                        <li className="nav-item">
-                                            <Link href="#">
+                                        {/* <li className="nav-item">
+                                            <Link href="/pricing">
                                                 <a className="nav-link">
-                                                    Pages <i className="fas fa-chevron-down"></i>
+                                                    Pricing <i className="fas fa-chevron-down"></i>
                                                 </a>
                                             </Link>
 
@@ -171,15 +174,15 @@ class Navbar extends Component {
                                                     </Link>
                                                 </li>
                                             </ul>
-                                        </li>
+                                        </li> */}
  
                                         <li className="nav-item">
                                             <Link href="/pricing" activeClassName="active">
                                                 <a className="nav-link">Pricing</a>
                                             </Link>
-                                        </li>
+                                        </li>   
 
-                                        <li className="nav-item">
+                                        {/* <li className="nav-item">
                                             <Link href="#">
                                                 <a className="nav-link">
                                                     Blog <i className="fas fa-chevron-down"></i>
@@ -205,11 +208,11 @@ class Navbar extends Component {
                                                     </Link>
                                                 </li>
                                             </ul>
-                                        </li>
+                                        </li> */}
 
                                         <li className="nav-item">
                                             <Link href="/contact" activeClassName="active">
-                                                <a className="nav-link">Contact</a>
+                                                <a className="nav-link">Contacto</a>
                                             </Link>
                                         </li>
                                     </ul>

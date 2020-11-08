@@ -57,7 +57,7 @@ class ServicesCard extends Component {
 
                             <div className="overview-image">
                                 <div className="image">
-                                    <img src={require("../../images/1.png")} alt="image" />
+                                    <img src={require("../../images/freelancer.jpeg")} alt="image" />
                                     <div className="circle-img">
                                         <img src={require("../../images/circle.png")} alt="image" />
                                     </div>
