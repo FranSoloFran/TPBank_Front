@@ -9,12 +9,12 @@ class AccountCreateArea extends Component {
                     <div className="row align-items-center">
                         <div className="col-lg-8">
                             <h2>¿Nuevo? Te abrimos tu cuenta en minutos</h2>
-                            <p>Onboarding 100% digital</p>
+                            <p>Onboarding 100% acompañado por nuestros empleados</p>
                         </div>
                         
                         <div className="col-lg-4">
                             <div className="create-account">
-                                <Link href="#">
+                                <Link href="/contact">
                                     <a className="btn btn-primary">Hacete miembro</a>
                                 </Link>
                             </div>

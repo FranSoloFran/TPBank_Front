@@ -9,7 +9,7 @@ class Login extends Component {
                     <div className="row m-0">
                         <div className="col-lg-6 col-md-12 p-0">
                             <div className="login-image">
-                                <img src={require("../images/login-bg.jpg")} alt="image" />
+                                <img src={require("../images/login-1.png")} alt="image" />
                             </div>
                         </div>
 
@@ -26,32 +26,32 @@ class Login extends Component {
                                                 </Link>
                                             </div>
 
-                                            <h3>Welcome back</h3>
-                                            <p>New to Haiper? <Link href="/sign-up"><a>Sign up</a></Link></p>
+                                            <h3>¡Bienvenidos!</h3>
+                                            {/* <p>Nuevo en Haiper? <Link href="/sign-up"><a>Accede</a></Link></p> */}
 
                                             <form>
                                                 <div className="form-group">
-                                                    <input type="email" name="email" id="email" placeholder="Your email address" className="form-control" />
+                                                    <input type="email" name="email" id="email" placeholder="Tu dirección de Email" className="form-control" />
                                                 </div>
 
                                                 <div className="form-group">
-                                                    <input type="password" name="password" id="password" placeholder="Your password" className="form-control" />
+                                                    <input type="password" name="password" id="password" placeholder="Contraseña" className="form-control" />
                                                 </div>
 
-                                                <button type="submit" className="btn btn-primary">Login</button>
+                                                <button type="submit" className="btn btn-primary">Accede</button>
                                                 
                                                 <div className="forgot-password">
-                                                    <Link href="/forgot-password"><a>Forgot Password?</a></Link>
+                                                    <Link href="/forgot-password"><a>¿Olvidaste tu contraseña?</a></Link>
                                                 </div>
 
-                                                <div className="connect-with-social">
+                                                {/* <div className="connect-with-social">
                                                     <button type="submit" className="facebook">
                                                         <i className="fab fa-facebook-square"></i> Connect with Facebook
                                                     </button>
                                                     <button type="submit" className="google">
                                                         <i className="fab fa-google"></i> Connect with Google
                                                     </button>
-                                                </div>
+                                                </div> */}
                                             </form>
                                         </div>
                                     </div>
