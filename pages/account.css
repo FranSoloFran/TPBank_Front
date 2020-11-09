@@ -1,7 +1,16 @@
 /*Estilos ventanas de operaciones*/
 
+.container-operation h1 {
+    margin-top: 30px;
+}
+
 .container-operation .money-transfer-form {
     margin-top: 50px;
+}
+
+.container-operation table{
+    margin-top: 50px;
+    border-radius: 5px;
 }
 
 .money-transfer-form form .form-group-default{
@@ -12,6 +21,10 @@
 .money-transfer-form form .form-group-default .form-control{
     width: 50%;
     display: inline-block;
+}
+
+.money-transfer-form form .form-group-default .form-control option {
+    color:black;
 }
 
 .money-transfer-form form .form-group-default .form-extra-data{

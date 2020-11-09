@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-class DepositOperation extends Component {
+class ExtractOperation extends Component {
     render() {
         return (
 
             <div className="container container-operation">
-                <h1>Depósito</h1>
+                <h1>Extracción</h1>
 
                 <div className="money-transfer-form">
                     <form>
@@ -16,7 +16,7 @@ class DepositOperation extends Component {
                         </div>
 
                         <div className="form-group">
-                            <label>Monto a depositar </label>
+                            <label>Monto a extraer </label>
                             <div className="money-transfer-field">
                                 <input type="text" className="form-control" placeholder="1,000" />
                                 <div className="amount-currency-select">
@@ -40,6 +40,6 @@ class DepositOperation extends Component {
     }
 }
 
-export default DepositOperation;
+export default ExtractOperation;
 
 

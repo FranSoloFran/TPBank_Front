@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-class DepositOperation extends Component {
+class PaymentsOperation extends Component {
     render() {
         return (
 
             <div className="container container-operation">
-                <h1>Depósito</h1>
+                <h1>Pago de servicios</h1>
 
                 <div className="money-transfer-form">
                     <form>
@@ -15,15 +15,23 @@ class DepositOperation extends Component {
                             <span className='form-extra-data'>Juan Carlos Pereyra</span>
                         </div>
 
+                        <div className="form-group form-group-default">
+                            <label>Servicio</label>
+                            <select className='form-control'>
+                                        <option>AYSA</option>
+                                        <option>EDESUR</option>
+                                        <option>Fibertel</option>
+                            </select>
+                        </div>
+
                         <div className="form-group">
-                            <label>Monto a depositar </label>
+                            <label>Monto a pagar</label>
                             <div className="money-transfer-field">
                                 <input type="text" className="form-control" placeholder="1,000" />
                                 <div className="amount-currency-select">
                                     <i className="fas fa-chevron-down"></i>
                                     <select>
                                         <option>ARS</option>
-                                        <option>USD</option>
                                     </select>
                                 </div>
                             </div>
@@ -40,6 +48,6 @@ class DepositOperation extends Component {
     }
 }
 
-export default DepositOperation;
+export default PaymentsOperation;
 
 

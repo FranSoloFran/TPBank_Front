@@ -28,15 +28,13 @@ class SideBarAccount extends Component {
 
                     <div className="collapse navbar-collapse" id="navbarsExampleDefault">
                         <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <a className={`nav-link ${this.state.operation == 'deposit' ? 'nav-link-selected' : ''}`} onClick={() => this.onClickOperation('deposit')}>Deposito</a>
+                            {this.props.operations.map((operation) => (
+                                <li className="nav-item">
+                                <a className={`nav-link ${this.state.operation == operation.value ? 'nav-link-selected' : ''}`} onClick={() => this.onClickOperation(operation.value)}>{operation.name}</a>
                             </li>
-                            <li className="nav-item">
-                                <a className={`nav-link ${this.state.operation == 'extract' ? 'nav-link-selected' : ''}`} onClick={() => this.onClickOperation('extract')}>Extracción</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className={`nav-link ${this.state.operation == 'payments' ? 'nav-link-selected' : ''}`} onClick={() => this.onClickOperation('payments')}>Pago de servicios</a>
-                            </li>
+                            ))    
+                        }
+                           
                             <li className="nav-item">
                                 <a className="nav-link">Cerrar sesión</a>
                             </li>

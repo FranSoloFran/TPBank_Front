@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import SideBarAccount from '../components/SideBarAccount/SideBarAccount';
-import DepositOperation from '../components/DepositOperation/DepositOperation';
-import ExtractOperation from '../components/ExtractOperation/ExtractOperation';
 import PaymentsOperation from '../components/PaymentsOperation/PaymentsOperation';
+import TransferOperation from '../components/TransferOperation/TransferOperation';
+import BalanceOperation from '../components/BalanceOperation/BalanceOperation';
+
 const operations=[
-    {name:'Depósito', value:'deposit'},
-    {name:'Extracción',value:'extract'},
+    {name:'Consulta de saldos', value:'balance'},
+    {name:'Transferencias',value:'transfer'},
     {name:'Pago de servicios', value:'payments'}
 ]
 
-class CashierAccount extends Component {
+class UserAccount extends Component {
     constructor() {
         super()
         this.state = {
@@ -35,11 +36,11 @@ class CashierAccount extends Component {
                         <p>En el menú selecciona la operación que deseas realizar</p>
                     </div>
                 }
-                { this.state.operation == 'deposit' &&
-                    <DepositOperation />
+                { this.state.operation == 'balance' &&
+                    <BalanceOperation />
                 }
-                { this.state.operation == 'extract' &&
-                    <ExtractOperation />
+                { this.state.operation == 'transfer' &&
+                    <TransferOperation />
                 }
                 { this.state.operation == 'payments' &&
                     <PaymentsOperation />
@@ -51,4 +52,4 @@ class CashierAccount extends Component {
     }
 }
 
-export default CashierAccount;
+export default UserAccount;
