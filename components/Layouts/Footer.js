@@ -14,7 +14,7 @@ class Footer extends Component {
                                     <Link href="#">
                                         <a><img src={require("../../images/logo.png")} alt="logo" /></a>
                                     </Link>
-                                    <p>Somos un banco joven, nacidos virtuales pero ya tenemos ubicaciones físicas. Llegamos para hacerte las cosas más fáciles.</p>
+                                    <p>Somos un banco virtual, con sucursales en todo el país y llegamos para acompañarte y hacerte las cosas más fáciles</p>
                                     <p>#ElFuturoEstaAca</p>
                                 </div>
                                 
@@ -61,21 +61,21 @@ class Footer extends Component {
                                             <a>Quienes Somos</a>
                                         </Link>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <Link href="#">
                                             <a>Servicios</a>
                                         </Link>
-                                    </li>
+                                    </li> */}
                                     <li>
                                         <Link href="#">
                                             <a>Funcionalidades</a>
                                         </Link>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <Link href="#">
                                             <a>Pricing</a>
                                         </Link>
-                                    </li>
+                                    </li> */}
                                     {/* <li>
                                         <Link href="#">
                                             <a>Latest News</a>
@@ -91,11 +91,11 @@ class Footer extends Component {
                                 
                                 <ul className="list">
                                     <li>
-                                        <Link href="#">
+                                        <Link href="/faq">
                                             <a>FAQ's</a>
                                         </Link>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <Link href="#">
                                             <a>Politicas de privacidad</a>
                                         </Link>
@@ -104,14 +104,14 @@ class Footer extends Component {
                                         <Link href="#">
                                             <a>Terminos y Condiciones</a>
                                         </Link>
-                                    </li>
+                                    </li> */}
                                     {/* <li>
                                         <Link href="#">
                                             <a>Community</a>
                                         </Link>
                                     </li> */}
                                     <li>
-                                        <Link href="#">
+                                        <Link href="/contact">
                                             <a>Contactanos</a>
                                         </Link>
                                     </li>

@@ -12,7 +12,7 @@ class MainBanner extends Component {
                                 <h1>Vos soña tu proyecto, nosotros te acompañamos</h1>
                                 {/* <p>Abri tu cuenta en Haiper por que: </p> */}
                                 <h1>#ElFuturoEstaAca</h1>
-                                <Link href="#">
+                                <Link href="/contact">
                                     <a className="btn btn-primary">¡Comencemos!</a>
                                 </Link>
                             </div>

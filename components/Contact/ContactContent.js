@@ -11,7 +11,7 @@ class ContactContent extends Component {
                         <div className="section-title">
                             <h2>Escribinos, estamos para ayudarte</h2>
                             <div className="bar"></div>
-                            <p>Si queres volverte miembro, dejanos tus datos y te contactaremos para que te acerques a nuestra sucursal para realizar el alta</p>
+                            <p>Si <b>queres volverte miembro</b>, dejanos tus datos y te contactaremos para que te acerques a nuestra sucursal para realizar el alta</p>
                         </div>
 
                         <div className="row">

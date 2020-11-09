@@ -13,11 +13,11 @@ class AboutUs extends Component {
         return (
             <React.Fragment>
                 <Navbar />
-                <PageBannerContent pageTitle="About Us" pageCaption="The Haiper story" />
+                <PageBannerContent pageTitle="Quienes Somos" pageCaption="La historia de Haiper" />
                 <AboutContent />
-                <TeamMember />
-                <PartnerContent />
-                <AppDownloadContent />
+                {/* <TeamMember /> */}
+                {/* <PartnerContent /> */}
+                {/* <AppDownloadContent /> */}
                 <AccountCreateArea />
                 <Footer />
             </React.Fragment>

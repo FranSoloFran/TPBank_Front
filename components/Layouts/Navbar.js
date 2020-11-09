@@ -176,11 +176,11 @@ class Navbar extends Component {
                                             </ul>
                                         </li> */}
  
-                                        <li className="nav-item">
+                                        {/* <li className="nav-item">
                                             <Link href="/pricing" activeClassName="active">
                                                 <a className="nav-link">Pricing</a>
                                             </Link>
-                                        </li>   
+                                        </li>    */}
 
                                         {/* <li className="nav-item">
                                             <Link href="#">

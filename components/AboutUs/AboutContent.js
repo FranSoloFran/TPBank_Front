@@ -18,16 +18,17 @@ class AboutContent extends Component {
                     <div className="row align-items-center">
                         <div className="col-lg-6 col-md-12">
                             <div className="about-content">
-                                <span>How we were founded</span>
-                                <h2>Easy, fee-free banking for entrepreneurs</h2>
-                                <p>Every month they moved their money the old way – which wasted their time and money. So they invented a beautifully simple workaround that became a billion-dollar business.</p>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                                <span>¿Como empezamos?</span>
+                                <h2>#ElFuturoEstaAca</h2>
+                                <p>Somos un grupo de soñadores que busca la forma de hacerte las cosas más fáciles. Acercarate un mercado más libre y que puedas operar desde donde estes</p>
+                                <p>Empezamos alla por 2005 pensando en renovar la industria financiera aplicando Nuevas Tecnologías de la información y aquí estamos</p>
                             </div>
                         </div>
 
                         <div className="col-lg-6 col-md-12">
                             <div className="about-image">
-                                <img src={require("../../images/about-img1.jpg")} alt="image" />
+                                {/* <img src={require("../../images/about-img1.jpg")} alt="image" /> */}
+                                <img src={require("../../images/somos.jpg")} alt="image" />
 
                                 <Link href="#play-video">
                                     <a
@@ -45,7 +46,8 @@ class AboutContent extends Component {
                     <ModalVideo 
                         channel='youtube' 
                         isOpen={this.state.isOpen} 
-                        videoId='szuchBiLrEM' 
+                        // videoId='szuchBiLrEM'
+                        videoId='KaQTLBvp3K0'  
                         onClose={() => this.setState({isOpen: false})} 
                     />
                 </div>
