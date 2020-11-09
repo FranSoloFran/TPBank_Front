@@ -4313,7 +4313,8 @@ Page Title Area CSS
 }
 
 .page-title-area.item-bg1 {
-  background-image: url(../../images/page-title-bg2.jpg);
+  /* background-image: url(../../images/page-title-bg2.jpg); */
+  background-image: url(../../images/contacto.jpg);
 }
 
 .page-title-area.item-bg2 {

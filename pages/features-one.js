@@ -12,10 +12,10 @@ class FeaturesOne extends Component {
         return (
             <React.Fragment>
                 <Navbar />
-                <PageBannerContent pageTitle="Our Features" pageCaption="All the tools you need" />
+                <PageBannerContent pageTitle="Nuestras Funcionalidades" pageCaption="Nuestras herramientas a tu disposición" />
                 <ServicesCard />
-                <PartnerContent />
-                <AppDownloadContent />
+                {/* <PartnerContent />
+                <AppDownloadContent /> */}
                 <AccountCreateArea />
                 <Footer />
             </React.Fragment>
