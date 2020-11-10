@@ -4,12 +4,27 @@ class NewClientOperation extends Component {
     constructor() {
         super()
         this.state = {
-            type: null
+            clientType:null,
+            lastname:null,
+            firstname:null,
+            documentType:null,
+            documentNumber:null,
+            birthdate:null,
+            nationality:null,
+            accountType:null,
+            startActivityDate:null
         }
         this.handleChangeType = this.handleChangeType.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
     handleChangeType(event) {
         this.setState({ type: event.target.value });
+    }
+
+    onSubmit(event) {
+        event.preventDefault()
+        //Llamada a backend
+        alert(`Usuario creado con exito`)
     }
 
     render() {
@@ -17,13 +32,12 @@ class NewClientOperation extends Component {
 
             <div className="container container-operation">
                 <h1>Nuevo cliente</h1>
-                <form>
+                <form onSubmit={this.onSubmit}>
 
                     <div className="form-group form-group-default">
                         <label>Tipo de cliente</label>
-                        <select className='form-control' value={this.state.type} onChange={this.handleChangeType}>
+                        <select required className='form-control' value={this.state.type} onChange={this.handleChangeType}>
                             <option disabled selected>Selecciona una opción</option>
-
                             <option value='pj'>Persona juridica</option>
                             <option value='pf'>Persona física</option>
                         </select>
@@ -34,13 +48,13 @@ class NewClientOperation extends Component {
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Apellido</label>
-                                        <input type="text" name="lastname" id="lastname" placeholder="..." className="form-control" />
+                                        <input required onChange={(event)=> this.setState({lastname:event.target.value})} type="text" name="lastname" id="lastname" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Nombre</label>
-                                        <input type="text" name="firstname" id="firstname" placeholder="..." className="form-control" />
+                                        <input required onChange={(event)=> this.setState({firstname:event.target.value})} type="text" name="firstname" id="firstname" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
 
@@ -49,18 +63,19 @@ class NewClientOperation extends Component {
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Tipo de documento</label>
-                                        <select className='form-control'>
-                                            <option>DNI</option>
-                                            <option>LE</option>
-                                            <option>CUIT</option>
-                                            <option>CUIL</option>
+                                        <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
+                                            <option value='' disabled selected>Selecciona una opción</option>
+                                            <option value='DNI'>DNI</option>
+                                            <option value='LE'>LE</option>
+                                            <option value='CUIT'>CUIT</option>
+                                            <option value='CUIL'>CUIL</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Número de documento</label>
-                                        <input type="text" name="firstname" id="firstname" placeholder="..." className="form-control" />
+                                        <input required onChange={(event)=> this.setState({documentNumber:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -69,13 +84,13 @@ class NewClientOperation extends Component {
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Fecha de nacimiento</label>
-                                        <input type="date" name="firstname" id="firstname" placeholder="..." className="form-control" />
+                                        <input required onChange={(event)=> this.setState({birthdate:event.target.value})} type="date" name="birthdate" id="birthdate" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Nacionalidad</label>
-                                        <input type="text" name="firstname" id="firstname" placeholder="..." className="form-control" />
+                                        <input required onChange={(event)=> this.setState({nationality:event.target.value})} type="text" name="nationality" id="nationality" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +103,7 @@ class NewClientOperation extends Component {
                         <div>
                             <div className="form-group form-group-default">
                                 <label>Razón social</label>
-                                <input type="text" name="lastname" id="lastname" placeholder="..." className="form-control" />
+                                <input required type="text" name="businessName" id="businessName" placeholder="..." className="form-control" />
                             </div>
 
 
@@ -96,18 +111,19 @@ class NewClientOperation extends Component {
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Tipo de documento</label>
-                                        <select className='form-control'>
-                                            <option>DNI</option>
-                                            <option>LE</option>
-                                            <option>CUIT</option>
-                                            <option>CUIL</option>
+                                        <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
+                                            <option value='' disabled selected>Selecciona una opción</option>
+                                            <option value='DNI'>DNI</option>
+                                            <option value='LE'>LE</option>
+                                            <option value='CUIT'>CUIT</option>
+                                            <option value='CUIL'>CUIL</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Número de documento</label>
-                                        <input type="text" name="firstname" id="firstname" placeholder="..." className="form-control" />
+                                        <input required onChange={(event)=> this.setState({documentNumber:event.target.value})}  type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -116,22 +132,21 @@ class NewClientOperation extends Component {
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Fecha de comienzo de actividades</label>
-                                        <input type="date" name="firstname" id="firstname" placeholder="..." className="form-control" />
+                                        <input required onChange={(event)=> this.setState({startActivityDate:event.target.value})} type="date" name="startActivityDate" id="startActivityDate" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
 
                             </div>
-
-
                         </div>
                     }
                     {this.state.type &&
                         <React.Fragment>
                             <div className="form-group form-group-default">
                                 <label>Tipo de cuenta</label>
-                                <select className='form-control'>
-                                    <option>Caja de ahorro</option>
-                                    <option>Cuenta corriente</option>
+                                <select required onChange={(event)=> this.setState({accountType:event.target.value})} className='form-control'>
+                                    <option value='' disabled selected>Selecciona una opción</option>
+                                    <option value="CA">Caja de ahorro</option>
+                                    <option value="CC">Cuenta corriente</option>
                                 </select>
                             </div>
 
@@ -139,7 +154,6 @@ class NewClientOperation extends Component {
                         </React.Fragment>
 
                     }
-
 
 
                 </form>
