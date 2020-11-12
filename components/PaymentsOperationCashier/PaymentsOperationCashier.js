@@ -3,32 +3,33 @@ import sessionManager from '../../services/sessionManager'
 import axios from 'axios';
 
 
-class TransferOperation extends Component {
+class PaymentsOperation extends Component {
 
     constructor() {
         super()
         this.state = {
-            originAccount:null,
-            destinationAccount:null,
-            accounts: [],
             accountNumber: null,
             amount: 0,
+            account: null,
+            accounts: [],
             clientName: null,
-            userId: null
+            serviceId:null
         }
         this.onChangeAccountNumber = this.onChangeAccountNumber.bind(this)
         this.onChangeAmount = this.onChangeAmount.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
-        this.onChangeOriginAccount = this.onChangeOriginAccount.bind(this) 
-               
+        this.onChangeService = this.onChangeService.bind(this)   
     }
 
     onChangeAccountNumber(event) {
         //Pegado a backend
+        const selectedAccount = event.target.value;
 
         this.setState({
-            accountNumber: event.target.value,
-            clientName: 'Juan Carlos Pereyra'
+            accountNumber: selectedAccount,
+            clientName: 'Juan Carlos Pere',
+            electronicCode: null,
+            documentNumber:null
         })
     }
 
@@ -40,38 +41,31 @@ class TransferOperation extends Component {
 
     onSubmit(event) {
         event.preventDefault()
+        console.log(this.state.accountNumber)
+        console.log(this.state.serviceId)
 
-        const number = this.state.accountNumber
-
-        axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/accounts/search/cbu/${number}`)
-            .then(res => {
-                console.log(res);
-                this.setState({ destinationAccount: res.data.id})                
-                // verificar catcheo de error
-            })
-
-            //post a transacción, no funciona
-        
-        axios.post('https://bank-api-integrations.herokuapp.com/api/v1/transactions',
-                {detail:"Deposito",
-                amount:200.30,
-                transaction_type:"DEP",
-                cash:false,
-                type_operation:"I",
-                account_id:this.state.destinationAccount,
-                account_origin_id:this.state.originAccount
+        axios.post('https://bank-api-integrations.herokuapp.com/api/v1/payments',
+                {   "id":this.state.serviceId, 
+                    "cash":true,
+                    "account_id":this.state.accountNumber
             })
         .then(res => {
             console.log(res);
         })
+    }
 
-        alert('Transferencia realizada con éxito')
+    onChangeService(event){
+        this.setState({
+            //serviceName:event.target.value
+            serviceId:event.target.value
+        })
     }
 
     componentDidMount() {
         this.sessionManager = new sessionManager()
         const userId = this.sessionManager.getUserId()
-           
+        
+        
         axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${userId}/accounts`)
             .then(res => {
                 console.log(res);
@@ -79,44 +73,58 @@ class TransferOperation extends Component {
                 console.log(res.data)
                 // verificar catcheo de error
                 //console.log(accounts)
-            })
+            });
     }
 
-    onChangeOriginAccount(event){
-        this.setState({
-            originAccount:event.target.value
-        })
-    }
 
     render() {
         return (
 
             <div className="container container-operation">
-                <h1>Transferencias</h1>
+                <h1>Pago de servicios</h1>
 
                 <div className="money-transfer-form">
+                    
                     <form onSubmit={this.onSubmit}>
 
                         <div className="form-group form-group-default">
-                            <label>Cuenta de origen</label>
-                            <select  onChange={this.onChangeOriginAccount}  required className='form-control'>
-                                <option value='' disabled selected>Seleccioná una opción</option>
+                            <label>Cliente</label>
+                            <input required value={this.state.documentNumber} required onChange={(event)=> this.setState({documentNumber:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="000000" className="form-control" />
+                            <span className='form-extra-data'></span>
+                        </div>
+
+                        <div className="form-group form-group-default">
+                            <label>Número de cuenta</label>
+                            <select onChange={this.onChangeAccountNumber} required className='form-control'>
+                                <option value='' disabled selected>Selecciona una opción</option>
                                 {this.state.accounts.map((account) => (
                                     <option value={account.id} >{account.account_type} : {account.identification_number}</option>
                                 ))
                                 }
-
                             </select>
                         </div>
 
+
+
                         <div className="form-group form-group-default">
-                            <label>Número de cuenta a transferir</label>
-                            <input required value={this.state.accountNumber} on onChange={this.onChangeAccountNumber} type="text" name="account-number" id="account-number" placeholder="000000000000000" className="form-control" />
-                            <span className='form-extra-data'>{this.state.clientName}</span>
+                            <label>Número de pago electronico</label>
+                            <input required value={this.state.electronicCode} required onChange={(event)=> this.setState({electronicCode:event.target.value})} type="text" name="electronicCode" id="electronicCode" placeholder="000000" className="form-control" />
+                            <span className='form-extra-data'></span>
+                        </div>
+
+
+                        <div className="form-group form-group-default">
+                            <label>Servicio</label>
+                            <select required onChange={this.onChangeService} className='form-control'>
+                                <option value='' disabled selected>Selecciona una opción</option>
+                                <option value='1'>AYSA</option>
+                                <option value='2'>EDESUR</option>
+                                <option value='3'>Fibertel</option>
+                            </select>
                         </div>
 
                         <div className="form-group">
-                            <label>Monto a transferir </label>
+                            <label>Monto a pagar</label>
                             <div className="money-transfer-field">
                             <input min={100} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="1,000" />
                                 <div className="amount-currency-select">
@@ -129,6 +137,8 @@ class TransferOperation extends Component {
                         </div>
 
                         <button type="submit" className="btn btn-primary">Confirmar operación</button>
+
+
                     </form>
                 </div>
 
@@ -137,6 +147,6 @@ class TransferOperation extends Component {
     }
 }
 
-export default TransferOperation;
+export default PaymentsOperation;
 
 

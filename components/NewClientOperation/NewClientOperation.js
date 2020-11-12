@@ -23,7 +23,7 @@ class NewClientOperation extends Component {
     }
 
     onSubmit(event) {
-        axios.post("https://bank-api-integrations.herokuapp.com//api/v1/clients", {
+        axios.post("https://bank-api-integrations.herokuapp.com/api/v1/clients", {
             clientType: this.state.clientType,
             lastname: this.state.lastname,
             firstname: this.state.firstname,
