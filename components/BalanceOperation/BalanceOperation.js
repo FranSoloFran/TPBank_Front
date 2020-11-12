@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import sessionManager from '../../services/sessionManager'
 
 class BalanceOperation extends Component {
     constructor() {
@@ -8,62 +9,37 @@ class BalanceOperation extends Component {
             account: null,
             accounts: [],
             movements: [],
-            clientId: null
+            userId: null
         }
         this.onChangeAccount = this.onChangeAccount.bind(this)
     }
 
     onChangeAccount(event) {
         //Llamada a backend account seleccionada para obtener movimientos
+        const selectedAccount = event.target.value;
+    
+        axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/accounts/${selectedAccount}/transactions`)
+            .then(res => {
+                console.log(res.data);
+                    this.setState({ movements: res.data.transactions, account: selectedAccount })
+                // verificar catcheo de error
+            });
 
-        axios.post("'https://bank-api-integrations.herokuapp.com/api/v1/clients/", {accountid: this.state.account})
-        .then(res => {
-            console.log(res);
-            setTimeout(()=> {
-                this.setState({isLoadingResultados:false, movements: res.data})
-            }, 2000
-            )
-            // verificar catcheo de error
-        });
-
-        alert(movements)
-
-        const movements = [ 
-            { idOperation: '16716', detail: 'Compra en Fravega', amount: '1555' },
-            { idOperation: '16717', detail: 'Compra en Garbarino', amount: '95000' },
-            { idOperation: '16718', detail: 'MercadoPago', amount: '70' }
-        ]
-
-        this.setState({
-            account: event.target.value,
-            movements: movements
-        })
     }
 
     componentDidMount() {
-        //Llamada a backend para obtener las cuentas by userid
-
-        //http://localhost:8080/api/v1/clients/{idClient}/accounts    
-        axios.get(`http://bank-api-integrations.herokuapp.com/api/v1/clients/2/accounts`)
-        .then(res => {
-            console.log(res);
-            setTimeout(()=> {
-                this.setState({isLoadingResultados:false, accounts: res.data})
-            }, 2000
-            )
-            // verificar catcheo de error
-            //console.log(accounts)
-        });
-
+        this.sessionManager = new sessionManager()
+        const userId = this.sessionManager.getUserId()
         
-
-       /*const accounts = [
-            { type: 'CA', number: '00000000015' },
-            { type: 'CC', number: '00000000016' }
-        ] 
-        this.setState({
-            accounts: accounts
-        })*/
+        //NOFUNCIONA, VERIFICAR
+        axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${userId}/accounts`)
+            .then(res => {
+                console.log(res);
+                this.setState({ accounts: res.data, userId: userId })
+                console.log(res.data)
+                // verificar catcheo de error
+                //console.log(accounts)
+            });
     }
 
     render() {
@@ -79,7 +55,7 @@ class BalanceOperation extends Component {
                             <select onChange={this.onChangeAccount} required className='form-control'>
                                 <option value='' disabled selected>Selecciona una opción</option>
                                 {this.state.accounts.map((account) => (
-                                    <option value={account.number} >{account.type} : {account.number}</option>
+                                    <option value={account.id} >{account.account_type} : {account.identification_number}</option>
                                 ))
                                 }
                             </select>
