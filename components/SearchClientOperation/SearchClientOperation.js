@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
+const clientes = axios.create({
+    baseURL: 'https://bank-api-integrations.herokuapp.com/api/v1/clients/search/'
+})
+
+const cuentas = axios.create({
+    baseURL: 'https://bank-api-integrations.herokuapp.com/api/v1/clients/'
+})
 
 class SearchClientOperation extends Component {
     constructor() {
         super()
         this.state = {
             client: null,
-            clientType:null,
+            id:null,
             lastname:null,
             firstname:null,
             documentType:null,
             documentNumber:null,
-            birthdate:null,
-            nationality:null,
-            accountType:null,
-            startActivityDate:null
+            cuil:null,
+            email:null,
+            status:null,
+            startActivityDate:null,
+            accounts:[]
         }
         this.onSubmit = this.onSubmit.bind(this)
 
@@ -21,9 +31,33 @@ class SearchClientOperation extends Component {
 
     onSubmit(event) {
         event.preventDefault()
-        this.setState({
-            client: true
-        })
+
+        clientes.get('dni/' + this.state.documentNumber).then(res => {
+            console.log(res.data);
+            this.state.lastname = res.data.last_name;
+            this.state.email = res.data.email;
+            this.state.status = res.data.status;
+            this.state.firstname = res.data.name;
+            this.state.id = res.data.id;
+          
+            cuentas.get(this.state.id + '/accounts').then(resp => {
+                console.log(resp.data);
+                this.state.accounts = resp.data;
+                
+                this.setState({
+                    client: true
+                })
+
+            }
+            )
+            .catch(function (error)
+            {console.log(error)})
+
+        }
+        )
+        .catch(function (error)
+        {console.log(error)})
+
     }
 
     render() {
@@ -60,29 +94,42 @@ class SearchClientOperation extends Component {
                 {this.state.client &&
                     <div className='client-info'>
                         <div className='row'>
-                            <div className='col-md-6'>
-                                <p><b>Nombre:</b> $Juan</p>
+                            <div className='col-md-6'> 
+                            <p><b>Nombre:</b> {this.state.firstname}</p>
                             </div>
                             <div className='col-md-6'>
-                                <p><b>Apellido:</b> $Ramires</p>
+                                <p><b>Apellido:</b> {this.state.lastname}</p>
                             </div>
                         </div>
+
                         <div className='row'>
                             <div className='col-md-6'>
-                                <p><b>Tipo de cuenta:</b> $Cuenta corriente</p>
+                                <p><b>Email:</b> {this.state.email}</p>
                             </div>
                             <div className='col-md-6'>
-                                <p><b>Número de cuenta:</b> $00000000000015</p>
+                            <p><b>Estado:</b>Activo</p>
                             </div>
                         </div>
-                        <div className='row'>
-                            <div className='col-md-6'>
-                                <p><b>Fecha de nacimiento</b> $24/12/78</p>
+                        {this.state.accounts.map(account => (
+                            <div className='row' key={account.id}>
+                                <div className='col-md-12'>
+                                    <br></br>
+                                    <p><b>Cuenta número :</b> {account.id}</p>
+                                </div>
+                                <div className='col-md-6'>
+                                    <p><b>Tipo de cuenta:</b> {account.account_type}</p>
+                                </div>
+                                <div className='col-md-6'>
+                                    <p><b>Número de cuenta:</b> {account.identification_number}</p>
+                                </div>
+                                <div className='col-md-6'>
+                                    <p><b>Balance:</b> {account.balance}</p>
+                                </div>
+                                <div className='col-md-6'>
+                                    <p><b>Nombre:</b> {account.name}</p>
+                                </div>
                             </div>
-                            <div className='col-md-6'>
-                                <p><b>Nacionalidad</b> $Polaco</p>
-                            </div>
-                        </div>
+                        ))}
 
                     </div>
 
