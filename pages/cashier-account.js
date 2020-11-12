@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SideBarAccount from '../components/SideBarAccount/SideBarAccount';
 import DepositOperation from '../components/DepositOperation/DepositOperation';
 import ExtractOperation from '../components/ExtractOperation/ExtractOperation';
-import PaymentsOperation from '../components/PaymentsOperation/PaymentsOperation';
+import PaymentsOperationCashier from '../components/PaymentsOperationCashier/PaymentsOperationCashier';
 import sessionManager from '../services/sessionManager'
 
 const operations=[
@@ -54,7 +54,7 @@ class CashierAccount extends Component {
                     <ExtractOperation />
                 }
                 { this.state.operation == 'payments' &&
-                    <PaymentsOperation />
+                    <PaymentsOperationCashier />
                 }
                 
 

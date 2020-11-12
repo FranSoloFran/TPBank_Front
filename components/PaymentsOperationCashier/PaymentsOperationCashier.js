@@ -18,7 +18,7 @@ class PaymentsOperation extends Component {
         this.onChangeAccountNumber = this.onChangeAccountNumber.bind(this)
         this.onChangeAmount = this.onChangeAmount.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
-        this.onChangeService = this.onChangeService.bind(this)        
+        this.onChangeService = this.onChangeService.bind(this)   
     }
 
     onChangeAccountNumber(event) {
@@ -27,8 +27,9 @@ class PaymentsOperation extends Component {
 
         this.setState({
             accountNumber: selectedAccount,
-            clientName: 'Juan Carlos Pereyra',
-            electronicCode: null
+            clientName: 'Juan Carlos Pere',
+            electronicCode: null,
+            documentNumber:null
         })
     }
 
@@ -75,6 +76,7 @@ class PaymentsOperation extends Component {
             });
     }
 
+
     render() {
         return (
 
@@ -82,7 +84,15 @@ class PaymentsOperation extends Component {
                 <h1>Pago de servicios</h1>
 
                 <div className="money-transfer-form">
+                    
                     <form onSubmit={this.onSubmit}>
+
+                        <div className="form-group form-group-default">
+                            <label>Cliente</label>
+                            <input required value={this.state.documentNumber} required onChange={(event)=> this.setState({documentNumber:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="000000" className="form-control" />
+                            <span className='form-extra-data'></span>
+                        </div>
+
                         <div className="form-group form-group-default">
                             <label>Número de cuenta</label>
                             <select onChange={this.onChangeAccountNumber} required className='form-control'>
@@ -94,9 +104,11 @@ class PaymentsOperation extends Component {
                             </select>
                         </div>
 
+
+
                         <div className="form-group form-group-default">
                             <label>Número de pago electronico</label>
-                            <input required value={this.state.electronicCode} required onChange={(event)=> this.setState({electronicCode:event.target.value})} type="text" name="account-number" id="account-number" placeholder="000000" className="form-control" />
+                            <input required value={this.state.electronicCode} required onChange={(event)=> this.setState({electronicCode:event.target.value})} type="text" name="electronicCode" id="electronicCode" placeholder="000000" className="form-control" />
                             <span className='form-extra-data'></span>
                         </div>
 
