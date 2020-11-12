@@ -20,8 +20,8 @@ class AboutContent extends Component {
                             <div className="about-content">
                                 <span>¿Como empezamos?</span>
                                 <h2>#ElFuturoEstaAca</h2>
-                                <p>Somos un grupo de soñadores que busca la forma de hacerte las cosas más fáciles. Acercarate un mercado más libre y que puedas operar desde donde estes</p>
-                                <p>Empezamos alla por 2005 pensando en renovar la industria financiera aplicando Nuevas Tecnologías de la información y aquí estamos</p>
+                                <p>Somos un grupo de soñadores que busca la forma de hacerte las cosas más fáciles, para acercarte un mercado más libre y que puedas operar desde donde estés.</p>
+                                <p>Empezamos allá por 2005 pensando en renovar la industria financiera, aplicando Nuevas Tecnologías de la información, y aquí estamos para vos.</p>
                             </div>
                         </div>
 

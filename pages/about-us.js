@@ -13,7 +13,7 @@ class AboutUs extends Component {
         return (
             <React.Fragment>
                 <Navbar />
-                <PageBannerContent pageTitle="Quienes Somos" pageCaption="La historia de Haiper" />
+                <PageBannerContent pageTitle="Quienes Somos" pageCaption="La historia de TPBank" />
                 <AboutContent />
                 {/* <TeamMember /> */}
                 {/* <PartnerContent /> */}

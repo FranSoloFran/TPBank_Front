@@ -100,7 +100,7 @@ class TransferOperation extends Component {
                         <div className="form-group form-group-default">
                             <label>Cuenta de origen</label>
                             <select  onChange={this.onChangeOriginAccount}  required className='form-control'>
-                                <option value='' disabled selected>Selecciona una opción</option>
+                                <option value='' disabled selected>Seleccioná una opción</option>
                                 {this.state.accounts.map((account) => (
                                     <option value={account.id} >{account.account_type} : {account.identification_number}</option>
                                 ))

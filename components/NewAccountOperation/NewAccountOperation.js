@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class NewAccountOperation extends Component {
     constructor() {
@@ -12,9 +13,14 @@ class NewAccountOperation extends Component {
     }
 
     onSubmit(event) {
+        axios.post("https://bank-api-integrations.herokuapp.com/api/v1/accounts", {
+            documentType: this.state.documentType,
+            documentNumber: this.state.documentNumber,
+            accountType: this.state.accountType,
+            })
         event.preventDefault()
         //Llamada a backend
-        alert(`Usuario creado con exito`)
+        alert(`Cuenta creada con éxito`)
     }
 
 
@@ -30,7 +36,7 @@ class NewAccountOperation extends Component {
                                     <div className="form-group form-group-default">
                                         <label>Tipo de documento</label>
                                         <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
-                                            <option value='' disabled selected>Selecciona una opción</option>
+                                            <option value='' disabled selected>Seleccioná una opción</option>
                                             <option>DNI</option>
                                             <option>LE</option>
                                             <option>CUIT</option>
@@ -49,7 +55,7 @@ class NewAccountOperation extends Component {
                             <div className="form-group form-group-default">
                                 <label>Tipo de cuenta a crear</label>
                                 <select required onChange={(event)=> this.setState({accountType:event.target.value})} className='form-control'>
-                                    <option value='' disabled selected>Selecciona una opción</option>
+                                    <option value='' disabled selected>Seleccioná una opción</option>
                                     <option value="CA">Caja de ahorro</option>
                                     <option value="CC">Cuenta corriente</option>
                                 </select>

@@ -28,9 +28,9 @@ class AppDownloadContent extends Component {
                             <div className="app-download-content">
                                 <h2>Paga y opera desde nuestra nueva aplicación</h2>
                                 <div className="bar"></div>
-                                <p>Lanzamos a través de Haiper nuestra nueva aplicación Mobile Southern para que puedas pagar con QR, operar, comprar moneda extranjera y más!.</p>
+                                <p>Lanzamos a través de TPBank nuestra nueva aplicación Mobile Southern para que puedas pagar con QR, operar, comprar moneda extranjera y más.</p>
 
-                                <p>¿Te preguntas como obtenerla? Es muy fácil, descargala de manera gratuita desde tu telefono en los Stores o a través de nuestro acceso que encontrarás abajo.</p>
+                                <p>¿Te preguntas cómo obtenerla? Es muy fácil, descargala de manera gratuita desde tu teléfono en las stores o a través de nuestro acceso que encontrarás abajo.</p>
 
                                 <div className="btn-box">
                                     <Link href="#">

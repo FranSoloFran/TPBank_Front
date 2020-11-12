@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class NewClientOperation extends Component {
     constructor() {
@@ -22,10 +23,23 @@ class NewClientOperation extends Component {
     }
 
     onSubmit(event) {
+        axios.post("https://bank-api-integrations.herokuapp.com/api/v1/clients", {
+            clientType: this.state.clientType,
+            lastname: this.state.lastname,
+            firstname: this.state.firstname,
+            documentType: this.state.documentType,
+            documentNumber: this.state.documentNumber,
+            birthdate: this.state.birthdate,
+            nationality: this.state.nationality,
+            accountType: this.state.accountType,
+            startActivityDate: this.state.startActivityDate,
+            })
         event.preventDefault()
         //Llamada a backend
         alert(`Usuario creado con exito`)
     }
+
+
 
     render() {
         return (

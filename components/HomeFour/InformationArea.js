@@ -13,7 +13,7 @@ class InformationArea extends Component {
                                     <i className="flaticon-piggy-bank"></i>
                                 </div>
                                 <h3>$0.00 / mo</h3>
-                                <p>Free account available</p>
+                                <p>Cuenta gratis disponible</p>
                             </div>
                         </div>
 
@@ -23,7 +23,7 @@ class InformationArea extends Component {
                                     <i className="flaticon-user"></i>
                                 </div>
                                 <h3>10 minutes</h3>
-                                <p>Apply for account</p>
+                                <p>Abrir una cuenta</p>
                             </div>
                         </div>
 
@@ -33,7 +33,7 @@ class InformationArea extends Component {
                                     <i className="flaticon-shield"></i>
                                 </div>
                                 <h3>$100,000</h3>
-                                <p>Guarantee on deposits</p>
+                                <p>Garantía en depósitos</p>
                             </div>
                         </div>
 
@@ -43,7 +43,7 @@ class InformationArea extends Component {
                                     <Link href="#">
                                         <a className="app-store-btn">
                                             <i className="flaticon-apple"></i>
-                                            Download on
+                                            Descargar en
                                             <span>App Store</span>
                                         </a>
                                     </Link>
@@ -51,7 +51,7 @@ class InformationArea extends Component {
                                     <Link href="#">
                                         <a className="play-store-btn">
                                             <i className="flaticon-play-store"></i>
-                                            Download on
+                                            Descargar en
                                             <span>Google play</span>
                                         </a>
                                     </Link>
