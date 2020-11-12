@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import axios from 'axios';
+
 class SearchClientOperation extends Component {
     constructor() {
         super()
@@ -10,12 +12,23 @@ class SearchClientOperation extends Component {
 
     }
 
+
+
     onSubmit(event) {
+        axios.get(`https://bank-api-integrations.herokuapp.com//api/v1/clients/search/dni/{dni}`).then( res => {
+            console.log(res);
+            setTimeout(() =>{
+            this.setState({accounts: res.data})
+            }, 2000, console.log(res.data)
+            )
+        });
         event.preventDefault()
         this.setState({
             client: true
         })
     }
+
+
 
     render() {
         return (
