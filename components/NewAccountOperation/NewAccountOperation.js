@@ -14,7 +14,7 @@ class NewAccountOperation extends Component {
     onSubmit(event) {
         event.preventDefault()
         //Llamada a backend
-        alert(`Usuario creado con éxito`)
+        alert(`Cuenta creada con éxito`)
     }
 
 
