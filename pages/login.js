@@ -1,7 +1,47 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
+import sessionManager from '../services/sessionManager'
 
 class Login extends Component {
+    constructor() {
+        super()
+        this.state = {
+            email:null,
+            password:null
+        }
+        this.handleChangeType = this.handleChangeType.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        
+    }
+    handleChangeType(event) {
+        this.setState({ type: event.target.value });
+    }
+
+    componentDidMount(){
+        this.sessionManager = new sessionManager()
+    }
+
+
+    onSubmit(event) {
+        event.preventDefault()
+        //Llamada a backend
+
+        if (this.state.email === "usuario1@gmail.com"){
+            this.sessionManager.login('usuario1@gmail.com','Juan','DNI','6398425','User','10')
+            window.location.href='/user-account'
+        }
+        if (this.state.email === "cajero@gmail.com"){
+            this.sessionManager.login('cajero@gmail.com','Ramon','DNI','12511525','Cashier','9')
+            window.location.href='/cashier-account'
+        }
+        if (this.state.email === "ejecutivo@gmail.com"){
+            this.sessionManager.login('ejecutivo@gmail.com','Sebastian','DNI','33565656','Executive','11')
+            window.location.href='/executive-account'
+        }
+    }
+
+
+
     render() {
         return (
             <React.Fragment>
@@ -29,29 +69,20 @@ class Login extends Component {
                                             <h3>¡Bienvenidos!</h3>
                                             {/* <p>Nuevo en Haiper? <Link href="/sign-up"><a>Accede</a></Link></p> */}
 
-                                            <form>
+                                            <form onSubmit={this.onSubmit}>
                                                 <div className="form-group">
-                                                    <input type="email" name="email" id="email" placeholder="Tu dirección de Email" className="form-control" />
+                                                    <input required onChange={(event)=> this.setState({email:event.target.value})}  type="email" name="email" id="email" placeholder="Tu dirección de Email" className="form-control" />
                                                 </div>
 
                                                 <div className="form-group">
-                                                    <input type="password" name="password" id="password" placeholder="Contraseña" className="form-control" />
+                                                    <input required onChange={(event)=> this.setState({password:event.target.value})}  type="password" name="password" id="password" placeholder="Contraseña" className="form-control" />
                                                 </div>
 
                                                 <button type="submit" className="btn btn-primary">Accede</button>
                                                 
                                                 <div className="forgot-password">
                                                     <Link href="/forgot-password"><a>¿Olvidaste tu contraseña?</a></Link>
-                                                </div>
-
-                                                {/* <div className="connect-with-social">
-                                                    <button type="submit" className="facebook">
-                                                        <i className="fab fa-facebook-square"></i> Connect with Facebook
-                                                    </button>
-                                                    <button type="submit" className="google">
-                                                        <i className="fab fa-google"></i> Connect with Google
-                                                    </button>
-                                                </div> */}
+                                                </div>                                    
                                             </form>
                                         </div>
                                     </div>

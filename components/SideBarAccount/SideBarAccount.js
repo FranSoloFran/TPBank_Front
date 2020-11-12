@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap-navbar-sidebar/dist/navbar-fixed-left.min.css'
+import sessionManager from '../../services/sessionManager'
 
 class SideBarAccount extends Component {
     constructor(props){
@@ -8,6 +9,7 @@ class SideBarAccount extends Component {
             operation:null
         }
         this.onClickOperation = this.onClickOperation.bind(this)
+        this.logout = this.logout.bind(this)
     }
 
     onClickOperation(selectedOperation){
@@ -16,6 +18,15 @@ class SideBarAccount extends Component {
             operation:selectedOperation
         })
     }
+    componentDidMount(){
+        this.sessionManager = new sessionManager()
+    }
+
+    logout(){
+        this.sessionManager.logout()
+        window.location.href='/'
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -36,7 +47,7 @@ class SideBarAccount extends Component {
                         }
                            
                             <li className="nav-item">
-                                <a className="nav-link">Cerrar sesión</a>
+                                <a className="nav-link" onClick={this.logout}>Cerrar sesión</a>
                             </li>
                         </ul>
                     </div>

@@ -4,7 +4,16 @@ class SearchClientOperation extends Component {
     constructor() {
         super()
         this.state = {
-            client: null
+            client: null,
+            clientType:null,
+            lastname:null,
+            firstname:null,
+            documentType:null,
+            documentNumber:null,
+            birthdate:null,
+            nationality:null,
+            accountType:null,
+            startActivityDate:null
         }
         this.onSubmit = this.onSubmit.bind(this)
 
@@ -28,7 +37,8 @@ class SearchClientOperation extends Component {
                         <div className='col-md-6'>
                             <div className="form-group form-group-default">
                                 <label>Tipo de documento</label>
-                                <select className='form-control'>
+                                <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
+                                    <option value='' disabled selected>Selecciona una opción</option>
                                     <option>DNI</option>
                                     <option>LE</option>
                                     <option>CUIT</option>
@@ -39,7 +49,7 @@ class SearchClientOperation extends Component {
                         <div className='col-md-6'>
                             <div className="form-group form-group-default">
                                 <label>Número de documento</label>
-                                <input type="text" name="firstname" id="firstname" placeholder="..." className="form-control" />
+                                <input required onChange={(event)=> this.setState({documentNumber:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                             </div>
                         </div>
                     </div>
