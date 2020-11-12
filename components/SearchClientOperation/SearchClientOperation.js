@@ -9,6 +9,8 @@ const cuentas = axios.create({
     baseURL: 'https://bank-api-integrations.herokuapp.com/api/v1/clients/'
 })
 
+import axios from 'axios';
+
 class SearchClientOperation extends Component {
     constructor() {
         super()
@@ -29,7 +31,16 @@ class SearchClientOperation extends Component {
 
     }
 
+
+
     onSubmit(event) {
+        axios.get(`https://bank-api-integrations.herokuapp.com//api/v1/clients/search/dni/{dni}`).then( res => {
+            console.log(res);
+            setTimeout(() =>{
+            this.setState({accounts: res.data})
+            }, 2000, console.log(res.data)
+            )
+        });
         event.preventDefault()
 
         clientes.get('dni/' + this.state.documentNumber).then(res => {
@@ -59,6 +70,8 @@ class SearchClientOperation extends Component {
         {console.log(error)})
 
     }
+
+
 
     render() {
         return (

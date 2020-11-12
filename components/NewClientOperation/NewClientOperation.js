@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class NewClientOperation extends Component {
     constructor() {
@@ -22,10 +23,23 @@ class NewClientOperation extends Component {
     }
 
     onSubmit(event) {
+        axios.post("https://bank-api-integrations.herokuapp.com//api/v1/clients", {
+            clientType: this.state.clientType,
+            lastname: this.state.lastname,
+            firstname: this.state.firstname,
+            documentType: this.state.documentType,
+            documentNumber: this.state.documentNumber,
+            birthdate: this.state.birthdate,
+            nationality: this.state.nationality,
+            accountType: this.state.accountType,
+            startActivityDate: this.state.startActivityDate,
+            })
         event.preventDefault()
         //Llamada a backend
-        alert(`Usuario creado con éxito`)
+        alert(`Usuario creado con exito`)
     }
+
+
 
     render() {
         return (
@@ -37,8 +51,8 @@ class NewClientOperation extends Component {
                     <div className="form-group form-group-default">
                         <label>Tipo de cliente</label>
                         <select required className='form-control' value={this.state.type} onChange={this.handleChangeType}>
-                            <option disabled selected>Seleccioná una opción</option>
-                            <option value='pj'>Persona jurídica</option>
+                            <option disabled selected>Selecciona una opción</option>
+                            <option value='pj'>Persona juridica</option>
                             <option value='pf'>Persona física</option>
                         </select>
                     </div>
@@ -112,7 +126,7 @@ class NewClientOperation extends Component {
                                     <div className="form-group form-group-default">
                                         <label>Tipo de documento</label>
                                         <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
-                                            <option value='' disabled selected>Seleccioná una opción</option>
+                                            <option value='' disabled selected>Selecciona una opción</option>
                                             <option value='DNI'>DNI</option>
                                             <option value='LE'>LE</option>
                                             <option value='CUIT'>CUIT</option>
@@ -144,7 +158,7 @@ class NewClientOperation extends Component {
                             <div className="form-group form-group-default">
                                 <label>Tipo de cuenta</label>
                                 <select required onChange={(event)=> this.setState({accountType:event.target.value})} className='form-control'>
-                                    <option value='' disabled selected>Seleccioná una opción</option>
+                                    <option value='' disabled selected>Selecciona una opción</option>
                                     <option value="CA">Caja de ahorro</option>
                                     <option value="CC">Cuenta corriente</option>
                                 </select>
