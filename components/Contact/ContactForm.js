@@ -20,7 +20,7 @@ class ContactForm extends Component {
 
                         <div className="col-lg-6 col-md-6">
                             <div className="form-group">
-                                <input type="text" name="phone_number" id="phone_number" required className="form-control" placeholder="Telefono" />
+                                <input type="text" name="phone_number" id="phone_number" required className="form-control" placeholder="Teléfono" />
                             </div>
                         </div>
 

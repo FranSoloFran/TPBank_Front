@@ -8,7 +8,7 @@ class AccountCreateArea extends Component {
                 <div className="container account-create-content">
                     <div className="row align-items-center">
                         <div className="col-lg-8">
-                            <h2>¿Nuevo? Te abrimos tu cuenta en minutos</h2>
+                            <h2>¿Nuevo? Abriremos tu cuenta en minutos</h2>
                             <p>Onboarding 100% acompañado por nuestros empleados</p>
                         </div>
                         

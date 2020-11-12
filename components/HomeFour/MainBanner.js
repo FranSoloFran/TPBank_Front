@@ -20,8 +20,8 @@ class MainBanner extends Component {
                         <div className="row m-0 align-items-center">
                             <div className="col-lg-5 col-md-12 p-0">
                                 <div className="hero-content">
-                                    <h1>Fast and easy business banking</h1>
-                                    <p>Get the financial tools and insights to start, build, and grow your business.</p>
+                                    <h1>HomeBanking rápido y fácil</h1>
+                                    <p>Tenemos las herramientas para empezar, construir y hacer crecer tu negocio.</p>
                                     <Link href="#">
                                         <a className="btn btn-primary">Create your account</a>
                                     </Link>
@@ -62,7 +62,7 @@ class MainBanner extends Component {
                                             className="video-btn"
                                         > 
                                             <i className="fas fa-play mr-2"></i> 
-                                            Play Video
+                                            Reproducir
                                         </a>
                                     </Link>
                                 </div>

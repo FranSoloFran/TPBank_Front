@@ -9,9 +9,9 @@ class MainBanner extends Component {
                     <div className="d-table-cell">
                         <div className="container">
                             <div className="main-banner-content">
-                                <h1>Vos soña tu proyecto, nosotros te acompañamos</h1>
+                                <h1>Vos soñá tu proyecto, nosotros te acompañamos.</h1>
                                 {/* <p>Abri tu cuenta en Haiper por que: </p> */}
-                                <h1>#ElFuturoEstaAca</h1>
+                                <h1>#ElFuturoEstáAcá</h1>
                                 <Link href="/contact">
                                     <a className="btn btn-primary">¡Comencemos!</a>
                                 </Link>

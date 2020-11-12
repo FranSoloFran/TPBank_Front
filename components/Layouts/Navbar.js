@@ -98,7 +98,7 @@ class Navbar extends Component {
 
                                         <li className="nav-item">
                                             <Link href="/about-us" activeClassName="active">
-                                                <a className="nav-link">Quienes Somos</a>
+                                                <a className="nav-link">Quiénes Somos</a>
                                             </Link>
                                         </li>
  
@@ -220,7 +220,7 @@ class Navbar extends Component {
                                     <div className="others-options">
                                         <Link href="/login">
                                             <a className="login-btn">
-                                                <i className="flaticon-user"></i> Login
+                                                <i className="flaticon-user"></i> Entrar
                                             </a>
                                         </Link>
                                     </div>

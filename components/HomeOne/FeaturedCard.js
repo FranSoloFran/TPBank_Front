@@ -15,10 +15,10 @@ class FeaturedCard extends Component {
                                     </div>
 
                                     <h3>Transacciones Transparentes</h3>
-                                    <p>Podes operar, revisar tus consumos, tus transacciones en un mismo lugar y de manera transparente y sin comisiones.</p>
+                                    <p>Podés operar, revisar tus consumos y transacciones en un mismo lugar y de manera transparente y sin comisiones.</p>
 
                                     <Link href="#">
-                                        <a className="read-more-btn">Read More</a>
+                                        <a className="read-more-btn">Ver más</a>
                                     </Link>
                                 </div>
                             </div>
@@ -29,11 +29,11 @@ class FeaturedCard extends Component {
                                         <i className="flaticon-data-encryption"></i>
                                     </div>
 
-                                    <h3>Totalmente Encriptado</h3>
+                                    <h3>Totalmente Cifrado</h3>
                                     <p>Nos preocupa cuidar tus ahorros e información tanto como a vos, por ello tenemos nuestro sitio totalmente encriptado.</p>
 
                                     <Link href="#">
-                                        <a className="read-more-btn">Read More</a>
+                                        <a className="read-more-btn">Ver más</a>
                                     </Link>
                                 </div>
                             </div>
@@ -44,11 +44,11 @@ class FeaturedCard extends Component {
                                         <i className="flaticon-wallet"></i>
                                     </div>
 
-                                    <h3>Opera de manera instantanea</h3>
-                                    <p>Retira tu dinero desde nuestras sucursales o ATMs habilitados. Transferi en el acto, paga en el momento.</p>
+                                    <h3>Operá de manera instantánea</h3>
+                                    <p>Retirá tu dinero desde nuestras sucursales o cajeros habilitados. Transferí en el acto y pagá en el momento.</p>
 
                                     <Link href="#">
-                                        <a className="read-more-btn">Read More</a>
+                                        <a className="read-more-btn">Ver más</a>
                                     </Link>
                                 </div>
                             </div>
@@ -60,10 +60,10 @@ class FeaturedCard extends Component {
                                     </div>
 
                                     <h3>Seguridad y tranquilidad</h3>
-                                    <p>Nuestro lema es opera tranquilo que nosotros nos ocupamos de que sea seguro. Tene en cuenta que nunca te pediremos tus datos de acceso.</p>
+                                    <p>Nuestro lema es operá tranquilo que nosotros nos ocupamos de que sea seguro. Tené en cuenta que NUNCA te pediremos tus datos de acceso.</p>
 
                                     <Link href="#">
-                                        <a className="read-more-btn">Read More</a>
+                                        <a className="read-more-btn">Ver más</a>
                                     </Link>
                                 </div>
                             </div>

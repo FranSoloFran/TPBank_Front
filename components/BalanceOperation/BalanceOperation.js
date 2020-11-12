@@ -47,7 +47,7 @@ class BalanceOperation extends Component {
                         <div className="form-group form-group-default">
                             <label>Cuenta</label>
                             <select onChange={this.onChangeAccount} required className='form-control'>
-                                <option value='' disabled selected>Selecciona una opción</option>
+                                <option value='' disabled selected>Seleccioná una opción</option>
                                 {this.state.accounts.map((account) => (
                                     <option value={account.number} >{account.type} : {account.number}</option>
                                 ))
