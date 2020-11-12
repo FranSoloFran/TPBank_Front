@@ -19,7 +19,7 @@ class OurFeaturesContent extends Component {
                                 </div>
 
                                 <h3>Web y Mobile</h3>
-                                <p>Te permitimos realizar las mismas operaciones tanto desde nuestra web como desde nuestra aplicación. Usa nuestro Token virtual para cualquier movimiento.</p>
+                                <p>Te permitimos realizar las mismas operaciones desde nuestra web y desde nuestra app. Usá nuestro Token virtual para cualquier movimiento.</p>
                             </div>
                         </div>
 
