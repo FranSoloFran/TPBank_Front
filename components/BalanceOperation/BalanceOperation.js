@@ -18,6 +18,7 @@ class BalanceOperation extends Component {
         //Llamada a backend account seleccionada para obtener movimientos
         const selectedAccount = event.target.value;
     
+        //NOFUNCIONA, VERIFICAR
         axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/accounts/${selectedAccount}/transactions`)
             .then(res => {
                 console.log(res.data);
@@ -31,7 +32,7 @@ class BalanceOperation extends Component {
         this.sessionManager = new sessionManager()
         const userId = this.sessionManager.getUserId()
         
-        //NOFUNCIONA, VERIFICAR
+        
         axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${userId}/accounts`)
             .then(res => {
                 console.log(res);

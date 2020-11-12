@@ -29,8 +29,19 @@ class ExtractOperation extends Component {
 
     onSubmit(event) {
         event.preventDefault()
-        //Llamada a backend
-        alert('Extracción realizada con éxito')
+        axios.post('https://bank-api-integrations.herokuapp.com/api/v1/transactions',
+            {
+                detail: "Extracción",
+                amount: this.state.amount,
+                transaction_type: "EXT",
+                cash: true,
+                type_operation: "I",
+                account_id: this.state.accountNumber
+            })
+            .then(res => {
+                console.log(res);
+            })
+        alert('Extración realizado con éxito')
     }
 
 
