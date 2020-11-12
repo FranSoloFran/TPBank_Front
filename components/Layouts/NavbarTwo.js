@@ -71,22 +71,22 @@ class NavbarTwo extends Component {
                                             <ul className="dropdown-menu">
                                                 <li className="nav-item">
                                                     <Link href="/" activeClassName="active">
-                                                        <a className="nav-link">Home one</a>
+                                                        <a className="nav-link">Home 1</a>
                                                     </Link>
                                                 </li>
                                                 <li className="nav-item">
                                                     <Link href="/index2" activeClassName="active">
-                                                        <a className="nav-link">Home two</a>
+                                                        <a className="nav-link">Home 2</a>
                                                     </Link>
                                                 </li>
                                                 <li className="nav-item">
                                                     <Link href="/index3" activeClassName="active">
-                                                        <a className="nav-link">Home three</a>
+                                                        <a className="nav-link">Home 3</a>
                                                     </Link>
                                                 </li>
                                                 <li className="nav-item">
                                                     <Link href="/index4" activeClassName="active">
-                                                        <a className="nav-link">Home four</a>
+                                                        <a className="nav-link">Home 4</a>
                                                     </Link>
                                                 </li>
                                             </ul>
@@ -94,7 +94,7 @@ class NavbarTwo extends Component {
 
                                         <li className="nav-item">
                                             <Link href="/about-us" activeClassName="active">
-                                                <a className="nav-link">About us</a>
+                                                <a className="nav-link">Nosotros</a>
                                             </Link>
                                         </li>
  
@@ -108,13 +108,13 @@ class NavbarTwo extends Component {
                                             <ul className="dropdown-menu">
                                                 <li className="nav-item">
                                                     <Link href="/features-one" activeClassName="active">
-                                                        <a className="nav-link">Features style one</a>
+                                                        <a className="nav-link">Funcionalidades 1</a>
                                                     </Link>
                                                 </li>
 
                                                 <li className="nav-item">
                                                     <Link href="/features-two" activeClassName="active">
-                                                        <a className="nav-link">Features style two</a>
+                                                        <a className="nav-link">Funcionalidades 2</a>
                                                     </Link>
                                                 </li>
                                             </ul>

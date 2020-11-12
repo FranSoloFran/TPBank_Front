@@ -3,6 +3,8 @@ import SideBarAccount from '../components/SideBarAccount/SideBarAccount';
 import DepositOperation from '../components/DepositOperation/DepositOperation';
 import ExtractOperation from '../components/ExtractOperation/ExtractOperation';
 import PaymentsOperation from '../components/PaymentsOperation/PaymentsOperation';
+import sessionManager from '../services/sessionManager'
+
 const operations=[
     {name:'Depósito', value:'deposit'},
     {name:'Extracción',value:'extract'},
@@ -23,6 +25,16 @@ class CashierAccount extends Component {
             operation: newOperation
         })
     }
+    
+    componentDidMount(){
+        this.sessionManager = new sessionManager()
+        if (!this.sessionManager.isLogged('Cashier')){
+            window.location.href='/login'
+        }
+        this.setState({
+            userName:this.sessionManager.getUserName()
+        })
+    }
 
     render() {
         return (
@@ -31,7 +43,7 @@ class CashierAccount extends Component {
 
                 { !this.state.operation &&
                     <div className='container container-operation'>
-                        <h1>Hola $Usuario</h1>
+                        <h1>Hola {this.state.userName}</h1>
                         <p>En el menú selecciona la operación que deseas realizar</p>
                     </div>
                 }

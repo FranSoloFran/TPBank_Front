@@ -14,7 +14,7 @@ class Footer extends Component {
                                     <Link href="#">
                                         <a><img src={require("../../images/logo.png")} alt="logo" /></a>
                                     </Link>
-                                    <p>Somos un banco virtual, con sucursales en todo el país y llegamos para acompañarte y hacerte las cosas más fáciles</p>
+                                    <p>Somos un banco virtual con sucursales en todo el país. Llegamos para acompañarte y hacerte las cosas más fáciles.</p>
                                     <p>#ElFuturoEstaAca</p>
                                 </div>
                                 
@@ -58,7 +58,7 @@ class Footer extends Component {
                                 <ul className="list">
                                     <li>
                                         <Link href="#">
-                                            <a>Quienes Somos</a>
+                                            <a>Quiénes Somos</a>
                                         </Link>
                                     </li>
                                     {/* <li>
@@ -130,7 +130,7 @@ class Footer extends Component {
                                     </li>
                                     <li>
                                         <span className="mr-1">Email:</span> 
-                                        infohaiper@haiper.com
+                                        infotpbank@tpbank.com
                                     </li>
                                     <li>
                                         <span className="mr-1">Telefono:</span> 
@@ -146,7 +146,7 @@ class Footer extends Component {
                     </div>
 
                     <div className="copyright-area">
-                        <p>© {currentYear} Haiper - Todos los derehcos reservados 2020</p>
+                        <p>© {currentYear} TPBank - Todos los derehcos reservados 2020</p>
                     </div>
                 </div>
             </footer>

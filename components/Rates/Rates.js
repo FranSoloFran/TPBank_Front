@@ -31,7 +31,7 @@ class Rates extends Component {
                     <div className="section-title">
                         <h2>Tarifas de las distintas monedas</h2>
                         <div className="bar"></div>
-                        <p>Actualización de tarifas basadas en <strong>USA</strong></p>
+                        <p>Actualización de tarifas basadas en <strong>USD</strong></p>
                     </div>
                     <div className="table-responsive currency-rates-table">
                         <table className="table">

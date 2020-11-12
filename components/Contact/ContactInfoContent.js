@@ -18,14 +18,14 @@ class ContactInfoContent extends Component {
                             <i className="fas fa-envelope"></i>
                         </div>
                         <span>Email</span> 
-                        infohaiper@haiper.com <br />
+                        infotpbank@tpbank.com <br />
                     </li>
 
                     <li>
                         <div className="icon">
                             <i className="fas fa-phone-volume"></i>
                         </div>
-                        <span>Telefono</span> 
+                        <span>Teléfono</span> 
                         + 011 6329-0000
                     </li>
                 </ul>

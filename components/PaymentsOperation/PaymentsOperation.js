@@ -59,7 +59,7 @@ class PaymentsOperation extends Component {
                         <div className="form-group form-group-default">
                             <label>Servicio</label>
                             <select required onChange={this.onChangeService} className='form-control'>
-                                <option value='' disabled selected>Selecciona una opción</option>
+                                <option value='' disabled selected>Seleccioná una opción</option>
                                 <option value='AYSA'>AYSA</option>
                                 <option value='EDESUR'>EDESUR</option>
                                 <option value='Fibertel'>Fibertel</option>

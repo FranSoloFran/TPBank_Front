@@ -10,9 +10,9 @@ class ServicesCard extends Component {
                         <div className="overview-box">
                             <div className="overview-content">
                                 <div className="content left-content">
-                                    <h2>Freelancers, emprendedores tenemos planes para ustedes</h2>
+                                    <h2>Freelancers, emprendedores, PyMEs: tenemos planes para ustedes.</h2>
                                     <div className="bar"></div>
-                                    <p>¿Vas a comenzar tu negocio? Bueno, tenemos varios planes preparados para acompañarte</p>
+                                    <p>¿Vas a comenzar tu negocio? Tenemos varios planes preparados para acompañarte.</p>
 
                                     <ul className="services-list">
                                         <li>
@@ -48,7 +48,7 @@ class ServicesCard extends Component {
                                         <li>
                                             <span>
                                                 <i className="flaticon-check-mark"></i> 
-                                                Tarjeta MasterCard Debito
+                                                Tarjeta MasterCard Débito
                                             </span>
                                         </li>
                                     </ul>

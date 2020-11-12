@@ -44,7 +44,7 @@ class FunFacts extends Component {
 
                     <div className="contact-cta-box">
                         <h3>¿Dudas?</h3>
-                        <p>Ponte en contacto</p>
+                        <p>Ponete en contacto</p>
 
                         <Link href="/contact">
                             <a className="btn btn-primary">Contacto</a>

@@ -42,13 +42,13 @@ export default class MyApp extends App {
         return (
             <React.Fragment>
                 <DefaultSeo
-                    title="Haiper - React Next Online Banking & Payment Processing Template"
-                    description="Haiper - React Next Online Banking & Payment Processing Template. This has been built with React, Next.js, Express.js, and ES6+"
+                    title="TPBank - Home Banking hecho simple"
+                    description="Haiper - Home Banking hecho simple. Creado con React, Next.js, Express.js, y ES6+"
                     openGraph={{
                         type: 'website',
                         locale: 'en_IE',
-                        url: 'https://haiper-react.envytheme.com/',
-                        site_name: 'Haiper - React Next Online Banking & Payment Processing Template',
+                        url: 'https://localhost:3000/',
+                        site_name: 'TPBank - Home Banking hecho simple',
                     }}
                 />
 

@@ -8,7 +8,7 @@ class OurFeaturesContent extends Component {
                     <div className="section-title">
                         <h2>Nuestras funcionalidades</h2>
                         <div className="bar"></div>
-                        <p>Opera con la tranquilidad que te ser cliente de Haiper, te notificaremos ante cualquier cambio en tus cuentas o si necesitas abonar algo</p>
+                        <p>Operá con la tranquilidad que te da ser cliente de TPBank, te notificaremos ante cualquier cambio en tus cuentas o si debés realizar un pago.</p>
                     </div>
 
                     <div className="row">
@@ -19,7 +19,7 @@ class OurFeaturesContent extends Component {
                                 </div>
 
                                 <h3>Web y Mobile</h3>
-                                <p>Te permitimos realizar las mismas operaciones tanto desde nuestra web como desde nuestra aplicación. Usa nuestro Token virtual para cualquier movimiento</p>
+                                <p>Te permitimos realizar las mismas operaciones desde nuestra web y desde nuestra app. Usá nuestro Token virtual para cualquier movimiento.</p>
                             </div>
                         </div>
 
@@ -30,7 +30,7 @@ class OurFeaturesContent extends Component {
                                 </div>
 
                                 <h3>Notificaciones vía mail</h3>
-                                <p>Ante cualquier movimiento de tus cuentas, te notificaremos vía mail para que estes informado</p>
+                                <p>Ante cualquier movimiento de tus cuentas, te notificaremos vía mail para que estes informado.</p>
                             </div>
                         </div>
 
@@ -41,7 +41,7 @@ class OurFeaturesContent extends Component {
                                 </div>
 
                                 <h3>Dashboard Intuitivo</h3>
-                                <p>Si la tecnología no es lo tuyo, no te preocupes, nuestra HomeBankings es muy intuitivo</p>
+                                <p>Si la tecnología no es lo tuyo, no te preocupes, nuestro Home Banking es muy intuitivo.</p>
                             </div>
                         </div>
 
@@ -52,7 +52,7 @@ class OurFeaturesContent extends Component {
                                 </div>
 
                                 <h3>Promociones</h3>
-                                <p>Contamos con una plataforma de beneficios toda para vos, estate atento a las notificaciones push</p>
+                                <p>Contamos con una plataforma de beneficios para vos. Estate atento a las notificaciones push.</p>
                             </div>
                         </div>
 
@@ -63,7 +63,7 @@ class OurFeaturesContent extends Component {
                                 </div>
 
                                 <h3>Drag and Drop</h3>
-                                <p>Podes cargar documentos de manera sencilla, simplemente toma el archivo y arrojalo en la pantalla</p>
+                                <p>Podés cargar documentos de manera sencilla, simplemente arrastrá el archivo y arrojalo en la pantalla.</p>
                             </div>
                         </div>
 
@@ -74,7 +74,7 @@ class OurFeaturesContent extends Component {
                                 </div>
 
                                 <h3>Alarma de vencimiento</h3>
-                                <p>Configura tu cuenta para que nunca te olvides de pagar un servicio</p>
+                                <p>Configurá tu cuenta para que nunca te olvides de pagar un servicio.</p>
                             </div>
                         </div>
                     </div>
