@@ -12,6 +12,11 @@ class NewAccountOperation extends Component {
     }
 
     onSubmit(event) {
+        axios.post("https://bank-api-integrations.herokuapp.com/api/v1/accounts", {
+            documentType: this.state.documentType,
+            documentNumber: this.state.documentNumber,
+            accountType: this.state.accountType,
+            })
         event.preventDefault()
         //Llamada a backend
         alert(`Cuenta creada con éxito`)

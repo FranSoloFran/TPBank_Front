@@ -3,7 +3,7 @@ import SideBarAccount from '../components/SideBarAccount/SideBarAccount';
 import NewClientOperation from '../components/NewClientOperation/NewClientOperation';
 import NewAccountOperation from '../components/NewAccountOperation/NewAccountOperation';
 import SearchClientOperation from '../components/SearchClientOperation/SearchClientOperation';
-import sessionManager from '../services/sessionManager'
+
 
 const operations=[
     {name:'Nuevo cliente', value:'new-client'},
@@ -19,20 +19,11 @@ class ExecutiveAccount extends Component {
         }
         this.onChangeOperation = this.onChangeOperation.bind(this)
     }
+    
 
     onChangeOperation(newOperation) {
         this.setState({
             operation: newOperation
-        })
-    }
-
-    componentDidMount(){
-        this.sessionManager = new sessionManager()
-        if (!this.sessionManager.isLogged('Executive')){
-            window.location.href='/login'
-        }
-        this.setState({
-            userName:this.sessionManager.getUserName()
         })
     }
 
@@ -43,7 +34,7 @@ class ExecutiveAccount extends Component {
 
                 { !this.state.operation &&
                     <div className='container container-operation'>
-                        <h1>Hola {this.state.userName}</h1>
+                        <h1>Hola $Usuario</h1>
                         <p>En el menú selecciona la operación que deseas realizar</p>
                     </div>
                 }
