@@ -74,9 +74,9 @@ class SearchClientOperation extends Component {
                                 <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
                                     <option value='' disabled selected>Selecciona una opción</option>
                                     <option>DNI</option>
-                                    <option>LE</option>
-                                    <option>CUIT</option>
-                                    <option>CUIL</option>
+                                    {/* <option>LE</option> */}
+                                    <option>CUIT/CUIL</option>
+                                    {/* <option>CUIL</option> */}
                                 </select>
                             </div>
                         </div>
