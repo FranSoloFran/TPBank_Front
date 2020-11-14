@@ -13,7 +13,8 @@ class NewClientOperation extends Component {
             birthdate:null,
             nationality:null,
             accountType:null,
-            startActivityDate:null
+            startActivityDate:null,
+            email:null
         }
         this.handleChangeType = this.handleChangeType.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -24,15 +25,10 @@ class NewClientOperation extends Component {
 
     onSubmit(event) {
         axios.post("https://bank-api-integrations.herokuapp.com/api/v1/clients", {
-            // clientType: this.state.clientType,
             last_name: this.state.last_name,
             name: this.state.name,
-            // documentType: this.state.documentType,
             dni: this.state.dni,
-            // birthdate: this.state.birthdate,
-            // nationality: this.state.nationality,
-            // accountType: this.state.accountType,
-            // startActivityDate: this.state.startActivityDate,
+            email: this.state.email,
             })
         event.preventDefault()
         //Llamada a backend
@@ -80,9 +76,9 @@ class NewClientOperation extends Component {
                                         <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
                                             <option value='' disabled selected>Selecciona una opción</option>
                                             <option value='DNI'>DNI</option>
-                                            <option value='LE'>LE</option>
-                                            <option value='CUIT'>CUIT</option>
-                                            <option value='CUIL'>CUIL</option>
+                                            {/* <option value='LE'>LE</option> */}
+                                            <option value='CUIT'>CUIL</option>
+                                            {/* <option value='CUIL'>CUIL</option> */}
                                         </select>
                                     </div>
                                 </div>
@@ -127,10 +123,10 @@ class NewClientOperation extends Component {
                                         <label>Tipo de documento</label>
                                         <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
                                             <option value='' disabled selected>Selecciona una opción</option>
-                                            <option value='DNI'>DNI</option>
-                                            <option value='LE'>LE</option>
+                                            {/* <option value='DNI'>DNI</option> */}
+                                            {/* <option value='LE'>LE</option> */}
                                             <option value='CUIT'>CUIT</option>
-                                            <option value='CUIL'>CUIL</option>
+                                            {/* <option value='CUIL'>CUIL</option> */}
                                         </select>
                                     </div>
                                 </div>
@@ -149,19 +145,27 @@ class NewClientOperation extends Component {
                                         <input required onChange={(event)=> this.setState({startActivityDate:event.target.value})} type="date" name="startActivityDate" id="startActivityDate" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     }
                     {this.state.type &&
                         <React.Fragment>
-                            <div className="form-group form-group-default">
+                            {/* <div className="form-group form-group-default">
                                 <label>Tipo de cuenta</label>
                                 <select required onChange={(event)=> this.setState({accountType:event.target.value})} className='form-control'>
                                     <option value='' disabled selected>Selecciona una opción</option>
                                     <option value="CA">Caja de ahorro</option>
                                     <option value="CC">Cuenta corriente</option>
                                 </select>
+                            </div> */}
+
+                            <div className='row'>
+                                <div className='col-md-6'>
+                                    <div className="form-group form-group-default">
+                                        <label>Email</label>
+                                        <input required onChange={(event)=> this.setState({email:event.target.value})} type="text" name="email" id="email" placeholder="..." className="form-control" />
+                                    </div>
+                                </div>
                             </div>
 
                             <button type="submit" className="btn btn-primary">Confirmar operación</button>
