@@ -176,8 +176,8 @@ class SearchClientOperation extends Component {
                                 </ul>
 
                                 <div className="buy-btn">
-                                    <Link href="#">
-                                        <a className="btn btn-primary">Editar </a>
+                                    <Link href="/">
+                                        <a className="btn btn-primary">Editar</a>
                                     </Link>
                                 </div>
                             </div>
