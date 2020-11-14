@@ -53,8 +53,8 @@ class TransferOperation extends Component {
             //post a transacción, no funciona
         
         axios.post('https://bank-api-integrations.herokuapp.com/api/v1/transactions',
-                {detail:"Deposito",
-                amount:200.30,
+                {detail:"Transferencia",
+                amount:this.state.amount,
                 transaction_type:"DEP",
                 cash:false,
                 type_operation:"I",

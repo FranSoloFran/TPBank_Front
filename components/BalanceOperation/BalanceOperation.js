@@ -9,21 +9,21 @@ class BalanceOperation extends Component {
             account: null,
             accounts: [],
             movements: [],
-            userId: null
+            userId: null,
+            balance:null
         }
         this.onChangeAccount = this.onChangeAccount.bind(this)
     }
 
     onChangeAccount(event) {
-        //Llamada a backend account seleccionada para obtener movimientos
+
         const selectedAccount = event.target.value;
     
-        //NOFUNCIONA, VERIFICAR
         axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/accounts/${selectedAccount}/transactions`)
             .then(res => {
                 console.log(res.data);
-                    this.setState({ movements: res.data.transactions, account: selectedAccount })
-                // verificar catcheo de error
+                    this.setState({ movements: res.data.transactions, account: selectedAccount, balance: res.data.account_detail.balance })
+                    // verificar catcheo de error
             });
 
     }
@@ -76,7 +76,7 @@ class BalanceOperation extends Component {
                         <tbody>
                             {this.state.movements.map((movement) => (
                                 <tr>
-                                    <td>{movement.idOperation}</td>
+                                    <td>{movement.id}</td>
                                     <td>{movement.detail}</td>
                                     <td>{movement.amount}</td>
                                 </tr>
