@@ -150,27 +150,27 @@ class SearchClientOperation extends Component {
  
                                 <ul className="pricing-features">
                                     <li>
-                                        Tipo de cuenta: {account.account_type_description} 
+                                        <b>Tipo de cuenta:</b> {account.account_type_description} 
                                         {/* <i className="fas fa-check"></i>  */}
                                     </li>
                                     <li>
-                                        Número de cuenta: {account.identification_number} 
+                                        <b>Número de cuenta:</b> {account.identification_number} 
                                         {/* <i className="fas fa-check"></i>  */}
                                     </li>
                                     <li>
-                                        Balance: {account.balance} 
+                                        <b>Balance:</b> {account.balance} 
                                         {/* <i className="fas fa-check"></i>  */}
                                     </li>
                                     <li>
-                                        Alias: {account.name} 
+                                        <b>Alias:</b> {account.name} 
                                         {/* <i className="fas fa-ban"></i>  */}
                                     </li>
                                     <li>
-                                        Descubierto: {account.overdraft} 
+                                        <b>Descubierto:</b> {account.overdraft} 
                                         {/* <i className="fas fa-ban"></i>  */}
                                     </li>
                                     <li>
-                                        Activa: {account.active} 
+                                        <b>Activa:</b> {account.active} 
                                         {/* <i className="fas fa-ban"></i>  */}
                                     </li>
                                 </ul>
