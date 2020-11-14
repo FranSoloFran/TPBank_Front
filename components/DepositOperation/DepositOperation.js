@@ -9,19 +9,20 @@ class DepositOperation extends Component {
         this.state = {
             accountNumber: null,
             amount: 0,
-            clientName: null
+            clientName: null,
+            clientId: 0,
+            accounts: []
         }
         this.onChangeAccountNumber = this.onChangeAccountNumber.bind(this)
         this.onChangeAmount = this.onChangeAmount.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+        this.onSubmitSearch = this.onSubmitSearch.bind(this)
     }
 
-    onChangeAccountNumber(event) {
-        //Pegado a backend
+    onChangeAccountNumber(event) {                
         this.setState({
-            accountNumber: event.target.value,
-            clientName: 'Juan Carlos Pereyra'
-        })
+            accountNumber: event.target.value            
+        })       
     }
 
     onChangeAmount(event) {
@@ -47,6 +48,24 @@ class DepositOperation extends Component {
         alert('Deposito realizado con éxito')
     }
 
+    onSubmitSearch(event) {
+        event.preventDefault()
+
+        axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search/dni/' + this.state.documentNumber)
+            .then(res => {
+                this.state.clientName = res.data.name + ' ' + res.data.last_name
+                this.state.clientId = res.data.id;
+            })
+
+        axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${this.state.clientId}/accounts`)
+            .then(res => {
+                console.log(res);
+                this.setState({ accounts: res.data })
+                console.log(res.data)
+            })
+    }
+
+
     render() {
         return (
 
@@ -54,18 +73,48 @@ class DepositOperation extends Component {
                 <h1>Depósito</h1>
 
                 <div className="money-transfer-form">
+
+                    <form onSubmit={this.onSubmitSearch}>
+
+                        <div className='row'>
+                            <div className='col-md-6'>
+                                <div className="form-group form-group-default">
+                                    <label>Tipo de documento</label>
+                                    <select required onChange={(event) => this.setState({ documentType: event.target.value })} className='form-control'>
+                                        <option value='' disabled selected>Selecciona una opción</option>
+                                        <option>DNI</option>
+                                        <option>CUIT</option>
+                                        <option>CUIL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className='col-md-6'>
+                                <div className="form-group form-group-default">
+                                    <label>Número de documento</label>
+                                    <input required onChange={(event) => this.setState({ documentNumber: event.target.value })} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" name="buscar" className="btn btn-primary">Buscar cliente</button>
+                    </form>
+
                     <form onSubmit={this.onSubmit}>
 
                         <div className="form-group form-group-default">
-                            <label>Número de cuenta</label>
-                            <input required value={this.state.accountNumber} onChange={this.onChangeAccountNumber} type="text" name="account-number" id="account-number" placeholder="000000000000000" className="form-control" />
-                            <span className='form-extra-data'> </span>
+                            <label>Cuenta</label>
+                            <select onChange={this.onChangeAccountNumber} required className='form-control'>
+                                <option value='' disabled selected>Seleccioná una opción</option>
+                                {this.state.accounts.map((account) => (
+                                    <option value={account.id} >{account.account_type} : {account.identification_number}</option>
+                                ))
+                                }
+                            </select>
                         </div>
 
                         <div className="form-group">
                             <label>Monto a depositar </label>
                             <div className="money-transfer-field">
-                                <input min={100} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="1,000" />
+                                <input min={0} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="1,000" />
                                 <div className="amount-currency-select">
                                     <i className="fas fa-chevron-down"></i>
                                     <select>
@@ -75,7 +124,7 @@ class DepositOperation extends Component {
                             </div>
                         </div>
 
-                        <button type="submit" className="btn btn-primary">Confirmar operación</button>
+                        <button type="submit" name="procesar" className="btn btn-primary">Confirmar operación</button>
 
 
                     </form>

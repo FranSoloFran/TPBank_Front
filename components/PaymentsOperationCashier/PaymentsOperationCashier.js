@@ -18,7 +18,7 @@ class PaymentsOperation extends Component {
         this.onChangeAccountNumber = this.onChangeAccountNumber.bind(this)
         this.onChangeAmount = this.onChangeAmount.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
-        this.onChangeService = this.onChangeService.bind(this)   
+        this.onChangeElectronicCode = this.onChangeElectronicCode.bind(this)
     }
 
     onChangeAccountNumber(event) {
@@ -29,7 +29,10 @@ class PaymentsOperation extends Component {
             accountNumber: selectedAccount,
             clientName: 'Juan Carlos Pere',
             electronicCode: null,
-            documentNumber:null
+            documentNumber:null,
+            debtAmount:null,
+            serviceName:'',
+            expirationDate:null
         })
     }
 
@@ -39,43 +42,36 @@ class PaymentsOperation extends Component {
         })
     }
 
+    onChangeElectronicCode(){
+/*         axios.get('https://bank-api-integrations.herokuapp.com/api/v1/payments/search/electronicCode/' + this.state.electronicCode)
+        .then(res => {
+            this.state.serviceId= res.data.serviceId,
+            this.state.debtAmount=res.data.amount,
+            this.state.serviceName=res.data.serviceName,
+            this.state.expirationDate=res.data.date
+        }) */
+
+        this.setState({
+            debtAmount:100,
+            serviceName:'Cablevision',
+            expirationDate:'2014-01-01'
+        })
+
+    }
+
     onSubmit(event) {
         event.preventDefault()
         console.log(this.state.accountNumber)
         console.log(this.state.serviceId)
 
         axios.post('https://bank-api-integrations.herokuapp.com/api/v1/payments',
-                {   "id":this.state.serviceId, 
-                    "cash":true,
-                    "account_id":this.state.accountNumber
+                {   "id":1, 
+                    "cash":true
             })
         .then(res => {
             console.log(res);
         })
     }
-
-    onChangeService(event){
-        this.setState({
-            //serviceName:event.target.value
-            serviceId:event.target.value
-        })
-    }
-
-    componentDidMount() {
-        this.sessionManager = new sessionManager()
-        const userId = this.sessionManager.getUserId()
-        
-        
-        axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${userId}/accounts`)
-            .then(res => {
-                console.log(res);
-                this.setState({ accounts: res.data, userId: userId })
-                console.log(res.data)
-                // verificar catcheo de error
-                //console.log(accounts)
-            });
-    }
-
 
     render() {
         return (
@@ -88,45 +84,19 @@ class PaymentsOperation extends Component {
                     <form onSubmit={this.onSubmit}>
 
                         <div className="form-group form-group-default">
-                            <label>Cliente</label>
-                            <input required value={this.state.documentNumber} required onChange={(event)=> this.setState({documentNumber:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="000000" className="form-control" />
-                            <span className='form-extra-data'></span>
-                        </div>
-
-                        <div className="form-group form-group-default">
-                            <label>Número de cuenta</label>
-                            <select onChange={this.onChangeAccountNumber} required className='form-control'>
-                                <option value='' disabled selected>Selecciona una opción</option>
-                                {this.state.accounts.map((account) => (
-                                    <option value={account.id} >{account.account_type} : {account.identification_number}</option>
-                                ))
-                                }
-                            </select>
-                        </div>
-
-
-
-                        <div className="form-group form-group-default">
                             <label>Número de pago electronico</label>
-                            <input required value={this.state.electronicCode} required onChange={(event)=> this.setState({electronicCode:event.target.value})} type="text" name="electronicCode" id="electronicCode" placeholder="000000" className="form-control" />
+                            <input required value={this.state.electronicCode} required onChange={this.onChangeElectronicCode} type="text" name="electronicCode" id="electronicCode" placeholder="000000" className="form-control" />
                             <span className='form-extra-data'></span>
                         </div>
 
-
                         <div className="form-group form-group-default">
-                            <label>Servicio</label>
-                            <select required onChange={this.onChangeService} className='form-control'>
-                                <option value='' disabled selected>Selecciona una opción</option>
-                                <option value='1'>AYSA</option>
-                                <option value='2'>EDESUR</option>
-                                <option value='3'>Fibertel</option>
-                            </select>
+                            <label>Servicio: {this.state.serviceName} - Monto: {this.state.debtAmount} - Fecha: {this.state.expirationDate} </label>                       
                         </div>
 
                         <div className="form-group">
                             <label>Monto a pagar</label>
                             <div className="money-transfer-field">
-                            <input min={100} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="1,000" />
+                            <input min={0} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="1,000" />
                                 <div className="amount-currency-select">
                                     <i className="fas fa-chevron-down"></i>
                                     <select>
