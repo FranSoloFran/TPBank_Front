@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 const clientes = axios.create({
-    baseURL: 'https://bank-api-integrations.herokuapp.com/api/v1/clients/search/'
+    baseURL: 'https://bank-api-integrations.herokuapp.com/api/v1/clients/'
 })
 
 const cuentas = axios.create({
@@ -31,8 +31,8 @@ class SearchClientOperation extends Component {
 
     onSubmit(event) {
         event.preventDefault()
-
-        clientes.get('dni/' + this.state.documentNumber).then(res => {
+    if(this.state.documentType === 'DNI'){
+        clientes.get('search?dni=' + this.state.documentNumber).then(res => {
             console.log(res.data);
             this.state.lastname = res.data.last_name;
             this.state.email = res.data.email;
@@ -57,7 +57,33 @@ class SearchClientOperation extends Component {
         )
         .catch(function (error)
         {console.log(error)})
+    }else{
+        clientes.get('search?cuil=' + this.state.documentNumber).then(res => {
+            console.log(res.data);
+            this.state.lastname = res.data.last_name;
+            this.state.email = res.data.email;
+            this.state.status = res.data.status;
+            this.state.firstname = res.data.name;
+            this.state.id = res.data.id;
+          
+            cuentas.get(this.state.id + '/accounts').then(resp => {
+                console.log(resp.data);
+                this.state.accounts = resp.data;
+                
+                this.setState({
+                    client: true
+                })
 
+            }
+            )
+            .catch(function (error)
+            {console.log(error)})
+
+        }
+        )
+        .catch(function (error)
+        {console.log(error)})        
+    }
     }
 
     render() {
@@ -74,7 +100,6 @@ class SearchClientOperation extends Component {
                                 <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
                                     <option value='' disabled selected>Selecciona una opción</option>
                                     <option>DNI</option>
-                                    <option>LE</option>
                                     <option>CUIT</option>
                                     <option>CUIL</option>
                                 </select>
