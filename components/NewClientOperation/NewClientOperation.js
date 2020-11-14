@@ -6,10 +6,10 @@ class NewClientOperation extends Component {
         super()
         this.state = {
             clientType:null,
-            lastname:null,
-            firstname:null,
+            last_name:null,
+            name:null,
             documentType:null,
-            documentNumber:null,
+            dni:null,
             birthdate:null,
             nationality:null,
             accountType:null,
@@ -24,15 +24,15 @@ class NewClientOperation extends Component {
 
     onSubmit(event) {
         axios.post("https://bank-api-integrations.herokuapp.com/api/v1/clients", {
-            clientType: this.state.clientType,
-            lastname: this.state.lastname,
-            firstname: this.state.firstname,
-            documentType: this.state.documentType,
-            documentNumber: this.state.documentNumber,
-            birthdate: this.state.birthdate,
-            nationality: this.state.nationality,
-            accountType: this.state.accountType,
-            startActivityDate: this.state.startActivityDate,
+            // clientType: this.state.clientType,
+            last_name: this.state.last_name,
+            name: this.state.name,
+            // documentType: this.state.documentType,
+            dni: this.state.dni,
+            // birthdate: this.state.birthdate,
+            // nationality: this.state.nationality,
+            // accountType: this.state.accountType,
+            // startActivityDate: this.state.startActivityDate,
             })
         event.preventDefault()
         //Llamada a backend
@@ -62,13 +62,13 @@ class NewClientOperation extends Component {
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Apellido</label>
-                                        <input required onChange={(event)=> this.setState({lastname:event.target.value})} type="text" name="lastname" id="lastname" placeholder="..." className="form-control" />
+                                        <input required onChange={(event)=> this.setState({last_name:event.target.value})} type="text" name="lastname" id="lastname" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Nombre</label>
-                                        <input required onChange={(event)=> this.setState({firstname:event.target.value})} type="text" name="firstname" id="firstname" placeholder="..." className="form-control" />
+                                        <input required onChange={(event)=> this.setState({name:event.target.value})} type="text" name="firstname" id="firstname" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
 
@@ -89,7 +89,7 @@ class NewClientOperation extends Component {
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Número de documento</label>
-                                        <input required onChange={(event)=> this.setState({documentNumber:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                        <input required onChange={(event)=> this.setState({dni:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                             </div>

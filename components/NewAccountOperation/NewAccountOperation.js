@@ -6,17 +6,17 @@ class NewAccountOperation extends Component {
         super()
         this.state = {
             documentType:null,
-            documentNumber:null,
-            accountType:null
+            client_cuil:null,
+            account_type:null
         }
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onSubmit(event) {
         axios.post("https://bank-api-integrations.herokuapp.com/api/v1/accounts", {
+            account_type: this.state.account_type,
             documentType: this.state.documentType,
-            documentNumber: this.state.documentNumber,
-            accountType: this.state.accountType,
+            client_cuil: this.state.client_cuil,
             })
         event.preventDefault()
         //Llamada a backend
@@ -43,18 +43,18 @@ class NewAccountOperation extends Component {
                                             <option>CUIL</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div>  
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Número de documento</label>
-                                        <input required onChange={(event)=> this.setState({documentNumber:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                        <input required onChange={(event)=> this.setState({client_cuil:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                             </div>
 
                             <div className="form-group form-group-default">
                                 <label>Tipo de cuenta a crear</label>
-                                <select required onChange={(event)=> this.setState({accountType:event.target.value})} className='form-control'>
+                                <select required onChange={(event)=> this.setState({account_type:event.target.value})} className='form-control'>
                                     <option value='' disabled selected>Seleccioná una opción</option>
                                     <option value="CA">Caja de ahorro</option>
                                     <option value="CC">Cuenta corriente</option>
