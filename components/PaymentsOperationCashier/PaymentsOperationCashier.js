@@ -44,17 +44,16 @@ class PaymentsOperation extends Component {
                     date : res.data.date,
                 })
                     console.log(res.data.provider_name)
-            })
+            }).catch((error)=>{
+                console.log(error)
+                alert("Error buscar el pago")
+            })       
 
     }
 
     onSubmit(event) {
         event.preventDefault()
-        console.log(this.state.accountNumber)
-        console.log(this.state.serviceId)
 
-
-        
         axios.post('https://bank-api-integrations.herokuapp.com/api/v1/payments',
             {
                 id:this.state.serviceId, 
@@ -62,7 +61,11 @@ class PaymentsOperation extends Component {
             })
             .then(res => {
                 console.log(res);
-            })
+                alert("Pago realizado con éxito")
+            }).catch((error)=>{
+                console.log(error)
+                alert("Error al insertar el pago")
+            })       
     }
 
     render() {

@@ -25,6 +25,7 @@
 .money-transfer-form form .form-group-default .form-control{
     width: 50%;
     display: inline-block;
+    padding-right: 20px;
 }
 
 .money-transfer-form form .form-group-default .form-control option {

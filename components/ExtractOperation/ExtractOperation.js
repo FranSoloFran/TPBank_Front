@@ -20,10 +20,8 @@ class ExtractOperation extends Component {
     }
 
     onChangeAccountNumber(event) {
-        //Pegado a backend
         this.setState({
             accountNumber: event.target.value,
-            clientName: 'Juan Carlos Pereyra'
         })
     }
 
@@ -53,7 +51,7 @@ class ExtractOperation extends Component {
 
     onSubmitSearch(event) {
         event.preventDefault()
-        console.log(this.state)
+
         this.setState({
             accounts: []
         })
@@ -63,7 +61,6 @@ class ExtractOperation extends Component {
                     this.setState({
                         clientName: res.data.name + ' ' + res.data.last_name,
                         clientId: res.data.id
-
                     }, this.findAccount(res.data.id))
                 }).catch((error) => {
                     console.log(error)
@@ -77,6 +74,9 @@ class ExtractOperation extends Component {
                         clientName: res.data.name + ' ' + res.data.last_name,
                         clientId: res.data.id
                     }, this.findAccount(res.data.id))
+                }).catch((error) => {
+                    console.log(error)
+                    alert("Error en la busqueda de usuario")
                 })
         }
     }
@@ -84,12 +84,19 @@ class ExtractOperation extends Component {
     findAccount(clientId) {
         axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${clientId}/accounts`)
             .then(res => {
+                if(res.data.length == 0) {
+                    alert("No se encontraron cuentas para el usuario")
+                }
                 this.setState({ accounts: res.data })
+            }).catch((error) => {
+                console.log(error)
+                alert("Error en la busqueda de cuenta")
             })
     }
 
 
     render() {
+        const docNumberPattern = this.state.documentType == 'cuil' ? "(20|23|24|27|30|33|34)(\D)?[0-9]{8}(\D)?[0-9]" : null
         return (
 
             <div className="container container-operation">
@@ -112,7 +119,7 @@ class ExtractOperation extends Component {
                             <div className='col-md-6'>
                                 <div className="form-group form-group-default">
                                     <label>Número de documento</label>
-                                    <input required onChange={(event) => this.setState({ documentNumber: event.target.value })} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                    <input required pattern={docNumberPattern} onChange={(event) => this.setState({ documentNumber: event.target.value })} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                                 </div>
                             </div>
                         </div>

@@ -23,27 +23,31 @@ class BalanceOperation extends Component {
             .then(res => {
                 console.log(res.data);
                 this.setState({ movements: res.data.transactions, account: selectedAccount, balance: res.data.account_detail.balance })
-                // verificar catcheo de error
+            }).catch((error)=>{
+                console.log(error)
+                alert("Error al buscar transacciones")
             });
-
     }
 
     componentDidMount() {
         this.sessionManager = new sessionManager()
         const userId = this.sessionManager.getUserId()
 
-
         axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${userId}/accounts`)
             .then(res => {
-                console.log(res);
                 this.setState({ accounts: res.data, userId: userId })
-                console.log(res.data)
-                // verificar catcheo de error
-                //console.log(accounts)
+            }).catch((error)=>{
+                console.log(error)
+                alert("Error al buscar cuentas")
             });
     }
 
     render() {
+        const symbol = {
+            "WITHDRAW": '-',
+            "DEPOSIT":'',
+            "COB":'-'
+        }
         return (
 
             <div className="container container-operation">
@@ -81,9 +85,9 @@ class BalanceOperation extends Component {
                             <tbody>
                                 {this.state.movements.map((movement) => (
                                     <tr>
-                                        <td>{movement.id}</td>
+                                        <td>{movement.id}</td>                                        
                                         <td>{movement.detail}</td>
-                                        <td>${movement.amount}</td>
+                                        <td>{symbol[movement.transaction_type]}${movement.amount}</td>
                                     </tr>
                                 ))
                                 }

@@ -26,6 +26,7 @@ class NewClientOperation extends Component {
     }
 
     onSubmit(event) {
+        event.preventDefault()
         axios.post("https://bank-api-integrations.herokuapp.com/api/v1/clients", {
             last_name: this.state.last_name,
             name: this.state.name,
@@ -34,7 +35,7 @@ class NewClientOperation extends Component {
             cuil: this.state.cuil,
             business_name: this.state.business_name
             })
-        event.preventDefault()
+       
         //Llamada a backend
         alert(`Usuario creado con exito`)
     }
@@ -83,7 +84,7 @@ class NewClientOperation extends Component {
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Número de CUIL/CUIT</label>
-                                        <input required onChange={(event)=> this.setState({cuil:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                        <input required pattern='\b(20|23|24|27|30|33|34)(\D)?[0-9]{8}(\D)?[0-9]' onChange={(event)=> this.setState({cuil:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +132,7 @@ class NewClientOperation extends Component {
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Número de documento</label>
-                                        <input required onChange={(event)=> this.setState({cuil:event.target.value})}  type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                        <input required pattern='\b(20|23|24|27|30|33|34)(\D)?[0-9]{8}(\D)?[0-9]' onChange={(event)=> this.setState({cuil:event.target.value})}  type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                             </div>
