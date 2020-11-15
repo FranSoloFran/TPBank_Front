@@ -76,20 +76,14 @@ class NewClientOperation extends Component {
                             <div className='row'>
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
-                                        <label>Tipo de documento</label>
-                                        <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
-                                            <option value='' disabled selected>Selecciona una opción</option>
-                                            <option value='DNI'>DNI</option>
-                                            {/* <option value='LE'>LE</option> */}
-                                            <option value='CUIT'>CUIL</option>
-                                            {/* <option value='CUIL'>CUIL</option> */}
-                                        </select>
+                                        <label>Número de DNI</label>
+                                        <input required onChange={(event)=> this.setState({dni:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
-                                        <label>Número de documento</label>
-                                        <input required onChange={(event)=> this.setState({dni:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                        <label>Número de CUIL/CUIT</label>
+                                        <input required onChange={(event)=> this.setState({cuil:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                             </div>

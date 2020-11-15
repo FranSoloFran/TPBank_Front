@@ -5,31 +5,30 @@ class NewAccountOperation extends Component {
     constructor() {
         super()
         this.state = {
-            documentType:null,
-            cuil:null,
+            client_cuil:null,
             account_type:null,
-            giro_cantidad:null,
-            dni:null
+            overdraft:null
         }
         this.handleChangeType = this.handleChangeType.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     onSubmit(event) {
+        event.preventDefault()
+        console.log(this.state.account_type);
+        console.log(this.state.client_cuil);
+        console.log(this.state.overdraft);
         axios.post("https://bank-api-integrations.herokuapp.com/api/v1/accounts", {
             account_type: this.state.account_type,
-            documentType: this.state.documentType,
-            cuil: this.state.cuil,
-            dni: this.state.dni,
-            giro_cantidad: this.state.giro_cantidad
+            client_cuil: this.state.client_cuil,
+            overdraft: this.state.overdraft
             })
-        event.preventDefault()
         //Llamada a backend
         alert(`Cuenta creada con éxito`)
     }
 
     handleChangeType(event) {
-        this.setState({ type: event.target.value });
+        this.setState({ account_type: event.target.value });
     }
 
     render() {
@@ -57,73 +56,29 @@ class NewAccountOperation extends Component {
                                     <option value="CC">Cuenta corriente</option>
                                 </select>
                             </div>
-                            {this.state.type == 'CA' && 
+                            {this.state.account_type == 'CA' && 
                             <div className='row'>
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
-                                        <label>Tipo de documento</label>
-                                        <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
-                                            <option value='' disabled selected>Seleccioná una opción</option>
-                                            <option>DNI</option>
-                                            {/* <option>LE</option> */}
-                                            <option>CUIT/CUIL</option>
-                                            {/* <option>CUIL</option> */}
-                                        </select>
-                                    </div>
-                                </div> 
-                                {this.state.documentType == 'CUIT/CUIL' &&
-                                <div className='col-md-6'>
-                                    <div className="form-group form-group-default">
-                                        <label>Número de documento</label>
-                                        <input required onChange={(event)=> this.setState({cuil:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                        <label>Número de CUIT/CUIL</label>
+                                        <input required onChange={(event)=> this.setState({client_cuil:event.target.value})} type="text" name="cuil" id="cuil" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
-                                }
-                                {this.state.documentType == 'DNI' &&
-                                <div className='col-md-6'>
-                                    <div className="form-group form-group-default">
-                                        <label>Número de documento</label>
-                                        <input required onChange={(event)=> this.setState({dni:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
-                                    </div>
-                                </div>
-                                }
                             </div>
                             }
-
-                            {this.state.type == 'CC' &&
+                            
+                            {this.state.account_type == 'CC' &&
                             <div className='row'>
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
-                                        <label>Tipo de documento</label>
-                                        <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
-                                            <option value='' disabled selected>Seleccioná una opción</option>
-                                            <option>DNI</option>
-                                            {/* <option>LE</option> */}
-                                            <option>CUIT/CUIL</option>
-                                            {/* <option>CUIL</option> */}
-                                        </select>
-                                    </div>
-                                </div> 
-                                {this.state.documentType == 'CUIT/CUIL' &&
-                                <div className='col-md-6'>
-                                    <div className="form-group form-group-default">
-                                        <label>Número de documento</label>
-                                        <input required onChange={(event)=> this.setState({cuil:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                        <label>Número de CUIT/CUIL</label>
+                                        <input required onChange={(event)=> this.setState({client_cuil:event.target.value})} type="text" name="cuil2" id="cuil2" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
-                                }
-                                {this.state.documentType == 'DNI' &&
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
-                                        <label>Número de documento</label>
-                                        <input required onChange={(event)=> this.setState({dni:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
-                                    </div>
-                                </div>
-                                }
-                                <div className='col-md-6'>
-                                    <div className="form-group form-group-default">
-                                        <label>Acuerdo Giro</label>
-                                        <input required onChange={(event)=> this.setState({giro_cantidad:event.target.value})} type="text" name="giro_cantidad" id="giro_cantidad" placeholder="$ Ingrese Monto" className="form-control" />
+                                        <label>Acuerdo Giro (Descubierto)</label>
+                                        <input required onChange={(event)=> this.setState({overdraft:event.target.value})} type="text" name="overdraft" id="overdraft" placeholder="$ Ingrese Monto" className="form-control" />
                                     </div>
                                 </div>
                             </div>
