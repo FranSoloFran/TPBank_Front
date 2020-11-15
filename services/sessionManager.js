@@ -27,7 +27,11 @@ export default class sessionManager{
     }
 
     setAccount(account_id){ 
-        return this.localstorage.setItem('account',account_id)        
+        return this.localstorage.setItem('account_id', account_id)        
+    }
+
+    setClientId(client_id){
+        return this.localstorage.setItem('clientId', client_id)
     }
 
 /*     getUserData(){
@@ -52,8 +56,12 @@ export default class sessionManager{
         return this.localstorage.getItem('userId')        
     }
 
+    getClientId(){
+        return this.localstorage.getItem('clientId')
+    }
+
     getAccount(){ 
-        return this.localstorage.getItem('account')        
+        return this.localstorage.getItem('account_id')        
     }
 
 }
