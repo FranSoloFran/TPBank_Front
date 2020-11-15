@@ -23,35 +23,17 @@ class PaymentsOperation extends Component {
         this.onChangeAmount = this.onChangeAmount.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.onChangeService = this.onChangeService.bind(this)
-        this.onChangeElectronicCode = this.onChangeElectronicCode.bind(this)
+        this.onSubmitSearchPayment = this.onSubmitSearchPayment.bind(this)
+
     }
 
     onChangeAccountNumber(event) {
-        //Pegado a backend
-        const selectedAccount = event.target.value;
 
         this.setState({
-            accountNumber: selectedAccount,
+            accountNumber: event.target.value,
             clientName: 'Juan Carlos Pereyra',
-            electronicCode: null
+            electronicCode: null,
         })
-    }
-
-    onChangeElectronicCode() {
-        /*         axios.get('https://bank-api-integrations.herokuapp.com/api/v1/payments/search/electronicCode/' + this.state.electronicCode)
-                .then(res => {
-                    this.state.serviceId= res.data.serviceId,
-                    this.state.debtAmount=res.data.amount,
-                    this.state.serviceName=res.data.serviceName,
-                    this.state.expirationDate=res.data.date
-                }) */
-
-        this.setState({
-            debtAmount: 100,
-            serviceName: 'Cablevision',
-            expirationDate: '2014-01-01'
-        })
-
     }
 
     onChangeAmount(event) {
@@ -62,24 +44,24 @@ class PaymentsOperation extends Component {
 
     onSubmit(event) {
         event.preventDefault()
+        console.log('account')
         console.log(this.state.accountNumber)
         console.log(this.state.serviceId)
-
+      
         axios.post('https://bank-api-integrations.herokuapp.com/api/v1/payments',
             {
-                "cash": true,
-                "date": getDate(),
-                "amount": debtAmount,
-                "account_id": this.state.accountNumber
+                id:this.state.serviceId, 
+                cash:false,
+                account_id: this.state.accountNumber
             })
             .then(res => {
                 console.log(res);
             })
     }
 
+
     onChangeService(event) {
         this.setState({
-            //serviceName:event.target.value
             serviceId: event.target.value
         })
     }
@@ -98,6 +80,23 @@ class PaymentsOperation extends Component {
             });
     }
 
+    onSubmitSearchPayment(event) {
+        event.preventDefault()
+
+        axios.get('https://bank-api-integrations.herokuapp.com/api/v1/payments/search/electronicCode/' + this.state.electronicCode)
+            .then(res => {
+                this.setState({
+                    serviceId: res.data.id,
+                    amount: res.data.amount,
+                    provider_name: res.data.provider_name,
+                    date: res.data.date,
+                })
+                console.log(res.data.provider_name)
+            })
+
+    }
+
+
     render() {
         return (
 
@@ -105,7 +104,8 @@ class PaymentsOperation extends Component {
                 <h1>Pago de servicios</h1>
 
                 <div className="money-transfer-form">
-                    <form onSubmit={this.onSubmit}>
+                    
+                    <form onSubmit={this.onSubmitSearchPayment}>
                         <div className="form-group form-group-default">
                             <label>Número de cuenta</label>
                             <select onChange={this.onChangeAccountNumber} required className='form-control'>
@@ -117,37 +117,46 @@ class PaymentsOperation extends Component {
                             </select>
                         </div>
 
-                        <div className="form-group form-group-default">
-                            <label>Número de pago electronico</label>
-                            <input required value={this.state.electronicCode} required onChange={this.onChangeElectronicCode} type="text" name="electronicCode" id="electronicCode" placeholder="000000" className="form-control" />
-                            <span className='form-extra-data'></span>
-                        </div>
 
-                        <div className="form-group form-group-default">
-                            <label>Comprobante </label>
-                            <span className='form-extra-data'>Servicio: {this.state.serviceName} - Monto: {this.state.debtAmount} - Fecha: {this.state.expirationDate} </span>
-                        </div>
-
-                        <div className="form-group">
-                            <label>Monto a pagar</label>
-                            <div className="money-transfer-field">
-                                <input min={100} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="5" />
-                                <div className="amount-currency-select">
-                                    <i className="fas fa-chevron-down"></i>
-                                    <select>
-                                        <option>ARS</option>
-                                    </select>
-                                </div>
+                            <div className="form-group form-group-default">
+                                <label>Número de pago electronico</label>
+                                <input required onChange={(event) => this.setState({ electronicCode: event.target.value })} type="number" name="electronicCode" id="electronicCode" placeholder="000000" className="form-control" />
+                                <span className='form-extra-data'></span>
                             </div>
-                        </div>
 
-                        <button type="submit" className="btn btn-primary">Confirmar operación</button>
+                            <button type="submit" name="buscar" className="btn btn-primary">Buscar factura</button>
+                        </form>
+
+                        {this.state.provider_name &&
+                            <form onSubmit={this.onSubmit}>
+                                <div className="form-group form-group-default">
+                                    <label>Comprobante </label>
+                                    <span className='form-extra-data'>Servicio: {this.state.provider_name} - Fecha: {this.state.date} </span>
+                                </div>
+
+                                <div className="form-group">
+                                    <label>Monto a pagar</label>
+                                    <div className="money-transfer-field">
+                                        <input min={100} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="5" />
+                                        <div className="amount-currency-select">
+                                            <i className="fas fa-chevron-down"></i>
+                                            <select>
+                                                <option>ARS</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" className="btn btn-primary">Confirmar operación</button>
+                            </form>
 
 
-                    </form>
+                        }
+                                
+                    
                 </div>
 
-            </div>
+                </div>
         );
     }
 }

@@ -14,7 +14,8 @@ class PaymentsOperation extends Component {
             accounts: [],
             clientName: null,
             serviceId: null,
-            electronicCode: null
+            electronicCode: null,
+            provider_name:null
         }
         this.onChangeAmount = this.onChangeAmount.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -30,16 +31,18 @@ class PaymentsOperation extends Component {
         })
     }
 
-    onSubmitSearchPayment() {
+    onSubmitSearchPayment(event) {
         event.preventDefault()
         console.log(this.state.electronicCode)
 
         axios.get('https://bank-api-integrations.herokuapp.com/api/v1/payments/search/electronicCode/' + this.state.electronicCode)
             .then(res => {
-                    this.state.serviceId = res.data.id,
-                    this.state.amount = res.data.amount,
-                    this.state.provider_name = res.data.provider_name,
-                    this.state.date = res.data.date,
+                this.setState({
+                    serviceId : res.data.id,
+                    amount : res.data.amount,
+                    provider_name : res.data.provider_name,
+                    date : res.data.date,
+                })
                     console.log(res.data.provider_name)
             })
 
@@ -50,11 +53,12 @@ class PaymentsOperation extends Component {
         console.log(this.state.accountNumber)
         console.log(this.state.serviceId)
 
+
+        
         axios.post('https://bank-api-integrations.herokuapp.com/api/v1/payments',
             {
-                "cash": true,
-                "date": getDate(),
-                "amount": debtAmount
+                id:this.state.serviceId, 
+                cash:true
             })
             .then(res => {
                 console.log(res);
@@ -77,33 +81,38 @@ class PaymentsOperation extends Component {
                             <span className='form-extra-data'></span>
                         </div>
 
-                        <div className="form-group form-group-default">
-                            <label>Comprobante </label>
-                            <span className='form-extra-data'>Servicio: {this.state.priveder_name} - Monto: {this.state.amount} - Fecha: {this.state.date} </span>
-                        </div>
-
                         <button type="submit" name="buscar" className="btn btn-primary">Buscar factura</button>
                     </form>
 
-                    <form onSubmit={this.onSubmit}>
+                    {this.state.provider_name &&
+                        <form onSubmit={this.onSubmit}>
 
-                        <div className="form-group">
-                            <label>Monto a pagar</label>
-                            <div className="money-transfer-field">
-                                <input min={0} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="1,000" />
-                                <div className="amount-currency-select">
-                                    <i className="fas fa-chevron-down"></i>
-                                    <select>
-                                        <option>ARS</option>
-                                    </select>
+                            <div className="form-group form-group-default">
+                                <label>Comprobante </label>
+                                <span className='form-extra-data'>Servicio: {this.state.provider_name} - Fecha: {this.state.date} </span>
+                            </div>
+
+                            <div className="form-group">
+                                <label>Monto a pagar</label>
+                                <div className="money-transfer-field">
+                                    <span className='form-extra-data'>{this.state.amount} </span>
+                                    <div className="amount-currency-select">
+                                        <i className="fas fa-chevron-down"></i>
+                                        <select>
+                                            <option>ARS</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <button type="submit" className="btn btn-primary">Confirmar operación</button>
+                            <button type="submit" className="btn btn-primary">Confirmar operación</button>
 
 
-                    </form>
+                        </form>
+
+                    }
+
+
                 </div>
 
             </div>

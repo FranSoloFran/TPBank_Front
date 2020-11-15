@@ -18,6 +18,7 @@ class DepositOperation extends Component {
         this.onChangeAmount = this.onChangeAmount.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.onSubmitSearch = this.onSubmitSearch.bind(this)
+        this.findAccount = this.findAccount.bind(this)       
     }
 
     onChangeAccountNumber(event) {
@@ -42,36 +43,48 @@ class DepositOperation extends Component {
             })
             .then(res => {
                 console.log(res);
-            })
-        alert('Deposito realizado con éxito')
+                alert('Deposito realizado con éxito')
+            }).catch((error)=>{
+                console.log(error)
+                alert("Error al realizar el deposito")
+            })        
     }
 
     onSubmitSearch(event) {
         event.preventDefault()
-
+        console.log(this.state)
+        this.setState({
+            accounts:[]
+        })
         if (this.state.documentType == 'dni') {
             axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search?dni=' + this.state.documentNumber)
                 .then(res => {
-                    this.state.clientName = res.data.name + ' ' + res.data.last_name
-                    this.state.clientId = res.data.id;
-                    console.log(res.data.id)
+                    this.setState({
+                        clientName: res.data.name + ' ' + res.data.last_name,
+                        clientId: res.data.id
+
+                    }, this.findAccount(res.data.id))
+                }).catch((error)=>{
+                    console.log(error)
+                    alert("Error en la busqueda de usuario")
                 })
         }
         else {
             axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search?cuil=' + this.state.documentNumber)
                 .then(res => {
-                    this.state.clientName = res.data.name + ' ' + res.data.last_name
-                    this.state.clientId = res.data.id;
-                    console.log(res.data.id)
+                    this.setState({
+                        clientName: res.data.name + ' ' + res.data.last_name,
+                        clientId: res.data.id
+                    }, this.findAccount(res.data.id))
                 })
         }
+    }
 
-        axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${this.state.clientId}/accounts`)
-            .then(res => {
-                console.log(res);
-                this.setState({ accounts: res.data })
-                console.log(res.data)
-            })
+    findAccount(clientId){
+        axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${clientId}/accounts`)
+        .then(res => {
+            this.setState({ accounts: res.data })
+        })
     }
 
     render() {
@@ -105,7 +118,8 @@ class DepositOperation extends Component {
                         <button type="submit" name="buscar" className="btn btn-primary">Buscar cliente</button>
                     </form>
 
-                    <form onSubmit={this.onSubmit}>
+                    {this.state.accounts.length > 0 &&
+                        <form onSubmit={this.onSubmit}>
 
                         <div className="form-group form-group-default">
                             <label>Cuenta</label>
@@ -134,6 +148,9 @@ class DepositOperation extends Component {
                         <button type="submit" name="procesar" className="btn btn-primary">Confirmar operación</button>
 
                     </form>
+                    }
+
+                    
                 </div>
 
             </div>
