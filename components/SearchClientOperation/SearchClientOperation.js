@@ -169,17 +169,26 @@ class SearchClientOperation extends Component {
                                     </li> */}
                                     {account.account_type == 'CC' &&
                                     <li>
-                                        <b>Descubierto: $</b> {account.overdraft} 
-                                        {/* <i className="fas fa-ban"></i>  */}
+                                    <div className='row'>
+                                        <div className='col-md-12'>
+                                            <b>Descubierto: $</b> {account.overdraft} 
+                                              </div>
+                                            <div className='col-md-6'>
+                                               <input type="text" name="overdraft" id="overdraft" defaultValue={account.overdraft} className="form-control" />
+                                            </div>
+                                            <div className='col-md-6' position='left'>
+                                                    <button className="btn btn-primary" type="submit">Editar</button>
+                                                </div>
+                                    </div>
                                     </li>
                                 }
                                 </ul>
 
-                                <div className="buy-btn">
+                                {/* <div className="buy-btn">
                                     <Link href="/">
-                                        <a className="btn btn-primary">Editar</a>
+                                        <a className="btn btn-primary">Desactivar</a>
                                     </Link>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         
