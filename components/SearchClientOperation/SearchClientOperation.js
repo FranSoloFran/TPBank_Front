@@ -167,10 +167,12 @@ class SearchClientOperation extends Component {
                                         <b>Alias:</b> {account.name} 
                                         {/* <i className="fas fa-ban"></i>  */}
                                     </li>
+                                    {account.account_type == 'CC' &&
                                     <li>
                                         <b>Descubierto: $</b> {account.overdraft} 
                                         {/* <i className="fas fa-ban"></i>  */}
                                     </li>
+                                }
                                 </ul>
 
                                 <div className="buy-btn">
