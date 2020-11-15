@@ -31,7 +31,7 @@ class SideBarAccount extends Component {
         return (
             <React.Fragment>
                 <nav className="navbar navbar-expand-md navbar-dark fixed-left navbar-admin">
-                    <a className="navbar-brand" href>Logo</a>
+                    <a className="navbar-brand img" href><img src={require("../../images/logo.png")} alt="logo" /></a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
                         aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>

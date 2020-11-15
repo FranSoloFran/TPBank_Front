@@ -14,7 +14,9 @@ class NewClientOperation extends Component {
             nationality:null,
             accountType:null,
             startActivityDate:null,
-            email:null
+            email:null,
+            cuil:null,
+            business_name:null
         }
         this.handleChangeType = this.handleChangeType.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -29,6 +31,8 @@ class NewClientOperation extends Component {
             name: this.state.name,
             dni: this.state.dni,
             email: this.state.email,
+            cuil: this.state.cuil,
+            business_name: this.state.business_name
             })
         event.preventDefault()
         //Llamada a backend
@@ -72,20 +76,14 @@ class NewClientOperation extends Component {
                             <div className='row'>
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
-                                        <label>Tipo de documento</label>
-                                        <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
-                                            <option value='' disabled selected>Selecciona una opción</option>
-                                            <option value='DNI'>DNI</option>
-                                            {/* <option value='LE'>LE</option> */}
-                                            <option value='CUIT'>CUIL</option>
-                                            {/* <option value='CUIL'>CUIL</option> */}
-                                        </select>
+                                        <label>Número de DNI</label>
+                                        <input required onChange={(event)=> this.setState({dni:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
-                                        <label>Número de documento</label>
-                                        <input required onChange={(event)=> this.setState({dni:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                        <label>Número de CUIL/CUIT</label>
+                                        <input required onChange={(event)=> this.setState({cuil:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +111,7 @@ class NewClientOperation extends Component {
                         <div>
                             <div className="form-group form-group-default">
                                 <label>Razón social</label>
-                                <input required type="text" name="businessName" id="businessName" placeholder="..." className="form-control" />
+                                <input required onChange={(event)=> this.setState({business_name:event.target.value})} type="text" name="business_name" id="business_name" placeholder="..." className="form-control" />
                             </div>
 
 
@@ -133,7 +131,7 @@ class NewClientOperation extends Component {
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Número de documento</label>
-                                        <input required onChange={(event)=> this.setState({documentNumber:event.target.value})}  type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                        <input required onChange={(event)=> this.setState({cuil:event.target.value})}  type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
                             </div>
