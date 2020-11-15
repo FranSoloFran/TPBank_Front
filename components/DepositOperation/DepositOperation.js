@@ -11,7 +11,8 @@ class DepositOperation extends Component {
             amount: 0,
             clientName: null,
             clientId: 0,
-            accounts: []
+            accounts: [],
+            documentType: null
         }
         this.onChangeAccountNumber = this.onChangeAccountNumber.bind(this)
         this.onChangeAmount = this.onChangeAmount.bind(this)
@@ -19,10 +20,10 @@ class DepositOperation extends Component {
         this.onSubmitSearch = this.onSubmitSearch.bind(this)
     }
 
-    onChangeAccountNumber(event) {                
+    onChangeAccountNumber(event) {
         this.setState({
-            accountNumber: event.target.value            
-        })       
+            accountNumber: event.target.value
+        })
     }
 
     onChangeAmount(event) {
@@ -33,13 +34,10 @@ class DepositOperation extends Component {
 
     onSubmit(event) {
         event.preventDefault()
-        axios.post('https://bank-api-integrations.herokuapp.com/api/v1/transactions',
+        axios.post('https://bank-api-integrations.herokuapp.com/api/v1/deposits',
             {
-                detail: "Deposito",
+                detail: "Deposito de dinero",
                 amount: this.state.amount,
-                transaction_type: "DEP",
-                cash: true,
-                type_operation: "I",
                 account_id: this.state.accountNumber
             })
             .then(res => {
@@ -51,11 +49,22 @@ class DepositOperation extends Component {
     onSubmitSearch(event) {
         event.preventDefault()
 
-        axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search/dni/' + this.state.documentNumber)
-            .then(res => {
-                this.state.clientName = res.data.name + ' ' + res.data.last_name
-                this.state.clientId = res.data.id;
-            })
+        if (this.state.documentType == 'dni') {
+            axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search?dni=' + this.state.documentNumber)
+                .then(res => {
+                    this.state.clientName = res.data.name + ' ' + res.data.last_name
+                    this.state.clientId = res.data.id;
+                    console.log(res.data.id)
+                })
+        }
+        else {
+            axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search?cuil=' + this.state.documentNumber)
+                .then(res => {
+                    this.state.clientName = res.data.name + ' ' + res.data.last_name
+                    this.state.clientId = res.data.id;
+                    console.log(res.data.id)
+                })
+        }
 
         axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${this.state.clientId}/accounts`)
             .then(res => {
@@ -64,7 +73,6 @@ class DepositOperation extends Component {
                 console.log(res.data)
             })
     }
-
 
     render() {
         return (
@@ -82,9 +90,8 @@ class DepositOperation extends Component {
                                     <label>Tipo de documento</label>
                                     <select required onChange={(event) => this.setState({ documentType: event.target.value })} className='form-control'>
                                         <option value='' disabled selected>Selecciona una opción</option>
-                                        <option>DNI</option>
-                                        <option>CUIT</option>
-                                        <option>CUIL</option>
+                                        <option value="dni">DNI</option>
+                                        <option value="cuil">CUIT/CUIL</option>
                                     </select>
                                 </div>
                             </div>
@@ -125,7 +132,6 @@ class DepositOperation extends Component {
                         </div>
 
                         <button type="submit" name="procesar" className="btn btn-primary">Confirmar operación</button>
-
 
                     </form>
                 </div>

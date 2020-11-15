@@ -27,11 +27,11 @@ class Login extends Component {
         //Llamada a backend
 
         if (this.state.email === "usuario1@gmail.com"){
-            this.sessionManager.login('usuario1@gmail.com','Juan','DNI','6398425','User','10')
+            this.sessionManager.login('usuario1@gmail.com','Juan','DNI','6398425','User','5')
             window.location.href='/user-account'
         }
         if (this.state.email === "cajero@gmail.com"){
-            this.sessionManager.login('cajero@gmail.com','Ramon','DNI','12511525','Cashier','9')
+            this.sessionManager.login('cajero@gmail.com','Ramon','DNI','12511525','Cashier','6')
             window.location.href='/cashier-account'
         }
         if (this.state.email === "ejecutivo@gmail.com"){

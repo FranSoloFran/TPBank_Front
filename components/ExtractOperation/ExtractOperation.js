@@ -34,13 +34,10 @@ class ExtractOperation extends Component {
 
     onSubmit(event) {
         event.preventDefault()
-        axios.post('https://bank-api-integrations.herokuapp.com/api/v1/transactions',
+        axios.post('https://bank-api-integrations.herokuapp.com/api/v1/withdraws',
             {
-                detail: "Extracción",
+                detail: "Extracción de dinero",
                 amount: this.state.amount,
-                transaction_type: "EXT",
-                cash: true,
-                type_operation: "E",
                 account_id: this.state.accountNumber
             })
             .then(res => {
@@ -52,11 +49,22 @@ class ExtractOperation extends Component {
     onSubmitSearch(event) {
         event.preventDefault()
 
-        axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search/dni/' + this.state.documentNumber)
-            .then(res => {
-                this.state.clientName = res.data.name + ' ' + res.data.last_name
-                this.state.clientId = res.data.id;
-            })
+        if (this.state.documentType == 'dni') {
+            axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search?dni=' + this.state.documentNumber)
+                .then(res => {
+                    this.state.clientName = res.data.name + ' ' + res.data.last_name
+                    this.state.clientId = res.data.id;
+                    console.log(res.data.id)
+                })
+        }
+        else {
+            axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search?cuil=' + this.state.documentNumber)
+                .then(res => {
+                    this.state.clientName = res.data.name + ' ' + res.data.last_name
+                    this.state.clientId = res.data.id;
+                    console.log(res.data.id)
+                })
+        }
 
         axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${this.state.clientId}/accounts`)
             .then(res => {
@@ -79,12 +87,11 @@ class ExtractOperation extends Component {
                         <div className='row'>
                             <div className='col-md-6'>
                                 <div className="form-group form-group-default">
-                                    <label>Tipo de documento</label>
+                                <label>Tipo de documento</label>
                                     <select required onChange={(event) => this.setState({ documentType: event.target.value })} className='form-control'>
                                         <option value='' disabled selected>Selecciona una opción</option>
-                                        <option>DNI</option>
-                                        <option>CUIT</option>
-                                        <option>CUIL</option>
+                                        <option value="dni">DNI</option>
+                                        <option value="cuil">CUIT/CUIL</option>
                                     </select>
                                 </div>
                             </div>

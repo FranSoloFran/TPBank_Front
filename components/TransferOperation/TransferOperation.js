@@ -77,8 +77,6 @@ class TransferOperation extends Component {
                 console.log(res);
                 this.setState({ accounts: res.data, userId: userId })
                 console.log(res.data)
-                // verificar catcheo de error
-                //console.log(accounts)
             })
     }
 
@@ -111,14 +109,14 @@ class TransferOperation extends Component {
 
                         <div className="form-group form-group-default">
                             <label>Número de cuenta a transferir</label>
-                            <input required value={this.state.accountNumber} on onChange={this.onChangeAccountNumber} type="text" name="account-number" id="account-number" placeholder="000000000000000" className="form-control" />
+                            <input required value={this.state.accountNumber} on onChange={this.onChangeAccountNumber} type="text" name="account-number" id="account-number" placeholder="0000000000000000000000" className="form-control" />
                             <span className='form-extra-data'>{this.state.clientName}</span>
                         </div>
 
                         <div className="form-group">
                             <label>Monto a transferir </label>
                             <div className="money-transfer-field">
-                            <input min={100} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="1,000" />
+                            <input min={0} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="1,000" />
                                 <div className="amount-currency-select">
                                     <i className="fas fa-chevron-down"></i>
                                     <select>
