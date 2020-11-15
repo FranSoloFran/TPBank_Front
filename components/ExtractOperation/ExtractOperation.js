@@ -46,7 +46,7 @@ class ExtractOperation extends Component {
                 alert('Extracción realizado con éxito')
             }).catch((error) => {
                 console.log(error)
-                alert("Error al realizar el deposito")
+                alert("Error al realizar la extracción")
             })
     }
 

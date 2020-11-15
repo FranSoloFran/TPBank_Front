@@ -32,7 +32,10 @@ class SearchClientOperation extends Component {
             accounts:[],
             business_name:null,
             overdraft:null,
-            account_id:null
+            account_id:null,
+            transactions:[],
+            balance:null,
+            account:null
         }
         this.onSubmit = this.onSubmit.bind(this)
         this.onChangeOverdraft = this.onChangeOverdraft.bind(this)
@@ -135,34 +138,13 @@ class SearchClientOperation extends Component {
         }
     }
 
-    onMouseTransaction(event, data){
-        event.preventDefault()
-        cuenta.get(data.id + '/transactions').then(respues => {
-            console.log(respues.data);
-            this.state.transactions = respues.data;
-        
-            this.setState({
-                client: true
-            })
-
-        })
-    }
-
     onClickTransaction(event, data){
-        event.preventDefault()
-        cuenta.get(data.id + '/transactions').then(respues => {
-            console.log(respues.data);
-            this.state.transactions = respues.data;
-        
-            this.setState({
-                client: true
-            })
-        }
-        // console.log(this.state.account_id);
-        // this.sessionManager.setAccount(this.state.account_id)
-        // this.sessionManager.setClientId(this.state.id)
-        // window.location.href='/account'
-        )}
+        axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/accounts/${data.id}/transactions`)
+        .then(res => {
+            console.log(res.data);
+            this.setState({ transactions: res.data.transactions, account: data.id, balance: res.data.account_detail.balance })
+            // verificar catcheo de error
+        });}
 
     render() {
         return (
@@ -196,20 +178,33 @@ class SearchClientOperation extends Component {
                 </form>
                 {this.state.client &&
                     <div className='client-info'>
-                        <div className='row'>
-                            <div className='col-md-6'> 
-                            <h4>{this.state.business_name}{this.state.firstname} {this.state.lastname}</h4>
-                            </div>
+                    <div className="contact-info-2">
+                <ul>
+                    <li>
+                        <div className="icon">
+                            <i className="fas fa-user"></i>
                         </div>
+                        <span>Cliente</span>
+                        {this.state.business_name}{this.state.firstname} {this.state.lastname}
+                    </li>
 
-                        <div className='row'>
-                            <div className='col-md-6'>
-                                <p><b>Email:</b> {this.state.email}</p>
-                            </div>
-                            {/* <div className='col-md-6'>
-                            <p><b>Estado:</b>Activo</p>
-                            </div> */}
+                    <li>
+                        <div className="icon">
+                            <i className="fas fa-envelope"></i>
                         </div>
+                        <span>Email</span> 
+                        {this.state.email}<br />
+                    </li>
+
+                    <li>
+                        <div className="icon">
+                            <i className="fas fa-id-card"></i>
+                        </div>
+                        <span>ID</span> 
+                        {this.state.id}
+                    </li>
+                </ul>
+            </div>
                         <div className="pricing-area pt-70 pb-50">
                         <div className="container">
                         <div className="row">
@@ -249,12 +244,10 @@ class SearchClientOperation extends Component {
                                             <b>Descubierto: $</b> {account.overdraft} 
                                               </div>
                                               <form onSubmit={this.onSubmitOverdraft}>
-                                            <div className='col-md-6'>
+                                            <div className='input-group'>
                                                <input type="text" name="overdraft" id="overdraft" defaultValue={account.overdraft} className="form-control" onChange={e=> this.onChangeOverdraft(e, account)}/> 
+                                               <button className="btn btn-primary" type="submit">Editar</button>
                                             </div>
-                                            <div className='col-md-6'>
-                                                    <button className="btn btn-primary" type="submit">Editar</button>
-                                                </div>
                                                 </form>
                                     </div>
                                     </li>
@@ -263,13 +256,42 @@ class SearchClientOperation extends Component {
 
                                 <div className="buy-btn">
                                     {/* <Link href="/"> */}
-                                        <a className="btn btn-primary" onMouseMove={e=> this.onMouseTransaction(e, account)} onClick={e=> this.onClickTransaction(e, account)}>Transacciones</a>
+                                        <a className="btn btn-primary" onClick={e=> this.onClickTransaction(e, account)}>Transacciones</a>
                                     {/* </Link> */}
                                 </div>
                             </div>
+
+                    
+
                         </div>
                         
+
+                        
                         ))}
+
+                        {this.state.transactions.length>0 &&
+                    <React.Fragment>
+                        <table className="table">
+                            <thead className="thead-dark">
+                                <tr>
+                                    <th scope="col">Número de operación</th>
+                                    <th scope="col">Detalle</th>
+                                    <th scope="col">Monto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.transactions.map((movement) => (
+                                    <tr>
+                                        <td>{movement.id}</td>
+                                        <td>{movement.detail}</td>
+                                        <td>${movement.amount}</td>
+                                    </tr>
+                                ))
+                                }
+                            </tbody>
+                        </table>
+                    </React.Fragment>
+                }
                         </div>
                         </div>
                         </div>
