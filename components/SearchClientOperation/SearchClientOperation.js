@@ -114,33 +114,55 @@ class SearchClientOperation extends Component {
         console.log(this.state.overdraft);
         console.log(this.state.account_id);
         console.log("entró");
-        // if(this.state.overdraft != null){
-        //     cuentas.post(this.state.account_id,
-        //         {
-        //             account_id: this.state.account_id,
-        //             overdraft: this.state.overdraft
-        //         }        )
-        //         .then(res => {
-        //             console.log(res);
-        //         })
-        //     alert('Descubierto actualizado con éxito!')
+        if(this.state.overdraft != null){
 
-        //  }
+            axios({
+                method: 'patch',
+                url: 'https://bank-api-integrations.herokuapp.com/api/v1/accounts/' + this.state.account_id,
+                data: {
+                    overdraft: this.state.overdraft
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        alert('Descubierto actualizado con éxito!')
+
+        }
     }
 
     onMouseTransaction(event, data){
         event.preventDefault()
-        this.setState({
-            account_id: data.id
-           })
+        cuenta.get(data.id + '/transactions').then(respues => {
+            console.log(respues.data);
+            this.state.transactions = respues.data;
+        
+            this.setState({
+                client: true
+            })
+
+        })
     }
 
     onClickTransaction(event, data){
         event.preventDefault()
-        console.log(this.state.account_id);
-        this.sessionManager.setAccount(this.state.account_id)
+        cuenta.get(data.id + '/transactions').then(respues => {
+            console.log(respues.data);
+            this.state.transactions = respues.data;
+        
+            this.setState({
+                client: true
+            })
+        }
+        // console.log(this.state.account_id);
+        // this.sessionManager.setAccount(this.state.account_id)
+        // this.sessionManager.setClientId(this.state.id)
         // window.location.href='/account'
-    }
+        )}
 
     render() {
         return (
