@@ -46,7 +46,7 @@ class SearchClientOperation extends Component {
 
     onSubmit(event) {
         event.preventDefault()
-        if(this.state.documentType === 'DNI'){
+        if(this.state.documentType === 'dni'){
             clientes.get('search?dni=' + this.state.documentNumber).then(res => {
                 console.log(res.data);
                 this.state.lastname = res.data.last_name;
@@ -143,6 +143,7 @@ class SearchClientOperation extends Component {
     }
 
     render() {
+        const docNumberPattern = this.state.documentType == 'cuil' ? "(20|23|24|27|30|33|34)(\D)?[0-9]{8}(\D)?[0-9]" : null
         return (
 
             <div className="container container-operation">
@@ -155,16 +156,15 @@ class SearchClientOperation extends Component {
                                 <label>Tipo de documento</label>
                                 <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
                                     <option value='' disabled selected>Selecciona una opción</option>
-                                    <option>DNI</option>
-                                    <option>CUIT</option>
-                                    <option>CUIL</option>
+                                    <option value='dni'>DNI</option>
+                                    <option value='cuil'>CUIT/CUIL</option>
                                 </select>
                             </div>
                         </div>
                         <div className='col-md-6'>
                             <div className="form-group form-group-default">
                                 <label>Número de documento</label>
-                                <input required onChange={(event)=> this.setState({documentNumber:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                <input required pattern={docNumberPattern} onChange={(event)=> this.setState({documentNumber:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                             </div>
                         </div>
                     </div>

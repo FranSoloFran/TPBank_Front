@@ -8,8 +8,8 @@ class TransferOperation extends Component {
     constructor() {
         super()
         this.state = {
-            originAccount:null,
-            destinationAccount:null,
+            originAccount: null,
+            destinationAccount: null,
             accounts: [],
             accountNumber: null,
             amount: 0,
@@ -19,16 +19,14 @@ class TransferOperation extends Component {
         this.onChangeAccountNumber = this.onChangeAccountNumber.bind(this)
         this.onChangeAmount = this.onChangeAmount.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
-        this.onChangeOriginAccount = this.onChangeOriginAccount.bind(this) 
-               
+        this.onChangeOriginAccount = this.onChangeOriginAccount.bind(this)
+        this.sendTransfer = this.sendTransfer.bind(this)
+
     }
 
     onChangeAccountNumber(event) {
-        //Pegado a backend
-
         this.setState({
             accountNumber: event.target.value,
-            clientName: 'Juan Carlos Pereyra'
         })
     }
 
@@ -40,49 +38,49 @@ class TransferOperation extends Component {
 
     onSubmit(event) {
         event.preventDefault()
-
         const number = this.state.accountNumber
-
         axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/accounts/search/cbu/${number}`)
             .then(res => {
-                console.log(res);
-                this.setState({ destinationAccount: res.data.id})                
-                // verificar catcheo de error
+                this.setState({ destinationAccount: res.data.id }, this.sendTransfer(res.data.id))
+            }).catch((error) => {
+                console.log(error)
+                alert("Error en la busqueda de cuenta de destino")
+            })
+    }
+
+    sendTransfer(destinationAccount) {
+
+        axios.post('https://bank-api-integrations.herokuapp.com/api/v1/transfers',
+            {
+                amount: this.state.amount,
+                destination_account: destinationAccount,
+                source_account: this.state.originAccount
+            })
+            .then(res => {
+                alert('Transferencia realizada con éxito')
+            }).catch((error) => {
+                console.log(error)
+                alert("Error al efectuar la transferencia")
             })
 
-            //post a transacción, no funciona
-        
-        axios.post('https://bank-api-integrations.herokuapp.com/api/v1/transactions',
-                {detail:"Transferencia",
-                amount:this.state.amount,
-                transaction_type:"DEP",
-                cash:false,
-                type_operation:"I",
-                account_id:this.state.destinationAccount,
-                account_origin_id:this.state.originAccount
-            })
-        .then(res => {
-            console.log(res);
-        })
-
-        alert('Transferencia realizada con éxito')
     }
 
     componentDidMount() {
         this.sessionManager = new sessionManager()
         const userId = this.sessionManager.getUserId()
-           
+
         axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${userId}/accounts`)
             .then(res => {
-                console.log(res);
                 this.setState({ accounts: res.data, userId: userId })
-                console.log(res.data)
-            })
+            }).catch((error)=>{
+                console.log(error)
+                alert("Error en la busqueda de cuentas")
+            })       
     }
 
-    onChangeOriginAccount(event){
+    onChangeOriginAccount(event) {
         this.setState({
-            originAccount:event.target.value
+            originAccount: event.target.value
         })
     }
 
@@ -97,7 +95,7 @@ class TransferOperation extends Component {
 
                         <div className="form-group form-group-default">
                             <label>Cuenta de origen</label>
-                            <select  onChange={this.onChangeOriginAccount}  required className='form-control'>
+                            <select onChange={this.onChangeOriginAccount} required className='form-control'>
                                 <option value='' disabled selected>Seleccioná una opción</option>
                                 {this.state.accounts.map((account) => (
                                     <option value={account.id} >{account.account_type} : {account.identification_number}</option>
@@ -116,10 +114,9 @@ class TransferOperation extends Component {
                         <div className="form-group">
                             <label>Monto a transferir </label>
                             <div className="money-transfer-field">
-                            <input min={0} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="1,000" />
+                                <input min={0} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="1,000" />
                                 <div className="amount-currency-select">
-                                    <i className="fas fa-chevron-down"></i>
-                                    <select>
+                                    <select disabled>
                                         <option>ARS</option>
                                     </select>
                                 </div>
