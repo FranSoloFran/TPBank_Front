@@ -16,6 +16,7 @@ class ExtractOperation extends Component {
         this.onChangeAmount = this.onChangeAmount.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.onSubmitSearch = this.onSubmitSearch.bind(this)
+        this.findAccount = this.findAccount.bind(this)
     }
 
     onChangeAccountNumber(event) {
@@ -34,35 +35,56 @@ class ExtractOperation extends Component {
 
     onSubmit(event) {
         event.preventDefault()
-        axios.post('https://bank-api-integrations.herokuapp.com/api/v1/transactions',
+        axios.post('https://bank-api-integrations.herokuapp.com/api/v1/withdraws',
             {
-                detail: "Extracción",
+                detail: "Extracción de dinero",
                 amount: this.state.amount,
-                transaction_type: "EXT",
-                cash: true,
-                type_operation: "E",
                 account_id: this.state.accountNumber
             })
             .then(res => {
                 console.log(res);
+                alert('Extracción realizado con éxito')
+            }).catch((error) => {
+                console.log(error)
+                alert("Error al realizar el deposito")
             })
-        alert('Extración realizado con éxito')
     }
+
 
     onSubmitSearch(event) {
         event.preventDefault()
+        console.log(this.state)
+        this.setState({
+            accounts: []
+        })
+        if (this.state.documentType == 'dni') {
+            axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search?dni=' + this.state.documentNumber)
+                .then(res => {
+                    this.setState({
+                        clientName: res.data.name + ' ' + res.data.last_name,
+                        clientId: res.data.id
 
-        axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search/dni/' + this.state.documentNumber)
-            .then(res => {
-                this.state.clientName = res.data.name + ' ' + res.data.last_name
-                this.state.clientId = res.data.id;
-            })
+                    }, this.findAccount(res.data.id))
+                }).catch((error) => {
+                    console.log(error)
+                    alert("Error en la busqueda de usuario")
+                })
+        }
+        else {
+            axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search?cuil=' + this.state.documentNumber)
+                .then(res => {
+                    this.setState({
+                        clientName: res.data.name + ' ' + res.data.last_name,
+                        clientId: res.data.id
+                    }, this.findAccount(res.data.id))
+                })
+        }
+    }
 
-        axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${this.state.clientId}/accounts`)
+    findAccount(clientId) {
+        axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${clientId}/accounts`)
             .then(res => {
-                console.log(res);
                 this.setState({ accounts: res.data })
-                console.log(res.data)
             })
     }
 
@@ -82,9 +104,8 @@ class ExtractOperation extends Component {
                                     <label>Tipo de documento</label>
                                     <select required onChange={(event) => this.setState({ documentType: event.target.value })} className='form-control'>
                                         <option value='' disabled selected>Selecciona una opción</option>
-                                        <option>DNI</option>
-                                        <option>CUIT</option>
-                                        <option>CUIL</option>
+                                        <option value="dni">DNI</option>
+                                        <option value="cuil">CUIT/CUIL</option>
                                     </select>
                                 </div>
                             </div>
@@ -98,37 +119,38 @@ class ExtractOperation extends Component {
                         <button type="submit" name="buscar" className="btn btn-primary">Buscar cliente</button>
                     </form>
 
+                    {this.state.accounts.length > 0 &&
 
-                    <form onSubmit={this.onSubmit}>
+                        <form onSubmit={this.onSubmit}>
 
-                        <div className="form-group form-group-default">
-                            <label>Cuenta</label>
-                            <select onChange={this.onChangeAccountNumber} required className='form-control'>
-                                <option value='' disabled selected>Seleccioná una opción</option>
-                                {this.state.accounts.map((account) => (
-                                    <option value={account.id} >{account.account_type} : {account.identification_number}</option>
-                                ))
-                                }
-                            </select>
-                        </div>
+                            <div className="form-group form-group-default">
+                                <label>Cuenta</label>
+                                <select onChange={this.onChangeAccountNumber} required className='form-control'>
+                                    <option value='' disabled selected>Seleccioná una opción</option>
+                                    {this.state.accounts.map((account) => (
+                                        <option value={account.id} >{account.account_type} : {account.identification_number}</option>
+                                    ))
+                                    }
+                                </select>
+                            </div>
 
-                        <div className="form-group">
-                            <label>Monto a extraer </label>
-                            <div className="money-transfer-field">
-                                <input min={0} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="1,000" />
-                                <div className="amount-currency-select">
-                                    <i className="fas fa-chevron-down"></i>
-                                    <select>
-                                        <option>ARS</option>
-                                    </select>
+                            <div className="form-group">
+                                <label>Monto a extraer </label>
+                                <div className="money-transfer-field">
+                                    <input min={0} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="1,000" />
+                                    <div className="amount-currency-select">                                        
+                                        <select disabled>
+                                            <option>ARS</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <button type="submit" className="btn btn-primary">Confirmar operación</button>
+                            <button type="submit" className="btn btn-primary">Confirmar operación</button>
 
 
-                    </form>
+                        </form>
+                    }
                 </div>
 
             </div>

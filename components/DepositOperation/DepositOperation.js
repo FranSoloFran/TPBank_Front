@@ -11,18 +11,20 @@ class DepositOperation extends Component {
             amount: 0,
             clientName: null,
             clientId: 0,
-            accounts: []
+            accounts: [],
+            documentType: null
         }
         this.onChangeAccountNumber = this.onChangeAccountNumber.bind(this)
         this.onChangeAmount = this.onChangeAmount.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.onSubmitSearch = this.onSubmitSearch.bind(this)
+        this.findAccount = this.findAccount.bind(this)       
     }
 
-    onChangeAccountNumber(event) {                
+    onChangeAccountNumber(event) {
         this.setState({
-            accountNumber: event.target.value            
-        })       
+            accountNumber: event.target.value
+        })
     }
 
     onChangeAmount(event) {
@@ -33,38 +35,57 @@ class DepositOperation extends Component {
 
     onSubmit(event) {
         event.preventDefault()
-        axios.post('https://bank-api-integrations.herokuapp.com/api/v1/transactions',
+        axios.post('https://bank-api-integrations.herokuapp.com/api/v1/deposits',
             {
-                detail: "Deposito",
+                detail: "Deposito de dinero",
                 amount: this.state.amount,
-                transaction_type: "DEP",
-                cash: true,
-                type_operation: "I",
                 account_id: this.state.accountNumber
             })
             .then(res => {
                 console.log(res);
-            })
-        alert('Deposito realizado con éxito')
+                alert('Deposito realizado con éxito')
+            }).catch((error)=>{
+                console.log(error)
+                alert("Error al realizar el deposito")
+            })        
     }
 
     onSubmitSearch(event) {
         event.preventDefault()
+        console.log(this.state)
+        this.setState({
+            accounts:[]
+        })
+        if (this.state.documentType == 'dni') {
+            axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search?dni=' + this.state.documentNumber)
+                .then(res => {
+                    this.setState({
+                        clientName: res.data.name + ' ' + res.data.last_name,
+                        clientId: res.data.id
 
-        axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search/dni/' + this.state.documentNumber)
-            .then(res => {
-                this.state.clientName = res.data.name + ' ' + res.data.last_name
-                this.state.clientId = res.data.id;
-            })
-
-        axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${this.state.clientId}/accounts`)
-            .then(res => {
-                console.log(res);
-                this.setState({ accounts: res.data })
-                console.log(res.data)
-            })
+                    }, this.findAccount(res.data.id))
+                }).catch((error)=>{
+                    console.log(error)
+                    alert("Error en la busqueda de usuario")
+                })
+        }
+        else {
+            axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search?cuil=' + this.state.documentNumber)
+                .then(res => {
+                    this.setState({
+                        clientName: res.data.name + ' ' + res.data.last_name,
+                        clientId: res.data.id
+                    }, this.findAccount(res.data.id))
+                })
+        }
     }
 
+    findAccount(clientId){
+        axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${clientId}/accounts`)
+        .then(res => {
+            this.setState({ accounts: res.data })
+        })
+    }
 
     render() {
         return (
@@ -82,9 +103,8 @@ class DepositOperation extends Component {
                                     <label>Tipo de documento</label>
                                     <select required onChange={(event) => this.setState({ documentType: event.target.value })} className='form-control'>
                                         <option value='' disabled selected>Selecciona una opción</option>
-                                        <option>DNI</option>
-                                        <option>CUIT</option>
-                                        <option>CUIL</option>
+                                        <option value="dni">DNI</option>
+                                        <option value="cuil">CUIT/CUIL</option>
                                     </select>
                                 </div>
                             </div>
@@ -98,7 +118,8 @@ class DepositOperation extends Component {
                         <button type="submit" name="buscar" className="btn btn-primary">Buscar cliente</button>
                     </form>
 
-                    <form onSubmit={this.onSubmit}>
+                    {this.state.accounts.length > 0 &&
+                        <form onSubmit={this.onSubmit}>
 
                         <div className="form-group form-group-default">
                             <label>Cuenta</label>
@@ -126,8 +147,10 @@ class DepositOperation extends Component {
 
                         <button type="submit" name="procesar" className="btn btn-primary">Confirmar operación</button>
 
-
                     </form>
+                    }
+
+                    
                 </div>
 
             </div>

@@ -49,3 +49,42 @@
     font-weight: bold;
     text-decoration: underline;
 }
+
+.money-transfer-form form .btn {
+    margin-bottom: 40px;
+}
+
+.money-transfer-form .form-extra-data {
+    text-align: left;
+    color: white;
+    display: block;
+}
+
+.money-transfer-form form .form-group .amount-currency-select select{
+    opacity: 1 !important;
+    cursor: default;
+}
+
+.balance-box{
+    margin-top: 40px;
+    margin-bottom: 20px;
+    height: 40px;
+    width: 300px;
+    float: right;
+    text-align: center;
+    background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%)
+}
+
+.balance-box p{
+    line-height: 40px;
+    color:white;
+}
+
+.thead-dark{ 
+    background: linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
+}
+
+.table .thead-dark th{
+    background-color: transparent;
+    border-color: transparent;
+}
