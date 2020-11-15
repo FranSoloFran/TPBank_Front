@@ -160,13 +160,13 @@ class SearchClientOperation extends Component {
                                         {/* <i className="fas fa-check"></i>  */}
                                     </li>
                                     <li>
-                                        <b>Balance:</b> {account.balance} 
+                                        <b>Balance: $</b> {account.balance} 
                                         {/* <i className="fas fa-check"></i>  */}
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <b>Alias:</b> {account.name} 
-                                        {/* <i className="fas fa-ban"></i>  */}
-                                    </li>
+                                        <i className="fas fa-ban"></i>
+                                    </li> */}
                                     {account.account_type == 'CC' &&
                                     <li>
                                         <b>Descubierto: $</b> {account.overdraft} 
