@@ -49,6 +49,7 @@ class SearchClientOperation extends Component {
 
     onSubmit(event) {
         event.preventDefault()
+        const this_ = this
         if (this.state.documentType === 'dni') {
             clientes.get('search?dni=' + this.state.documentNumber)
                 .then(res => {
@@ -57,18 +58,33 @@ class SearchClientOperation extends Component {
                         email: res.data.email,
                         status: res.data.status,
                         firstname: res.data.name,
-                        id: res.data.id
+                        id: res.data.id,
+                        business_name:''
                     })
-                    cuentas.get(this.state.id + '/accounts').then(resp => {
-                        this.state.accounts = resp.data;
+                    cuentas.get(this.state.id + '/accounts')
+                    .then(resp => {
                         this.setState({
-                            client: true
+                            client: true,
+                            accounts:resp.data
                         })
-                    }
-                    ).catch(function (error) { console.log(error) })
-                }
-                )
-                .catch(function (error) { console.log(error) })
+                    }).catch(function (error) { 
+                        console.log(error) 
+                        alert("Error al buscar cuentas")
+                    })
+                }).catch(function (error) { 
+                    console.log(error) 
+                    this_.setState({
+                        lastname: '',
+                        email: '',
+                        status: '',
+                        firstname: '',
+                        id: '',
+                        business_name:'',
+                        client:false,
+                        accounts:[]
+                    })
+                    alert("Error al buscar cliente")                    
+                })
         } else {
             clientes.get('search?cuil=' + this.state.documentNumber).then(res => {
                 this.setState({
@@ -86,9 +102,25 @@ class SearchClientOperation extends Component {
                             client: true,
                             accounts: resp.data
                         })
-                    }).catch(function (error) { console.log(error) })
+                    }).catch(function (error) {
+                        console.log(error) 
+                        alert("Error al buscar cuenta")
+                        })
 
-            }).catch(function (error) { console.log(error) })
+            }).catch(function (error) {
+                console.log(error) 
+                this_.setState({
+                    lastname:'',
+                    email:'',
+                    status: '',
+                    firstname: '',
+                    id: '',
+                    business_name: '',
+                    client:false,
+                    accounts:[]
+                });
+                alert("Error al buscar cliente")
+            })
         }
 
     }
@@ -118,11 +150,11 @@ class SearchClientOperation extends Component {
                 }
             }).then(function (response) {
                 console.log(response);
+                alert('Descubierto actualizado con éxito!')
             }).catch(function (error) {
                 console.log(error);
-            });
-            alert('Descubierto actualizado con éxito!')
-
+                alert('Error en la modificación del descubierto')
+            })
         }
     }
 
@@ -131,12 +163,20 @@ class SearchClientOperation extends Component {
             .then(res => {
                 console.log(res.data);
                 this.setState({ transactions: res.data.transactions, account: data.id, balance: res.data.account_detail.balance })
-                // verificar catcheo de error
+            }).catch((error)=>{
+                console.log(error)
+                alert('Error en la busqueda de transacciones')
             });
     }
 
     render() {
         const docNumberPattern = this.state.documentType == 'cuil' ? "(20|23|24|27|30|33|34)(\D)?[0-9]{8}(\D)?[0-9]" : null
+        const symbol = {
+            "WITHDRAW": '-',
+            "DEPOSIT":'',
+            "COB":'-'
+        }
+
         return (
 
             <div className="container container-operation">
@@ -272,7 +312,7 @@ class SearchClientOperation extends Component {
                                                 <tr>
                                                     <td>{movement.id}</td>
                                                     <td>{movement.detail}</td>
-                                                    <td>${movement.amount}</td>
+                                                    <td>{symbol[movement.transaction_type]}${movement.amount}</td>
                                                 </tr>
                                             ))
                                             }
