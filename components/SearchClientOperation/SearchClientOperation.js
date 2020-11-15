@@ -10,6 +10,10 @@ const cuentas = axios.create({
     baseURL: 'https://bank-api-integrations.herokuapp.com/api/v1/clients/'
 })
 
+const cuenta = axios.create({
+    baseURL: 'https://bank-api-integrations.herokuapp.com/api/v1/accounts/'
+})
+
 class SearchClientOperation extends Component {
     constructor() {
         super()
@@ -25,68 +29,98 @@ class SearchClientOperation extends Component {
             status:null,
             startActivityDate:null,
             accounts:[],
-            business_name:null
+            business_name:null,
+            overdraft:null,
+            account_id:null
         }
         this.onSubmit = this.onSubmit.bind(this)
+        this.onChangeOverdraft = this.onChangeOverdraft.bind(this)
+        this.onSubmitOverdraft = this.onSubmitOverdraft.bind(this)
 
     }
 
     onSubmit(event) {
         event.preventDefault()
-    if(this.state.documentType === 'DNI'){
-        clientes.get('search?dni=' + this.state.documentNumber).then(res => {
-            console.log(res.data);
-            this.state.lastname = res.data.last_name;
-            this.state.email = res.data.email;
-            this.state.status = res.data.status;
-            this.state.firstname = res.data.name;
-            this.state.id = res.data.id;
+        if(this.state.documentType === 'DNI'){
+            clientes.get('search?dni=' + this.state.documentNumber).then(res => {
+                console.log(res.data);
+                this.state.lastname = res.data.last_name;
+                this.state.email = res.data.email;
+                this.state.status = res.data.status;
+                this.state.firstname = res.data.name;
+                this.state.id = res.data.id;
           
-            cuentas.get(this.state.id + '/accounts').then(resp => {
-                console.log(resp.data);
-                this.state.accounts = resp.data;
+                cuentas.get(this.state.id + '/accounts').then(resp => {
+                    console.log(resp.data);
+                    this.state.accounts = resp.data;
                 
-                this.setState({
-                    client: true
-                })
+                    this.setState({
+                        client: true
+                    })
 
-            }
+                }
             )
             .catch(function (error)
             {console.log(error)})
 
         }
-        )
-        .catch(function (error)
-        {console.log(error)})
-    }else{
-        clientes.get('search?cuil=' + this.state.documentNumber).then(res => {
-            console.log(res.data);
-            this.state.lastname = res.data.last_name;
-            this.state.email = res.data.email;
-            this.state.status = res.data.status;
-            this.state.firstname = res.data.name;
-            this.state.id = res.data.id;
-            this.state.business_name = res.data.business_name;
-          
-            cuentas.get(this.state.id + '/accounts').then(resp => {
-                console.log(resp.data);
-                this.state.accounts = resp.data;
-                
-                this.setState({
-                    client: true
-                })
-
-            }
             )
             .catch(function (error)
             {console.log(error)})
+        }else{
+            clientes.get('search?cuil=' + this.state.documentNumber).then(res => {
+                console.log(res.data);
+                this.state.lastname = res.data.last_name;
+                this.state.email = res.data.email;
+                this.state.status = res.data.status;
+                this.state.firstname = res.data.name;
+                this.state.id = res.data.id;
+                this.state.business_name = res.data.business_name;
+          
+                cuentas.get(this.state.id + '/accounts').then(resp => {
+                    console.log(resp.data);
+                    this.state.accounts = resp.data;
+                
+                    this.setState({
+                        client: true
+                    })
+
+                })
+                .catch(function (error)
+                {console.log(error)})
 
         }
         )
         .catch(function (error)
         {console.log(error)})        
+        }
+
+    }    
+
+    onChangeOverdraft(event, data){
+        this.setState({
+            overdraft: event.target.value,
+            account_id: data.id
+           })                                           
     }
+
+    onSubmitOverdraft(event){
+        event.preventDefault()
+        console.log(this.state.overdraft);
+        console.log(this.state.account_id);
+        console.log("entró");
+        // if(this.state.overdraft != null){
+        //     cuentas.post(this.state.account_id,
+        //         {
+        //             account_id: this.state.account_id,
+        //             overdraft: this.state.overdraft
+        //         }        )
+        //         .then(res => {
+        //             console.log(res);
+        //         })
+        //     alert('Descubierto actualizado con éxito!')
+
+        //  }
     }
 
     render() {
@@ -139,7 +173,7 @@ class SearchClientOperation extends Component {
                         <div className="container">
                         <div className="row">
                         {this.state.accounts.map(account => (
-                        <div className="col-lg-4 col-md-6" key={account.id}>
+                            <div className="col-lg-4 col-md-6" key={account.id}>
                             <div className="single-pricing-box">
                                 <div className="pricing-header">
                                     <h3>Cuenta n° {account.id}</h3>
@@ -173,12 +207,14 @@ class SearchClientOperation extends Component {
                                         <div className='col-md-12'>
                                             <b>Descubierto: $</b> {account.overdraft} 
                                               </div>
+                                              <form onSubmit={this.onSubmitOverdraft}>
                                             <div className='col-md-6'>
-                                               <input type="text" name="overdraft" id="overdraft" defaultValue={account.overdraft} className="form-control" />
+                                               <input type="text" name="overdraft" id="overdraft" defaultValue={account.overdraft} className="form-control" onChange={e=> this.onChangeOverdraft(e, account)}/> 
                                             </div>
-                                            <div className='col-md-6' position='left'>
+                                            <div className='col-md-6'>
                                                     <button className="btn btn-primary" type="submit">Editar</button>
                                                 </div>
+                                                </form>
                                     </div>
                                     </li>
                                 }
