@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import sessionManager from '../../services/sessionManager'
 
 const clientes = axios.create({
     baseURL: 'https://bank-api-integrations.herokuapp.com/api/v1/clients/'
@@ -37,6 +38,10 @@ class SearchClientOperation extends Component {
         this.onChangeOverdraft = this.onChangeOverdraft.bind(this)
         this.onSubmitOverdraft = this.onSubmitOverdraft.bind(this)
 
+    }
+
+    componentDidMount(){
+        this.sessionManager = new sessionManager()
     }
 
     onSubmit(event) {
@@ -121,6 +126,20 @@ class SearchClientOperation extends Component {
         //     alert('Descubierto actualizado con éxito!')
 
         //  }
+    }
+
+    onMouseTransaction(event, data){
+        event.preventDefault()
+        this.setState({
+            account_id: data.id
+           })
+    }
+
+    onClickTransaction(event, data){
+        event.preventDefault()
+        console.log(this.state.account_id);
+        this.sessionManager.setAccount(this.state.account_id)
+        // window.location.href='/account'
     }
 
     render() {
@@ -220,11 +239,11 @@ class SearchClientOperation extends Component {
                                 }
                                 </ul>
 
-                                {/* <div className="buy-btn">
-                                    <Link href="/">
-                                        <a className="btn btn-primary">Desactivar</a>
-                                    </Link>
-                                </div> */}
+                                <div className="buy-btn">
+                                    {/* <Link href="/"> */}
+                                        <a className="btn btn-primary" onMouseMove={e=> this.onMouseTransaction(e, account)} onClick={e=> this.onClickTransaction(e, account)}>Transacciones</a>
+                                    {/* </Link> */}
+                                </div>
                             </div>
                         </div>
                         

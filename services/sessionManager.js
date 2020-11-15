@@ -26,6 +26,10 @@ export default class sessionManager{
         return this.localstorage.getItem('userType') === userType
     }
 
+    setAccount(account_id){ 
+        return this.localstorage.setItem('account',account_id)        
+    }
+
 /*     getUserData(){
         return axios.post('http://localhost:5000/users/userdata',{
             mail: this.getUserMail()
@@ -46,6 +50,10 @@ export default class sessionManager{
 
     getUserId(){ 
         return this.localstorage.getItem('userId')        
+    }
+
+    getAccount(){ 
+        return this.localstorage.getItem('account')        
     }
 
 }
