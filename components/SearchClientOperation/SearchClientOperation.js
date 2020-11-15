@@ -24,7 +24,8 @@ class SearchClientOperation extends Component {
             email:null,
             status:null,
             startActivityDate:null,
-            accounts:[]
+            accounts:[],
+            business_name:null
         }
         this.onSubmit = this.onSubmit.bind(this)
 
@@ -66,6 +67,7 @@ class SearchClientOperation extends Component {
             this.state.status = res.data.status;
             this.state.firstname = res.data.name;
             this.state.id = res.data.id;
+            this.state.business_name = res.data.business_name;
           
             cuentas.get(this.state.id + '/accounts').then(resp => {
                 console.log(resp.data);
@@ -121,7 +123,7 @@ class SearchClientOperation extends Component {
                     <div className='client-info'>
                         <div className='row'>
                             <div className='col-md-6'> 
-                            <h4>{this.state.lastname}, {this.state.firstname}</h4>
+                            <h4>{this.state.business_name}{this.state.firstname} {this.state.lastname}</h4>
                             </div>
                         </div>
 
@@ -166,11 +168,7 @@ class SearchClientOperation extends Component {
                                         {/* <i className="fas fa-ban"></i>  */}
                                     </li>
                                     <li>
-                                        <b>Descubierto:</b> {account.overdraft} 
-                                        {/* <i className="fas fa-ban"></i>  */}
-                                    </li>
-                                    <li>
-                                        <b>Activa:</b> {account.active} 
+                                        <b>Descubierto: $</b> {account.overdraft} 
                                         {/* <i className="fas fa-ban"></i>  */}
                                     </li>
                                 </ul>

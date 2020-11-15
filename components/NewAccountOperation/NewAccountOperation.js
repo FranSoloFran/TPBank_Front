@@ -6,10 +6,10 @@ class NewAccountOperation extends Component {
         super()
         this.state = {
             documentType:null,
-            client_cuil:null,
+            cuil:null,
             account_type:null,
             giro_cantidad:null,
-
+            dni:null
         }
         this.handleChangeType = this.handleChangeType.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -19,8 +19,9 @@ class NewAccountOperation extends Component {
         axios.post("https://bank-api-integrations.herokuapp.com/api/v1/accounts", {
             account_type: this.state.account_type,
             documentType: this.state.documentType,
-            client_cuil: this.state.client_cuil,
-            giro_cantidad: this.state.giro_cantidad,
+            cuil: this.state.cuil,
+            dni: this.state.dni,
+            giro_cantidad: this.state.giro_cantidad
             })
         event.preventDefault()
         //Llamada a backend
@@ -56,7 +57,7 @@ class NewAccountOperation extends Component {
                                     <option value="CC">Cuenta corriente</option>
                                 </select>
                             </div>
-                            {this.state.type == 'CA' &&
+                            {this.state.type == 'CA' && 
                             <div className='row'>
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
@@ -70,12 +71,22 @@ class NewAccountOperation extends Component {
                                         </select>
                                     </div>
                                 </div> 
+                                {this.state.documentType == 'CUIT/CUIL' &&
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Número de documento</label>
-                                        <input required onChange={(event)=> this.setState({client_cuil:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                        <input required onChange={(event)=> this.setState({cuil:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
+                                }
+                                {this.state.documentType == 'DNI' &&
+                                <div className='col-md-6'>
+                                    <div className="form-group form-group-default">
+                                        <label>Número de documento</label>
+                                        <input required onChange={(event)=> this.setState({dni:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                    </div>
+                                </div>
+                                }
                             </div>
                             }
 
@@ -93,12 +104,22 @@ class NewAccountOperation extends Component {
                                         </select>
                                     </div>
                                 </div> 
+                                {this.state.documentType == 'CUIT/CUIL' &&
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Número de documento</label>
-                                        <input required onChange={(event)=> this.setState({client_cuil:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                        <input required onChange={(event)=> this.setState({cuil:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                                     </div>
                                 </div>
+                                }
+                                {this.state.documentType == 'DNI' &&
+                                <div className='col-md-6'>
+                                    <div className="form-group form-group-default">
+                                        <label>Número de documento</label>
+                                        <input required onChange={(event)=> this.setState({dni:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                    </div>
+                                </div>
+                                }
                                 <div className='col-md-6'>
                                     <div className="form-group form-group-default">
                                         <label>Acuerdo Giro</label>
