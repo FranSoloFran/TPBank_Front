@@ -23,7 +23,6 @@ class NewAccountOperation extends Component {
             client_cuil: this.state.client_cuil,
             overdraft: this.state.overdraft
         })
-        //Llamada a backend
         alert(`Cuenta creada con éxito`)
     }
 

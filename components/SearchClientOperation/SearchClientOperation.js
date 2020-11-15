@@ -20,19 +20,19 @@ class SearchClientOperation extends Component {
         super()
         this.state = {
             client: null,
-            id:null,
-            lastname:null,
-            firstname:null,
-            documentType:null,
-            documentNumber:null,
-            cuil:null,
-            email:null,
-            status:null,
-            startActivityDate:null,
-            accounts:[],
-            business_name:null,
-            overdraft:null,
-            account_id:null
+            id: null,
+            lastname: null,
+            firstname: null,
+            documentType: null,
+            documentNumber: null,
+            cuil: null,
+            email: null,
+            status: null,
+            startActivityDate: null,
+            accounts: [],
+            business_name: null,
+            overdraft: null,
+            account_id: null
         }
         this.onSubmit = this.onSubmit.bind(this)
         this.onChangeOverdraft = this.onChangeOverdraft.bind(this)
@@ -40,76 +40,64 @@ class SearchClientOperation extends Component {
 
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.sessionManager = new sessionManager()
     }
 
     onSubmit(event) {
         event.preventDefault()
-        if(this.state.documentType === 'dni'){
-            clientes.get('search?dni=' + this.state.documentNumber).then(res => {
-                console.log(res.data);
-                this.state.lastname = res.data.last_name;
-                this.state.email = res.data.email;
-                this.state.status = res.data.status;
-                this.state.firstname = res.data.name;
-                this.state.id = res.data.id;
-          
-                cuentas.get(this.state.id + '/accounts').then(resp => {
-                    console.log(resp.data);
-                    this.state.accounts = resp.data;
-                
-                    this.setState({
-                        client: true
-                    })
-
-                }
-            )
-            .catch(function (error)
-            {console.log(error)})
-
-        }
-            )
-            .catch(function (error)
-            {console.log(error)})
-        }else{
-            clientes.get('search?cuil=' + this.state.documentNumber).then(res => {
-                console.log(res.data);
-                this.state.lastname = res.data.last_name;
-                this.state.email = res.data.email;
-                this.state.status = res.data.status;
-                this.state.firstname = res.data.name;
-                this.state.id = res.data.id;
-                this.state.business_name = res.data.business_name;
-          
-                cuentas.get(this.state.id + '/accounts').then(resp => {
-                    console.log(resp.data);
-                    this.state.accounts = resp.data;
-                
-                    this.setState({
-                        client: true
-                    })
-
+        if (this.state.documentType === 'dni') {
+            clientes.get('search?dni=' + this.state.documentNumber)
+                .then(res => {
+                this.setState({
+                    lastname : res.data.last_name,
+                    email : res.data.email,
+                    status : res.data.status,
+                    firstname : res.data.name,
+                    id : res.data.id
                 })
-                .catch(function (error)
-                {console.log(error)})
+                cuentas.get(this.state.id + '/accounts').then(resp => {
+                    this.state.accounts = resp.data;
+                    this.setState({
+                        client: true
+                    })
+                }
+                ).catch(function (error) { console.log(error) })
+            }
+            )
+                .catch(function (error) { console.log(error) })
+        } else {
+            clientes.get('search?cuil=' + this.state.documentNumber).then(res => {
+                this.setState({
+                lastname : res.data.last_name,
+                email : res.data.email,
+                status : res.data.status,
+                firstname : res.data.name,
+                id : res.data.id,
+                business_name : res.data.business_name
+                });
 
+                cuentas.get(this.state.id + '/accounts')
+                    .then(resp => {                   
+                    this.setState({
+                        client: true,
+                        accounts : resp.data
+                    })
+                }).catch(function (error) { console.log(error) })
+
+            }).catch(function (error) { console.log(error) })
         }
-        )
-        .catch(function (error)
-        {console.log(error)})        
-        }
 
-    }    
+    }
 
-    onChangeOverdraft(event, data){
+    onChangeOverdraft(event, data) {
         this.setState({
             overdraft: event.target.value,
             account_id: data.id
-           })                                           
+        })
     }
 
-    onSubmitOverdraft(event){
+    onSubmitOverdraft(event) {
         event.preventDefault()
         console.log(this.state.overdraft);
         console.log(this.state.account_id);
@@ -128,14 +116,14 @@ class SearchClientOperation extends Component {
         //  }
     }
 
-    onMouseTransaction(event, data){
+    onMouseTransaction(event, data) {
         event.preventDefault()
         this.setState({
             account_id: data.id
-           })
+        })
     }
 
-    onClickTransaction(event, data){
+    onClickTransaction(event, data) {
         event.preventDefault()
         console.log(this.state.account_id);
         this.sessionManager.setAccount(this.state.account_id)
@@ -154,7 +142,7 @@ class SearchClientOperation extends Component {
                         <div className='col-md-6'>
                             <div className="form-group form-group-default">
                                 <label>Tipo de documento</label>
-                                <select required onChange={(event)=> this.setState({documentType:event.target.value})} className='form-control'>
+                                <select required onChange={(event) => this.setState({ documentType: event.target.value })} className='form-control'>
                                     <option value='' disabled selected>Selecciona una opción</option>
                                     <option value='dni'>DNI</option>
                                     <option value='cuil'>CUIT/CUIL</option>
@@ -164,7 +152,7 @@ class SearchClientOperation extends Component {
                         <div className='col-md-6'>
                             <div className="form-group form-group-default">
                                 <label>Número de documento</label>
-                                <input required pattern={docNumberPattern} onChange={(event)=> this.setState({documentNumber:event.target.value})} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
+                                <input required pattern={docNumberPattern} onChange={(event) => this.setState({ documentNumber: event.target.value })} type="text" name="documentNumber" id="documentNumber" placeholder="..." className="form-control" />
                             </div>
                         </div>
                     </div>
@@ -175,8 +163,8 @@ class SearchClientOperation extends Component {
                 {this.state.client &&
                     <div className='client-info'>
                         <div className='row'>
-                            <div className='col-md-6'> 
-                            <h4>{this.state.business_name}{this.state.firstname} {this.state.lastname}</h4>
+                            <div className='col-md-6'>
+                                <h4>{this.state.business_name}{this.state.firstname} {this.state.lastname}</h4>
                             </div>
                         </div>
 
@@ -189,67 +177,67 @@ class SearchClientOperation extends Component {
                             </div> */}
                         </div>
                         <div className="pricing-area pt-70 pb-50">
-                        <div className="container">
-                        <div className="row">
-                        {this.state.accounts.map(account => (
-                            <div className="col-lg-4 col-md-6" key={account.id}>
-                            <div className="single-pricing-box">
-                                <div className="pricing-header">
-                                    <h3>Cuenta n° {account.id}</h3>
-                                    <p>{this.state.firstname} {this.state.lastname}</p>
-                                </div>
+                            <div className="container">
+                                <div className="row">
+                                    {this.state.accounts.map(account => (
+                                        <div className="col-lg-4 col-md-6" key={account.id}>
+                                            <div className="single-pricing-box">
+                                                <div className="pricing-header">
+                                                    <h3>Cuenta n° {account.id}</h3>
+                                                    <p>{this.state.firstname} {this.state.lastname}</p>
+                                                </div>
 
-                                <div className="price">
-                                    <span className="symbol">$</span> {account.balance} <span>balance</span>
-                                </div>
- 
-                                <ul className="pricing-features">
-                                    <li>
-                                        <b>Tipo de cuenta:</b> {account.account_type_description} 
-                                        {/* <i className="fas fa-check"></i>  */}
-                                    </li>
-                                    <li>
-                                        <b>Número de cuenta:</b> {account.identification_number} 
-                                        {/* <i className="fas fa-check"></i>  */}
-                                    </li>
-                                    <li>
-                                        <b>Balance: $</b> {account.balance} 
-                                        {/* <i className="fas fa-check"></i>  */}
-                                    </li>
-                                    {/* <li>
+                                                <div className="price">
+                                                    <span className="symbol">$</span> {account.balance} <span>balance</span>
+                                                </div>
+
+                                                <ul className="pricing-features">
+                                                    <li>
+                                                        <b>Tipo de cuenta:</b> {account.account_type_description}
+                                                        {/* <i className="fas fa-check"></i>  */}
+                                                    </li>
+                                                    <li>
+                                                        <b>Número de cuenta:</b> {account.identification_number}
+                                                        {/* <i className="fas fa-check"></i>  */}
+                                                    </li>
+                                                    <li>
+                                                        <b>Balance: $</b> {account.balance}
+                                                        {/* <i className="fas fa-check"></i>  */}
+                                                    </li>
+                                                    {/* <li>
                                         <b>Alias:</b> {account.name} 
                                         <i className="fas fa-ban"></i>
                                     </li> */}
-                                    {account.account_type == 'CC' &&
-                                    <li>
-                                    <div className='row'>
-                                        <div className='col-md-12'>
-                                            <b>Descubierto: $</b> {account.overdraft} 
-                                              </div>
-                                              <form onSubmit={this.onSubmitOverdraft}>
-                                            <div className='col-md-6'>
-                                               <input type="text" name="overdraft" id="overdraft" defaultValue={account.overdraft} className="form-control" onChange={e=> this.onChangeOverdraft(e, account)}/> 
-                                            </div>
-                                            <div className='col-md-6'>
-                                                    <button className="btn btn-primary" type="submit">Editar</button>
-                                                </div>
-                                                </form>
-                                    </div>
-                                    </li>
-                                }
-                                </ul>
+                                                    {account.account_type == 'CC' &&
+                                                        <li>
+                                                            <div className='row'>
+                                                                <div className='col-md-12'>
+                                                                    <b>Descubierto: $</b> {account.overdraft}
+                                                                </div>
+                                                                <form onSubmit={this.onSubmitOverdraft}>
+                                                                    <div className='col-md-6'>
+                                                                        <input type="text" name="overdraft" id="overdraft" defaultValue={account.overdraft} className="form-control" onChange={e => this.onChangeOverdraft(e, account)} />
+                                                                    </div>
+                                                                    <div className='col-md-6'>
+                                                                        <button className="btn btn-primary" type="submit">Editar</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </li>
+                                                    }
+                                                </ul>
 
-                                <div className="buy-btn">
-                                    {/* <Link href="/"> */}
-                                        <a className="btn btn-primary" onMouseMove={e=> this.onMouseTransaction(e, account)} onClick={e=> this.onClickTransaction(e, account)}>Transacciones</a>
-                                    {/* </Link> */}
+                                                <div className="buy-btn">
+                                                    {/* <Link href="/"> */}
+                                                    <a className="btn btn-primary" onMouseMove={e => this.onMouseTransaction(e, account)} onClick={e => this.onClickTransaction(e, account)}>Transacciones</a>
+                                                    {/* </Link> */}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    ))}
                                 </div>
                             </div>
-                        </div>
-                        
-                        ))}
-                        </div>
-                        </div>
                         </div>
 
                     </div>

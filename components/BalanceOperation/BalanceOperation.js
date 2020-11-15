@@ -27,7 +27,6 @@ class BalanceOperation extends Component {
                 console.log(error)
                 alert("Error al buscar transacciones")
             });
-
     }
 
     componentDidMount() {
