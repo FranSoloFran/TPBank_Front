@@ -4,11 +4,13 @@ import NewClientOperation from '../components/NewClientOperation/NewClientOperat
 import NewAccountOperation from '../components/NewAccountOperation/NewAccountOperation';
 import SearchClientOperation from '../components/SearchClientOperation/SearchClientOperation';
 import sessionManager from '../services/sessionManager'
+import UploadBillsOperation from '../components/UploadBillsOperation/UploadBillsOperation';
 
 const operations=[
     {name:'Nuevo cliente', value:'new-client'},
     {name:'Nueva cuenta',value:'new-account'},
-    {name:'Buscar cliente', value:'search-client'}
+    {name:'Buscar cliente', value:'search-client'},
+    {name:'Cargar facturas', value:'upload-bills'}
 ]
 
 class ExecutiveAccount extends Component {
@@ -56,6 +58,9 @@ class ExecutiveAccount extends Component {
                 }
                 { this.state.operation == 'search-client' &&
                     <SearchClientOperation />
+                }
+                { this.state.operation == 'upload-bills' &&
+                    <UploadBillsOperation />
                 }
                 
 
