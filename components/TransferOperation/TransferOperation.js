@@ -58,8 +58,7 @@ class TransferOperation extends Component {
                 this.setState({
                     clientName: res.data.name + ' ' + res.data.last_name,
                     clientId: res.data.id
-                }//, this.findAccount(res.data.id)
-                )
+                })
                 console.log(res.data)
             }).catch((error) => {
                 console.log(error)
@@ -70,12 +69,8 @@ class TransferOperation extends Component {
 
     sendTransfer(destinationAccount) {
 
-        console.log(this.state.originAccount)
-        console.log(this.state.accountNumber)
-
         axios.post('https://bank-api-integrations.herokuapp.com/api/v1/transfers',
-            {
-                
+            {              
                 amount: this.state.amount,
                 destination_account: this.state.accountNumber,
                 source_account: this.state.originAccount
