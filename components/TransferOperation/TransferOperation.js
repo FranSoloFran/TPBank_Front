@@ -21,6 +21,7 @@ class TransferOperation extends Component {
         this.onSubmit = this.onSubmit.bind(this)
         this.onChangeOriginAccount = this.onChangeOriginAccount.bind(this)
         this.sendTransfer = this.sendTransfer.bind(this)
+        this.onSubmitSearchClient = this.onSubmitSearchClient.bind(this)
 
     }
 
@@ -48,12 +49,35 @@ class TransferOperation extends Component {
             })
     }
 
+    onSubmitSearchClient(event) {
+        event.preventDefault()
+        console.log(this.state.accountNumber)
+
+        axios.get('https://bank-api-integrations.herokuapp.com/api/v1/clients/search/cbu/' + this.state.accountNumber)
+            .then(res => {
+                this.setState({
+                    clientName: res.data.name + ' ' + res.data.last_name,
+                    clientId: res.data.id
+                }//, this.findAccount(res.data.id)
+                )
+                console.log(res.data)
+            }).catch((error) => {
+                console.log(error)
+                alert("Error en la busqueda de usuario")
+            })
+    }
+
+
     sendTransfer(destinationAccount) {
+
+        console.log(this.state.originAccount)
+        console.log(this.state.accountNumber)
 
         axios.post('https://bank-api-integrations.herokuapp.com/api/v1/transfers',
             {
+                
                 amount: this.state.amount,
-                destination_account: destinationAccount,
+                destination_account: this.state.accountNumber,
                 source_account: this.state.originAccount
             })
             .then(res => {
@@ -72,10 +96,10 @@ class TransferOperation extends Component {
         axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${userId}/accounts`)
             .then(res => {
                 this.setState({ accounts: res.data, userId: userId })
-            }).catch((error)=>{
+            }).catch((error) => {
                 console.log(error)
                 alert("Error en la busqueda de cuentas")
-            })       
+            })
     }
 
     onChangeOriginAccount(event) {
@@ -91,14 +115,14 @@ class TransferOperation extends Component {
                 <h1>Transferencias</h1>
 
                 <div className="money-transfer-form">
-                    <form onSubmit={this.onSubmit}>
+                    <form onSubmit={this.onSubmitSearchClient}>
 
                         <div className="form-group form-group-default">
                             <label>Cuenta de origen</label>
                             <select onChange={this.onChangeOriginAccount} required className='form-control'>
                                 <option value='' disabled selected>Seleccioná una opción</option>
                                 {this.state.accounts.map((account) => (
-                                    <option value={account.id} >{account.account_type} : {account.identification_number}</option>
+                                    <option value={account.identification_number} >{account.account_type} : {account.identification_number}</option>
                                 ))
                                 }
 
@@ -110,6 +134,13 @@ class TransferOperation extends Component {
                             <input required value={this.state.accountNumber} on onChange={this.onChangeAccountNumber} type="text" name="account-number" id="account-number" placeholder="0000000000000000000000" className="form-control" />
                             <span className='form-extra-data'>{this.state.clientName}</span>
                         </div>
+
+                        <button type="submit" name="buscar" className="btn btn-primary">Buscar Cliente</button>
+                    </form>
+
+                    {this.state.clientName &&
+
+                    <form onSubmit={this.onSubmit}>
 
                         <div className="form-group">
                             <label>Monto a transferir </label>
@@ -125,7 +156,9 @@ class TransferOperation extends Component {
 
                         <button type="submit" className="btn btn-primary">Confirmar operación</button>
                     </form>
+                    }
                 </div>
+                
 
             </div>
         );

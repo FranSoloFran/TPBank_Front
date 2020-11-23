@@ -89,3 +89,9 @@
     background-color: transparent;
     border-color: transparent;
 }
+
+.single-pricing-box .pricing-features{
+    min-height: 280px;
+}
+
+

@@ -40,6 +40,7 @@ class SearchClientOperation extends Component {
         this.onSubmit = this.onSubmit.bind(this)
         this.onChangeOverdraft = this.onChangeOverdraft.bind(this)
         this.onSubmitOverdraft = this.onSubmitOverdraft.bind(this)
+        this.searchButton = React.createRef();
 
     }
 
@@ -49,6 +50,12 @@ class SearchClientOperation extends Component {
 
     onSubmit(event) {
         event.preventDefault()
+
+        this.setState({
+            client:null,
+            transactions:[]
+        })
+
         const this_ = this
         if (this.state.documentType === 'dni') {
             clientes.get('search?dni=' + this.state.documentNumber)
@@ -85,8 +92,45 @@ class SearchClientOperation extends Component {
                     })
                     alert("Error al buscar cliente")                    
                 })
-        } else {
+        } else if (this.state.documentType === 'cuil') {
             clientes.get('search?cuil=' + this.state.documentNumber).then(res => {
+                this.setState({
+                    lastname: res.data.last_name,
+                    email: res.data.email,
+                    status: res.data.status,
+                    firstname: res.data.name,
+                    id: res.data.id,
+                    business_name: res.data.business_name
+                });
+
+                cuentas.get(this.state.id + '/accounts')
+                    .then(resp => {
+                        this.setState({
+                            client: true,
+                            accounts: resp.data
+                        })
+                    }).catch(function (error) {
+                        console.log(error) 
+                        alert("Error al buscar cuenta")
+                        })
+
+            }).catch(function (error) {
+                console.log(error) 
+                this_.setState({
+                    lastname:'',
+                    email:'',
+                    status: '',
+                    firstname: '',
+                    id: '',
+                    business_name: '',
+                    client:false,
+                    accounts:[]
+                });
+                alert("Error al buscar cliente")
+            })
+        }
+        else if (this.state.documentType === 'cbu') {
+            clientes.get('search/cbu/' + this.state.documentNumber).then(res => {
                 this.setState({
                     lastname: res.data.last_name,
                     email: res.data.email,
@@ -134,10 +178,9 @@ class SearchClientOperation extends Component {
 
     onSubmitOverdraft(event) {
         event.preventDefault()
-        console.log(this.state.overdraft);
-        console.log(this.state.account_id);
-        console.log("entró");
+        
         if (this.state.overdraft != null) {
+        const this_ = this
 
             axios({
                 method: 'patch',
@@ -151,6 +194,8 @@ class SearchClientOperation extends Component {
             }).then(function (response) {
                 console.log(response);
                 alert('Descubierto actualizado con éxito!')
+                this_.searchButton.current.click();
+                
             }).catch(function (error) {
                 console.log(error);
                 alert('Error en la modificación del descubierto')
@@ -172,9 +217,8 @@ class SearchClientOperation extends Component {
     render() {
         const docNumberPattern = this.state.documentType == 'cuil' ? "(20|23|24|27|30|33|34)(\D)?[0-9]{8}(\D)?[0-9]" : null
         const symbol = {
-            "WITHDRAW": '-',
-            "DEPOSIT":'',
-            "COB":'-'
+            "EXPENDITURE": '-',
+            "INCOME":'',
         }
 
         return (
@@ -191,6 +235,7 @@ class SearchClientOperation extends Component {
                                     <option value='' disabled selected>Selecciona una opción</option>
                                     <option value='dni'>DNI</option>
                                     <option value='cuil'>CUIT/CUIL</option>
+                                    <option value='cbu'>CBU</option>
                                 </select>
                             </div>
                         </div>
@@ -202,7 +247,7 @@ class SearchClientOperation extends Component {
                         </div>
                     </div>
 
-                    <button type="submit" className="btn btn-primary">Buscar</button>
+                    <button type="submit" ref={this.searchButton} className="btn btn-primary">Buscar</button>
 
                 </form>
                 {this.state.client &&
@@ -246,7 +291,7 @@ class SearchClientOperation extends Component {
                                                 </div>
 
                                                 <div className="price">
-                                                    <span className="symbol">$</span> {account.balance} <span>balance</span>
+                                                    <span className="symbol">$</span> {account.balance}
                                                 </div>
 
                                                 <ul className="pricing-features">
@@ -305,6 +350,7 @@ class SearchClientOperation extends Component {
                                                 <th scope="col">Número de operación</th>
                                                 <th scope="col">Detalle</th>
                                                 <th scope="col">Monto</th>
+                                                <th scope="col">Fecha</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -312,7 +358,8 @@ class SearchClientOperation extends Component {
                                                 <tr>
                                                     <td>{movement.id}</td>
                                                     <td>{movement.detail}</td>
-                                                    <td>{symbol[movement.transaction_type]}${movement.amount}</td>
+                                                    <td>{symbol[movement.operation_type]}${movement.amount}</td>
+                                                    <td>{new Date(movement.date).toLocaleDateString()}</td>
                                                 </tr>
                                             ))
                                             }
