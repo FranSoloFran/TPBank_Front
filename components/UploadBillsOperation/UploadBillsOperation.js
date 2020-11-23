@@ -18,7 +18,7 @@ class UploadBillsOperation extends Component {
         this.setState({
             facturas: (this.state.s).split(/\n/)
                 .map(e => e.split(","))
-                .map(([idpago, monto, fecha]) => ({idpago, monto, fecha}))
+                .map(([electronic_code, amount, date]) => ({electronic_code, amount: parseFloat(amount), date}))
         }
         )
     }
@@ -28,7 +28,8 @@ class UploadBillsOperation extends Component {
         console.log(this.state.s);
         console.log(this.state.providerCode);
         console.log(this.state.facturas);
-        axios.post("https://bank-api-integrations.herokuapp.com/api/v1/providers/uploadfile", {facturas: this.state.facturas}, {params: {providerCode: this.state.providerCode}})
+        axios.post("https://bank-api-integrations.herokuapp.com/api/v1/payments/generatePayments/" + this.state.providerCode, {facturas: this.state.facturas})
+        // , {params: {providerCode: this.state.providerCode}}   se puede agregar esto despues de cerrado el corchete de facturas para mandarlo como params
         .then(response => response.status)
         .catch(err => console.warn(err));
         alert(`Facturas cargadas con éxito!`)
