@@ -44,9 +44,8 @@ class BalanceOperation extends Component {
 
     render() {
         const symbol = {
-            "WITHDRAW": '-',
-            "DEPOSIT":'',
-            "COB":'-'
+            "EXPENDITURE": '-',
+            "INCOME":'',
         }
         return (
 
@@ -80,6 +79,7 @@ class BalanceOperation extends Component {
                                     <th scope="col">Número de operación</th>
                                     <th scope="col">Detalle</th>
                                     <th scope="col">Monto</th>
+                                    <th scope="col">Fecha</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,7 +87,8 @@ class BalanceOperation extends Component {
                                     <tr>
                                         <td>{movement.id}</td>                                        
                                         <td>{movement.detail}</td>
-                                        <td>{symbol[movement.transaction_type]}${movement.amount}</td>
+                                        <td>{symbol[movement.operation_type]}${movement.amount}</td>
+                                        <td>{new Date(movement.date).toLocaleDateString()}</td>
                                     </tr>
                                 ))
                                 }
