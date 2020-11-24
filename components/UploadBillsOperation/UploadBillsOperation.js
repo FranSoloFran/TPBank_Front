@@ -28,8 +28,8 @@ class UploadBillsOperation extends Component {
         console.log(this.state.s);
         console.log(this.state.providerCode);
         console.log(this.state.facturas);
-        axios.post("https://bank-api-integrations.herokuapp.com/api/v1/payments/generatePayments/" + this.state.providerCode, {facturas: this.state.facturas})
-        // , {params: {providerCode: this.state.providerCode}}   se puede agregar esto despues de cerrado el corchete de facturas para mandarlo como params
+        axios.post("https://bank-api-integrations.herokuapp.com/api/v1/payments/generatePayments/" + this.state.providerCode, this.state.facturas)
+        // , {params: {providerCode: this.state.providerCode}}   se puede agregar esto despues de cerrado el corchete de facturas para mandarlo como params. {facturas: this.state.facturas}
         .then(response => response.status)
         .catch(err => console.warn(err));
         alert(`Facturas cargadas con éxito!`)
