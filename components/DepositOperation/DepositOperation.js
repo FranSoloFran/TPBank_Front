@@ -144,7 +144,7 @@ class DepositOperation extends Component {
                         <div className="form-group">
                             <label>Monto a depositar </label>
                             <div className="money-transfer-field">
-                                <input min={0} required value={this.state.amount} onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="1,000" />
+                                <input min={0} required value={this.state.amount} step="0.01" onChange={this.onChangeAmount} type="number" name="amount" id="amount" className="form-control" placeholder="1,000" />
                                 <div className="amount-currency-select">
                                     <i className="fas fa-chevron-down"></i>
                                     <select>

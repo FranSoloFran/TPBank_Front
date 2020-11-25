@@ -66,7 +66,7 @@ class PaymentsOperation extends Component {
 
     componentDidMount() {
         this.sessionManager = new sessionManager()
-        const userId = this.sessionManager.getUserId()
+        const userId = this.sessionManager.getClientId()
 
         axios.get(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${userId}/accounts`)
             .then(res => {

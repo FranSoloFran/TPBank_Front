@@ -28,7 +28,8 @@ class CashierAccount extends Component {
     
     componentDidMount(){
         this.sessionManager = new sessionManager()
-        if (!this.sessionManager.isLogged('Cashier')){
+        if (!this.sessionManager.isLogged('CASHIER')){
+            this.sessionManager.logout()
             window.location.href='/login'
         }
         this.setState({

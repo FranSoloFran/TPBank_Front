@@ -31,7 +31,8 @@ class ExecutiveAccount extends Component {
 
     componentDidMount(){
         this.sessionManager = new sessionManager()
-        if (!this.sessionManager.isLogged('Executive')){
+        if (!this.sessionManager.isLogged('EXECUTIVE')){
+            this.sessionManager.logout()
             window.location.href='/login'
         }
         this.setState({

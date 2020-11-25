@@ -4,18 +4,14 @@ export default class sessionManager{
 
     constructor(){
         this.localstorage=window.localStorage;
-
-
-        //this.getUserData = this.getUserData.bind(this)
     }
 
-    login(mail,name,documentType,documentNumber,userType,userId){
+    login(mail,name,documentNumber,userType,clientId){
         this.localstorage.setItem('usermail',mail)
         this.localstorage.setItem('name',name)
         this.localstorage.setItem('documentNumber',documentNumber)
-        this.localstorage.setItem('documentType',documentType)
         this.localstorage.setItem('userType',userType)
-        this.localstorage.setItem('userId',userId)
+        this.localstorage.setItem('clientId',clientId)
     }
 
     logout(){
@@ -26,42 +22,13 @@ export default class sessionManager{
         return this.localstorage.getItem('userType') === userType
     }
 
-    setAccount(account_id){ 
-        return this.localstorage.setItem('account_id', account_id)        
-    }
-
-    setClientId(client_id){
-        return this.localstorage.setItem('clientId', client_id)
-    }
-
-/*     getUserData(){
-        return axios.post('http://localhost:5000/users/userdata',{
-            mail: this.getUserMail()
-        }).then((res)=> res.data)
-    } */
-
     getUserName(){ 
         return this.localstorage.getItem('name')        
     }
 
-    getUserDocument(){ 
-        return this.localstorage.getItem('documentNumber')        
+    getClientId(){ 
+        return this.localstorage.getItem('clientId')        
     }
 
-    getUserMail(){ 
-        return this.localstorage.getItem('usermail')        
-    }
-
-    getUserId(){ 
-        return this.localstorage.getItem('userId')        
-    }
-
-    getClientId(){
-        return this.localstorage.getItem('clientId')
-    }
-
-    getAccount(){ 
-        return this.localstorage.getItem('account_id')        
-    }
 
 }
