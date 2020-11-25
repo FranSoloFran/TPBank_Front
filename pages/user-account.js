@@ -29,7 +29,8 @@ class UserAccount extends Component {
 
     componentDidMount(){
         this.sessionManager = new sessionManager()
-        if (!this.sessionManager.isLogged('User')){
+        if (!this.sessionManager.isLogged('CLIENT')){
+            this.sessionManager.logout()
             window.location.href='/login'
         }
         this.setState({
