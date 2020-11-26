@@ -8,64 +8,46 @@ class Login extends Component {
     constructor() {
         super()
         this.state = {
-            username:null,
             password:null,
-            type:null,
-            cuil:null,
-            clientId:null,
-            name:''
+            confirmPassword:null
         }
         this.onSubmit = this.onSubmit.bind(this);
         
     }
 
     componentDidMount(){
-        this.sessionManager = new sessionManager()
-
-        if (this.sessionManager.isLogged('CLIENT')){
-            window.location.href='/user-account'
+        this.sessionManager = new sessionManager()                 
+        if(this.sessionManager.getUserName()){
+            window.location.href='/login'
         }
-        if (this.sessionManager.isLogged('CASHIER')){
-            window.location.href='/cashier-account'
-        }
-        if  (this.sessionManager.isLogged('EXECUTIVE')){
-            window.location.href='/executive-account'
-        }    
     }
+
 
     onSubmit(event) {
         event.preventDefault()
 
-        axios.post('https://bank-api-integrations.herokuapp.com/api/v1/auth',
+        if(this.state.password === this.state.confirmPassword){
+            
+        const clientId = this.sessionManager.getClientId()
+
+        axios.patch(`https://bank-api-integrations.herokuapp.com/api/v1/clients/${clientId}`,
             {              
-                username: this.state.username,
                 password: this.state.password
             })
             .then(res => {
-
-                if(res.data.password_reset === 'true'){
-                    this.sessionManager.login( res.data.username,res.data.name,res.data.cuil,res.data.type,res.data.client_id)
-
-                    if (res.data.type === "CLIENT"){
-                        window.location.href='/user-account'
-                    }
-                    if (res.data.type === "CASHIER"){
-                        window.location.href='/cashier-account'
-                    }
-                    if (res.data.type === "EXECUTIVE"){
-                        window.location.href='/executive-account'
-                    }
-                }
-                else{
-                    this.sessionManager.setClientId(res.data.client_id)
-                    window.location.href='/password'
-                }
-               
+                this.sessionManager.logout()
+                alert("Contraseña cambiada con exito")
+                window.location.href='/login'
          
             }).catch((error) => {
                 console.log(error)
-                alert("Error al buscar la cuenta")
+                alert("Error al cambiar la contraseña")
             })
+
+        }
+        else{
+            alert("Las contraseñas ingresadas no coinciden")
+        }
 
 
     }
@@ -94,18 +76,19 @@ class Login extends Component {
                                                 </Link>
                                             </div>
 
-                                            <h3>¡Bienvenidos!</h3>
+                                            <h3>Ingresa tu nueva contraseña</h3>
 
                                             <form onSubmit={this.onSubmit}>
-                                                <div className="form-group">
-                                                    <input required onChange={(event)=> this.setState({username:event.target.value})}  type="email" name="email" id="email" placeholder="Tu dirección de Email" className="form-control" />
-                                                </div>
-
+                             
                                                 <div className="form-group">
                                                     <input required onChange={(event)=> this.setState({password:event.target.value})}  type="password" name="password" id="password" placeholder="Contraseña" className="form-control" />
                                                 </div>
 
-                                                <button type="submit" className="btn btn-primary">Accede</button>
+                                                <div className="form-group">
+                                                    <input required onChange={(event)=> this.setState({confirmPassword:event.target.value})}  type="password" name="confirmPassword" id="confirmPassword" placeholder="Repite la contraseña" className="form-control" />
+                                                </div>
+
+                                                <button type="submit" className="btn btn-primary">Confirmar</button>
                                                                                  
                                             </form>
                                         </div>

@@ -14,6 +14,10 @@ export default class sessionManager{
         this.localstorage.setItem('clientId',clientId)
     }
 
+    setClientId(clientId){
+        this.localstorage.setItem('clientId',clientId)
+    }
+
     logout(){
         this.localstorage.clear()
     }
